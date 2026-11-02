@@ -1,11 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://&lt;username&gt;.github.io/&lt;repo-name&gt;/</loc>
+         <loc>https://voquyen0502.github.io/knowledge-base/</loc>
          <lastmod>2026-11-02</lastmod>
     </url>
     <url>
-         <loc>https://&lt;username&gt;.github.io/&lt;repo-name&gt;/tags/</loc>
+         <loc>https://voquyen0502.github.io/knowledge-base/tags/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/afterword/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/chapter-01/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/chapter-02/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/chapter-03/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/chapter-04/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/chapter-05/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/chapter-06/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/chapter-07/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/chapter-08/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/chapter-09/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/chapter-10/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/introduction/</loc>
+         <lastmod>2026-11-02</lastmod>
+    </url>
+    <url>
+         <loc>https://voquyen0502.github.io/knowledge-base/books/ai-agents/reference-answers/</loc>
          <lastmod>2026-11-02</lastmod>
     </url>
 </urlset>

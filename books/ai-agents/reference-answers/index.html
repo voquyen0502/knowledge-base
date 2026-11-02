@@ -1,0 +1,1699 @@
+
+<!doctype html>
+<html lang="vi" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal Technical Knowledge Base & System Architecture Notes">
+      
+      
+      
+        <link rel="canonical" href="https://voquyen0502.github.io/knowledge-base/books/ai-agents/reference-answers/">
+      
+      
+        <link rel="prev" href="../afterword/">
+      
+      
+        <link rel="next" href="../../../tags/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Đáp án Tham khảo cho các Thought Questions - Engineering Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=-apple-system,+BlinkMacSystemFont,+"Segoe+UI",+Roboto,+Helvetica,+Arial,+sans-serif:300,300i,400,400i,700,700i%7CJetBrains+Mono,+SFMono-Regular,+Consolas,+monospace:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif";--md-code-font:"JetBrains Mono, SFMono-Regular, Consolas, monospace"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/book-theme.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#đáp-án-tham-khảo-cho-các-thought-questions" class="md-skip">
+          Bỏ qua
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Đầu trang">
+    <a href="../../.." title="Engineering Wiki" class="md-header__button md-logo" aria-label="Engineering Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 1-5 5v11l5-4.5zm2 4v13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6c-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1M10 18.41C8.75 18.09 7.5 18 6.5 18c-1.06 0-2.32.19-3.5.5V7.13c.91-.4 2.14-.63 3.5-.63s2.59.23 3.5.63z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+
+    
+    <button type="button"
+            class="md-header__button md-icon sidebar-toggle"
+            data-sidebar-toggle
+            aria-controls="primary-navigation"
+            aria-expanded="true"
+            aria-label="Ẩn thanh bên"
+            title="Ẩn thanh bên"
+            hidden>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 15.61 19.59 17l-5.01-5 5.01-5L21 8.39 17.44 12zM3 6h13v2H3zm0 7v-2h10v2zm0 5v-2h13v2z"/></svg>
+    </button>
+
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Engineering Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Đáp án Tham khảo cho các Thought Questions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Chuyển sang Dark Mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Chuyển sang Dark Mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="slate" data-md-color-accent="indigo"  aria-label="Chuyển sang Light Mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Chuyển sang Light Mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Tìm kiếm" placeholder="Tìm kiếm" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Tìm kiếm">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Chia sẻ" aria-label="Chia sẻ" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Xoá" aria-label="Xoá" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Thanh điều hướng" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Engineering Wiki" class="md-nav__button md-logo" aria-label="Engineering Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 1-5 5v11l5-4.5zm2 4v13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6c-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1M10 18.41C8.75 18.09 7.5 18 6.5 18c-1.06 0-2.32.19-3.5.5V7.13c.91-.4 2.14-.63 3.5-.63s2.59.23 3.5.63z"/></svg>
+
+    </a>
+    Engineering Wiki
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trang chủ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tủ sách
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tủ sách
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents in Depth
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Agents in Depth
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lời mở đầu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bắt đầu với AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Memory và Knowledge Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coding Agent và Code Generation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interaction: Mở rộng Observation Space và Action Space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluating Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Post-Training
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Continual Evolution of Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-Agent Collaboration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../afterword/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lời kết: Trở lại với Agent = LLM + Context + Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Đáp án Tham khảo cho các Thought Questions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Đáp án Tham khảo cho các Thought Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chương-1-bắt-đầu-với-ai-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 1: Bắt đầu với AI Agents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chương-2-context-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 2: Context Engineering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chương-3-user-memory-và-knowledge-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 3: User Memory và Knowledge Base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-4-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 4: Tools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chương-5-coding-agent-và-code-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 5: Coding Agent và Code Generation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-6-interaction-mở-rộng-observation-space-và-action-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 6: Interaction: Mở rộng Observation Space và Action Space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-7-evaluating-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 7: Evaluating Agents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-8-model-post-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 8: Model Post-Training
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chương-9-continuous-agent-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 9: Continuous Agent Evolution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chương-10-multi-agent-collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 10: Multi-Agent Collaboration
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tra cứu Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chương-1-bắt-đầu-với-ai-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 1: Bắt đầu với AI Agents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chương-2-context-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 2: Context Engineering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chương-3-user-memory-và-knowledge-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 3: User Memory và Knowledge Base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-4-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 4: Tools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chương-5-coding-agent-và-code-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 5: Coding Agent và Code Generation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-6-interaction-mở-rộng-observation-space-và-action-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 6: Interaction: Mở rộng Observation Space và Action Space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-7-evaluating-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 7: Evaluating Agents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-8-model-post-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 8: Model Post-Training
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chương-9-continuous-agent-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 9: Continuous Agent Evolution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chương-10-multi-agent-collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chương 10: Multi-Agent Collaboration
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="edit/main/docs/books/ai-agents/reference-answers.md" title="Chỉnh sửa" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="raw/main/docs/books/ai-agents/reference-answers.md" title="Xem mã nguồn của trang" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 class="unnumbered" id="đáp-án-tham-khảo-cho-các-thought-questions">Đáp án Tham khảo cho các Thought Questions<a class="headerlink" href="#đáp-án-tham-khảo-cho-các-thought-questions" title="Permanent link">#</a></h1>
+<p>Tài liệu này tổng hợp dàn ý đáp án tham khảo cho các Thought Questions xuyên suốt 10 chương của cuốn sách. Hầu hết các Thought Questions đều mang tính chất open-ended và không có một đáp án chính xác duy nhất. Các đáp án tham khảo được tạo bởi AI kết hợp với sự rà soát nhẹ từ con người, và chỉ nhằm mục đích đối chiếu cũng như gợi mở tư duy cho độc giả. Độc giả được khuyến khích sử dụng một LLM cùng với nội dung cuốn sách để thảo luận sâu hơn về các vấn đề này.</p>
+<h2 class="unnumbered" id="chương-1-bắt-đầu-với-ai-agents">Chương 1: Bắt đầu với AI Agents<a class="headerlink" href="#chương-1-bắt-đầu-với-ai-agents" title="Permanent link">#</a></h2>
+<p><strong>1. (★★) Nếu chỉ có thể bổ sung duy nhất một khả năng cho một Agent system—một model mạnh hơn, context phong phú hơn, hay nhiều tools hơn—bạn sẽ chọn yếu tố nào? Lựa chọn của bạn sẽ thay đổi trong điều kiện nào?</strong></p>
+<blockquote>
+<p>Theo công thức "não/mắt/tay chân" (brain/eyes/hands and feet), hãy tìm mắt xích yếu nhất trước: thông thường ưu tiên hàng đầu là làm phong phú context—tức là mở rộng observation space. Nếu tác vụ vượt quá khả năng reasoning của model, hãy chuyển sang một model mạnh hơn. Nếu action space không đủ (chẳng hạn, không có quyền truy cập vào các hệ thống nội bộ của công ty), hãy bổ sung tools. Cách đánh giá là phân tích các failure trajectories để xác định chính xác bottleneck nằm ở perception, decision-making hay action.</p>
+</blockquote>
+<p><strong>2. (★★★) Trong một ReAct loop, số lượt đọc cache tích lũy (cumulative cache reads) tăng xấp xỉ theo hàm bậc hai (quadratically) theo số rounds. Làm thế nào để giảm tốc độ tăng trưởng này?</strong></p>
+<blockquote>
+<p>Ở round <span class="arithmatex">\(i\)</span>, độ dài cached prefix tỉ lệ thuận xấp xỉ với <span class="arithmatex">\(i\)</span>, do đó cumulative reads là <span class="arithmatex">\(1 + 2 + \dots + n = O(n^2)\)</span>. Sự tăng trưởng bậc hai này nằm ở chi phí cumulative cache-read charges, chứ không phải ở trajectory length hay KV Cache footprint (vốn chỉ tăng xấp xỉ tuyến tính). Hãy áp dụng batch-compress cho trajectory giai đoạn đầu khi chạm các token thresholds, giữ lại các kết luận và key state quan trọng; externalize các kết quả trung gian có kích thước lớn để phục vụ on-demand retrieval, hoặc cô lập chúng trong các sub-agents. Không nên nén ở từng round riêng lẻ: điều này có thể làm giảm hiệu năng của Agent, đồng thời làm tăng số lượng compression calls và overhead cho việc cache-rebuild.</p>
+</blockquote>
+<p><strong>3. (★★) Paradigm "Model as Agent" đồng nghĩa với việc các models ngày càng tự chủ hơn trong các quyết định tool-calling. Tuy nhiên, chương này lại lập luận rằng tầm quan trọng của Harness engineering thực tế lại đang gia tăng. Hai xu hướng này cùng tồn tại như thế nào? Giá trị cốt lõi trong tương lai của các Agent frameworks nằm ở đâu?</strong></p>
+<blockquote>
+<p>Phép ẩn dụ "ngựa và dây cương": model càng mạnh và quyền tự chủ càng lớn thì blast radius của các sai sót càng rộng, kéo theo nhu cầu kiểm soát, verification và correction càng cao. Giá trị của frameworks dịch chuyển từ việc "orchestrating LLM calls" sang assurance layer nằm trong năm thành tố cốt lõi của Harness: permission classification, circuit breakers, error recovery, context compression, và tool ecosystem.</p>
+</blockquote>
+<p><strong>4. (★★) Trong ablation experiment, việc thiếu vắng "tool result feedback" đã khiến Agent rơi vào infinite loop. Trong môi trường production, ngoài việc thiếu tool results, những tình huống nào khác có thể khiến Agent bị lặp vô tận? Bạn sẽ thiết kế các cơ chế detection và termination như thế nào?</strong></p>
+<blockquote>
+<p>Các nguyên nhân khác: một tool liên tục trả về cùng một lỗi; hallucinated calls đến các tools không tồn tại; context compression vô tình loại bỏ key state quan trọng; nội dung reasoning bị loại bỏ dẫn đến model API báo lỗi; hoặc bản thân tác vụ là unsolvable. Cơ chế xử lý: thiết lập stop conditions như giới hạn số lần lặp tối đa (maximum iteration count); phát hiện repeated calls (dựa trên cùng một tool + argument fingerprint); escalate chuyển giao cho con người can thiệp (human intervention) ngay khi vượt ngưỡng failure threshold.</p>
+</blockquote>
+<p><strong>5. (★) Chương này đã phân tích năm sản phẩm Agent theo ba chiều: working context, action interfaces, và strategy. Hãy chọn một sản phẩm AI bạn sử dụng hàng ngày, phân tích nó theo ba chiều tương tự, và đánh giá xem architecture của nó đã phù hợp chưa. Nếu là người thiết kế, bạn sẽ cải tiến điều gì?</strong></p>
+<blockquote>
+<p>Câu hỏi open-ended. Các trọng điểm: bám sát bảng phân tích trong chương, mô tả rõ phần "mắt" (các nguồn thông tin mà hệ thống có thể quan sát), "tay chân" (action space có open-ended hay không, có khả năng suy nghĩ nội bộ hay không), và "strategy" (pattern của execution loop mà Agent áp dụng).</p>
+</blockquote>
+<p><strong>6. (★★) Nếu bạn phải thiết kế một hệ thống customer service chuyên biệt cho việc đặt vé máy bay, bạn sẽ chọn workflow pattern hay autonomous Agent pattern? Có thể kết hợp (mix) cả hai pattern này trong cùng một hệ thống được không?</strong></p>
+<blockquote>
+<p>Sử dụng workflow làm xương sống (backbone): bốn node gồm xác thực danh tính (identity verification) → search → payment → booking — cấu trúc này đảm bảo thứ tự tuân thủ (compliant ordering) như "không booking trước khi payment", đồng thời giới hạn bề mặt tấn công prompt-injection (attack surface) bên trong một node duy nhất. Chuyển sang autonomous Agent cho các phân đoạn mở (open-ended segments) như thấu hiểu nhu cầu, rebooking, gợi ý phương án thay thế khi chuyến bay bị hủy. Bổ sung human confirmation đối với các tác vụ rủi ro cao (high-risk operations như thanh toán giá trị lớn, hoàn tiền/refunds).</p>
+</blockquote>
+<p><strong>7. (★★★) Phần guardrails có đề cập đến việc xếp hạng mức độ rủi ro của tool (tool risk ratings). Nếu một tool nhìn chung thuộc diện low-risk nhưng lại trở thành high-risk khi đi kèm với các tổ hợp tham số cụ thể (ví dụ: <code>delete_file</code> xóa file thông thường so với xóa file hệ thống), bạn sẽ thiết kế dynamic risk assessment như thế nào?</strong></p>
+<blockquote>
+<p>Tinh chỉnh đối tượng đánh giá (rating target) từ "tool" thành "tool + arguments": tính toán rủi ro tại thời điểm gọi (call time) dựa trên tính khả nghịch (reversibility), permissions và phạm vi ảnh hưởng (blast radius). Sử dụng các bước kiểm tra deterministic theo dạng rule-based (path allowlists/blocklists, regular expressions) thay vì dựa vào phán đoán của model. Quá trình validation chỉ nên kiểm tra dữ liệu có cấu trúc (structured data) để phòng tránh việc bị thao túng qua prompt-injection.</p>
+</blockquote>
+<p><strong>8. (★★) Trong bảng sản phẩm Agent của chương này, tất cả các Agent đều có không gian hành động mở (open-ended action space). Trong những kịch bản nào thì một constrained action space (ví dụ: chỉ được chọn từ các tùy chọn định sẵn - predefined options) sẽ vượt trội hơn so với một open-ended action space?</strong></p>
+<blockquote>
+<p>Các kịch bản đòi hỏi tính tuân thủ cao (high-compliance), rủi ro cao (high-risk) và sai số không thể đảo ngược (irreversible-error): đối với hoàn tiền (refunds) và thanh toán (payments), các lựa chọn bị giới hạn (constrained options) đóng vai trò là "ràng buộc" (constraints) — mang tính chất chống sai sót tự nhiên (mistake-proof), triệt tiêu hoàn toàn khả năng xảy ra lỗi ngay từ khâu thiết kế (impossible by design).</p>
+</blockquote>
+<p><strong>9. (★★) Cơ chế can thiệp human-in-the-loop yêu cầu Agent phải "chuyển giao quyền kiểm soát một cách khéo léo (gracefully hand over control)". Tuy nhiên, trong thực tế, user có thể offline, phản hồi chậm hoặc đưa ra chỉ dẫn mơ hồ. Agent nên xử lý thế nào trong những tình huống như vậy?</strong></p>
+<blockquote>
+<p>Áp dụng cơ chế fail-safe: tạm dừng các high-risk operations khi chưa nhận được xác nhận thay vì mặc định thực thi; hoàn thành trước các phần việc low-risk có thể đảo ngược (reversible) và ghi nhận lại (document) các phần việc high-risk để con người đưa ra quyết định và Agent có thể resume sau đó; gửi thông báo qua các asynchronous communication tools (tin nhắn, email) kèm theo timeout policy; chủ động làm rõ ý định (intent clarification) khi nhận được các chỉ dẫn mơ hồ.</p>
+</blockquote>
+<p><strong>10. (★★★) Phần mở đầu có nêu rõ: "các nguyên lý thiết kế tốt phải vượt qua được các chu kỳ lặp của model (model iteration cycles)", nhưng các phương pháp kỹ thuật cụ thể (concrete engineering methods) dùng để hiện thực hóa những nguyên lý đó có thể trở nên lỗi thời khi năng lực của model được nâng cao. Hãy đưa ra ví dụ về một phương pháp kỹ thuật Agent như vậy và giải thích lý do.</strong></p>
+<blockquote>
+<p>Ví dụ 1: Sử dụng constrained sampling để ép các tool calls tuân theo một format nghiêm ngặt. Đây là một bản vá độ tin cậy (reliability patch) cho các model thường xuyên sinh ra JSON không hợp lệ hoặc bỏ sót parameters. Lợi ích của phương pháp này có thể suy giảm khi model ngày càng tuân thủ format tốt hơn, dù các kịch bản high-risk vẫn nên duy trì deterministic format validation.</p>
+<p>Ví dụ 2: Tích hợp một external knowledge base để bù đắp cho việc model không có khả năng liên tục tiếp thu tri thức mới (continual learning). Nếu sau này các model đạt được khả năng continual-learning đáng tin cậy, một phần công việc duy trì tri thức có thể dịch chuyển từ hệ thống bên ngoài vào trong các model parameters. Dẫu vậy, external knowledge bases vẫn giữ giá trị độc lập cho việc cập nhật theo thời gian thực (real-time updates), truy xuất chính xác (exact retrieval), kiểm soát quyền truy cập (access control) và truy vết nguồn gốc (source traceability); do đó phạm vi của chúng nhiều khả năng chỉ thu hẹp lại chứ không biến mất hoàn toàn.</p>
+<p>Ví dụ 3: Bắt buộc mọi capability phải được expose thông qua giao diện tool-calling chuẩn của model API và cấm các custom calling formats. Khái niệm Skills chỉ ra một hướng tiếp cận khác: mô tả một capability cùng quy trình vận hành của nó bằng văn bản (text), sau đó để model thực thi thông qua một general-purpose command-line tool. Dưới góc nhìn của model, điều này tương đương với việc hiểu và tuân thủ một custom textual calling protocol được xếp lớp bên trên một general executor. Khi model ngày càng hiểu tốt các arbitrary interfaces, nguyên tắc "luôn sử dụng format tool-calling chuẩn" không còn là chân lý phổ quát. Standard formats vẫn hữu ích cho khả năng tương tác (interoperability), structured validation và các model có năng lực thấp hơn, nhưng chúng nên được xem là một lựa chọn kỹ thuật phụ thuộc vào ngữ cảnh (context-dependent engineering choice).</p>
+<p>Ví dụ 4: Yêu cầu prompts và toàn bộ tool definitions phải xuất hiện ở phần đầu của context. Phương pháp này ra đời do các model đời đầu có khả năng instruction-following hạn chế, thường không nhận diện hoặc không thực thi được prompts và tool definitions nếu chúng nằm ngoài các vị trí cố định quen thuộc. Skills có thể nạp prompts vào giữa context theo nhu cầu (on demand), trong khi cơ chế dynamic tool discovery sẽ append các tool definitions mới tìm thấy vào phía sau trajectory hiện tại. Khi năng lực instruction-following được cải thiện và các model được post-training chuyên biệt cho các dynamic-loading patterns này, prompts và tool definitions không còn bắt buộc phải cố định ở đầu context nữa.</p>
+</blockquote>
+<h2 class="unnumbered" id="chương-2-context-engineering">Chương 2: Context Engineering<a class="headerlink" href="#chương-2-context-engineering" title="Permanent link">#</a></h2>
+<p><strong>1. (★★★) Experiment 2-3 chỉ ra rằng sliding window của conversation history khiến Agent liên tục lặp lại các tool call giống nhau. Tuy nhiên, việc giữ lại toàn bộ history lại khiến context phình to vô hạn. Hãy thiết kế một chiến lược vừa tránh thất thoát thông tin, vừa kiểm soát được context length mà không làm phá vỡ KV Cache prefix.</strong></p>
+<blockquote>
+<p>① Thay thế việc loại bỏ (discarding) bằng nén (compression): message chỉ được append, không bao giờ bị xóa hay chỉnh sửa; khi chạm ngưỡng threshold (ví dụ: 80% window), thực hiện batch-compress các tool result cũ. ② Cơ chế phân tầng (layered mechanism): persist các output dung lượng lớn xuống disk và chỉ giữ lại summary preview trong context, loại bỏ hoàn toàn noise, đồng thời duy trì archival summary để bảo toàn mạch ngữ cảnh (thread). ③ Sub-agent isolation, đảm bảo intermediate state không bao giờ lọt vào main context.</p>
+</blockquote>
+<p><strong>2. (★★) Cơ chế lưu giữ Chain-of-Thought trong Chat Template của Qwen3 chỉ giữ lại reasoning content "sau user message thực tế gần nhất". Nếu một vòng lặp ReAct kéo dài hàng trăm tool call, phần reasoning content tích lũy này có thể ngốn một lượng context khổng lồ. Bạn sẽ điều chỉnh cơ chế này như thế nào để xử lý các vòng lặp rất dài? DeepSeek R1 từng yêu cầu loại bỏ (strip) toàn bộ reasoning content trong lịch sử, trong khi DeepSeek V4 đảo ngược quy trình này bằng việc bắt buộc truyền ngược lại toàn bộ <code>reasoning_content</code>—hãy so sánh ưu và nhược điểm của hai chiến lược trái ngược này? Sự đảo ngược này phản ánh điều gì?</strong></p>
+<blockquote>
+<p>Hướng điều chỉnh: sliding-window retention—giữ nguyên vẹn reasoning content của các round gần nhất; ngoài phạm vi window, kích hoạt rolling compression dựa trên token budget (thay vì cố định số round), trích xuất ra một structured status bar (current goal, confirmed facts, ruled-out paths, to-dos). Quá trình compression chỉ diễn ra một lần duy nhất tại một vị trí cố định, do đó chi phí cache rebuild chỉ phải trả một lần thay vì lặp lại ở mỗi round. Chiến lược strip của R1: tiết kiệm token, giữ prefix ổn định và thân thiện với cache (cache-friendly), khớp với training distribution (CoT lịch sử không bao giờ xuất hiện trong input); nhưng mỗi round đều phải suy luận lại từ đầu, đánh mất các long-range plan và dễ lặp lại sai lầm. Chiến lược bắt buộc pass-back của V4: tư duy liền mạch (coherent thinking) và mang lại performance vượt trội trong các tác vụ agentic dài hạn (long-horizon agentic tasks); nhưng chi phí token cao, gây prefix bloat sau mỗi round, và không thể chuyển đổi mượt mà từ non-thinking mode. Sự đảo ngược này chứng minh: đối với đối thoại thuần túy, reasoning là lãng phí; nhưng đối với các kịch bản agentic, reasoning chính là state—và thực tiễn ngành đã chuyển dịch mạnh mẽ theo hướng thứ hai.</p>
+</blockquote>
+<p><strong>3. (★★) Trong experiment về context-aware compression, việc nén từ khoảng 148K ký tự xuống còn khoảng 2.000 ký tự—liệu mức độ nén cực hạn này có tiềm ẩn nguy cơ "mất mát thông tin không thể phục hồi" (irreversible information loss) không? Vấn đề này có thể được giải quyết như thế nào?</strong></p>
+<blockquote>
+<p>Có, rủi ro là hiện hữu: compression thực chất là một phép chiếu mất dữ liệu (lossy projection), và nếu câu hỏi truy vấn rơi vào chiều không gian thông tin không được bảo toàn, hệ thống sẽ gãy vỡ. Giải pháp: kết hợp "lossy compression + lossless indexing"—mọi fact đều đính kèm URL nguồn để truy vết (traceability); raw output được lưu trữ trực tiếp trên disk và chỉ đưa summary preview vào context; thiết lập retention priority rõ ràng—các quyết định kiến trúc, tính toàn vẹn ngữ nghĩa (mốc thời gian, tên thực thể/công ty), verification status, và các định danh như UUID/hash phải được giữ nguyên bản (verbatim); áp dụng adaptive windowing để trì hoãn tối đa thời điểm kích hoạt compression.</p>
+</blockquote>
+<p><strong>4. (★★) Agent Status Bar giúp chuyển hóa các implicit state thành explicit state. Tuy nhiên, nếu chính status bar chứa thông tin sai lệch (ví dụ: bug trong tool counter), Agent có thể đưa ra các quyết định sai lầm dựa trên thông tin không chính xác đó. Làm thế nào để giảm thiểu bài toán "meta-information reliability" này?</strong></p>
+<blockquote>
+<p>Model tin tưởng status bar gần như vô điều kiện, do đó sai sót sẽ bị khuếch đại và lan truyền nguyên trạng. Các biện pháp mitigation: ① duy trì status bar hoàn toàn bằng deterministic code—tuyệt đối không để LLM tự thực hiện batch-count trên lịch sử dài (nếu bắt buộc, hãy trích xuất từng item riêng lẻ và aggregate bằng code); ② theo dõi độ chính xác của status bar như một production metric ưu tiên hàng đầu (first-class production metric); ③ thông tin đưa vào status bar chỉ được lấy từ các observation đáng tin cậy của môi trường thực tế, thiết lập cơ chế phòng thủ trước nguy cơ status-bar poisoning.</p>
+</blockquote>
+<p><strong>5. (★★) Ablation experiment về Prompt Engineering chỉ ra rằng thông tin lộn xộn, thiếu tổ chức có thể làm giảm success rate hơn 30%. Tuy nhiên, trong quá trình phát triển thực tế, system prompt thường được bảo trì bởi nhiều người ở các thời điểm khác nhau. Bạn sẽ áp dụng những engineering practice nào để ngăn chặn system prompt ngày càng trở nên mất trật tự theo thời gian?</strong></p>
+<blockquote>
+<p>① Quản lý prompt như source code (treat prompts as code): áp dụng version control và quy trình review nghiêm ngặt, trong đó product manager định nghĩa business rule còn engineer phụ trách mã hóa (encoding); ② sử dụng các benchmark dạng Tau-Bench làm regression test, thực thi ablation trước và sau mỗi thay đổi để khoanh vùng chính xác tác động; ③ chuẩn hóa cấu trúc: định hình luồng xử lý theo chuẩn SOP-driven flow thay vì nhồi nhét quy tắc rời rạc, phân tầng trực quan bằng XML/Markdown; ④ phân loại và định danh các fragment thành "cacheable / cache-breaking", đặt dynamic content nằm sau cache boundary; ⑤ tách nhỏ phần nội dung phình to (bloated content) thành các Skill để nạp theo nhu cầu (on demand).</p>
+</blockquote>
+<p><strong>6. (★★★) Chương này đưa ra nhận định rằng "in-context learning về bản chất là retrieval, không phải reasoning." Nếu nhận định này đúng, toàn bộ các hướng tối ưu hóa hiện tại dựa trên việc "nhồi thêm thông tin vào context" đều cần phải được đánh giá lại. Theo bạn, hạn chế này nên được khắc phục như thế nào?</strong></p>
+<blockquote>
+<p>Bổ sung một lớp distillation layer vào "một nửa cỗ máy retrieval engine" này: ① context distillation / status bar — dùng code để precompute các kết luận phục vụ cho việc retrieval trực tiếp; ② active compression, thay thế các raw records bằng tri thức có cấu trúc với mật độ thông tin cao (high-density structured knowledge); ③ sub-agent isolation, giữ noise không lọt vào context chính; ④ interaction đóng vai trò là trục thứ ba — các công cụ/thiết bị bên ngoài (external instruments) quan sát và ghi ngược lại các thông tin mới mà model không thể tự suy luận ra; ⑤ các hướng đi tiên phong (frontier directions): các "ghi chú" KV Cache có khả năng chỉnh sửa (editable), kết hợp (composable), và cross-session memory consolidation.</p>
+</blockquote>
+<p><strong>7. (★★★) Cơ chế progressive disclosure của Skills chỉ load toàn bộ nội dung khi Agent đánh giá rằng nó thực sự cần thiết. Tuy nhiên, bản thân phán đoán này lại phụ thuộc vào năng lực của model — nếu model không biết những gì nó chưa biết, nó sẽ không thể trigger việc load một Skill một cách chính xác. Vấn đề "metacognition" này có thể được giải quyết như thế nào?</strong></p>
+<blockquote>
+<p>① Giữ cho Skill metadata (name, description) luôn thường trực (resident) trong context để model luôn "biết mình đang có những gì"; ② viết Skill description dưới dạng các routing conditions thay vì giới thiệu tính năng thông thường — ví dụ "Use when / Don't use when" — nhằm tránh các mô tả mơ hồ.</p>
+</blockquote>
+<p><strong>8. (★★) Trong cơ chế Skills, sau khi Agent load động (dynamically load) các instructions từ <code>SKILL.md</code>, các thao tác tiếp theo có tuân thủ chúng một cách đáng tin cậy (reliably follow) hay không? Mức độ hỗ trợ của các model đối với pattern Skills có điểm gì khác biệt?</strong></p>
+<blockquote>
+<p>Điều này phụ thuộc vào cách Skill được inject: inject vào system prompt mang lại khả năng instruction following mạnh nhất nhưng lại làm break KV Cache; đọc nó như một file thông thường vào giữa context có thể khiến instruction following kém hơn; inject vào cuối context cho kết quả instruction following tốt, nhưng phần KV của Skill sẽ phải recompute ở mỗi tool call, gây tốn kém chi phí (costly).</p>
+</blockquote>
+<p><strong>9. (★★★) Chương này nhấn mạnh rằng những thay đổi trong thông tin động (dynamic information, ví dụ: system timestamps, thứ tự danh sách tool) có thể làm phá vỡ prefix hits của KV Cache. Trong một production system có số lượng lớn tool và tập hợp tool thường xuyên thay đổi, bạn sẽ thiết kế context layout như thế nào để tối đa hóa cache hit rate?</strong></p>
+<blockquote>
+<p>① Duy trì một tập hợp nhỏ các core tools ổn định (ví dụ: khoảng 7 tools) kết hợp với một generic executor, các năng lực cụ thể sẽ được cung cấp thông qua cơ chế progressive disclosure của Skills; các tool definitions được đóng băng (freeze) trong static prefix theo một thứ tự cố định; ② các sub-agents giữ nguyên prefix tương tự như parent Agent.</p>
+</blockquote>
+<h2 class="unnumbered" id="chương-3-user-memory-và-knowledge-base">Chương 3: User Memory và Knowledge Base<a class="headerlink" href="#chương-3-user-memory-và-knowledge-base" title="Permanent link">#</a></h2>
+<p><strong>1. (★★) Trong một hệ thống user memory, khi cùng một user cung cấp thông tin mâu thuẫn qua các session khác nhau (ví dụ: đề cập đến hai địa chỉ nhà khác nhau), memory system nên xử lý xung đột này như thế nào?</strong></p>
+<blockquote>
+<p>Sử dụng một pipeline theo phong cách Mem0 với cơ chế "extract–compare–decide": trước tiên retrieve các memory cũ tương đồng bằng vector search, sau đó để một LLM quyết định ADD/UPDATE/DELETE/NOOP—ví dụ, "chuyển đến Thượng Hải" sẽ UPDATE và ghi đè lên "sống tại Bắc Kinh". Versioning: chỉ lưu phiên bản mới nhất kèm timestamp đối với các thông tin dạng địa chỉ, nhưng giữ toàn bộ history đối với thông tin dạng kinh nghiệm làm việc. Về phía retrieval, contextual prefixes (người, thời gian, intent—tương tự trường hợp lệnh chuyển khoản bị sửa đổi ba lần) có thể hỗ trợ đánh giá entry nào cuối cùng có hiệu lực.</p>
+</blockquote>
+<p><strong>2. (★★) Contextual Retrieval bổ sung ngữ cảnh từ tài liệu gốc vào từng chunk. Tuy nhiên, nếu bản thân tài liệu gốc có cấu trúc lộn xộn hoặc chứa thông tin mâu thuẫn, phương pháp này có thể lan truyền hoặc thậm chí khuếch đại sai sót. Bạn sẽ đưa tín hiệu "information quality" vào retrieval phase như thế nào?</strong></p>
+<blockquote>
+<p>Mượn ý tưởng từ "knowledge base freshness and governance": gắn metadata như version number, effective/expiration time, và source vào các chunk; filter bỏ nội dung hết hạn tại retrieval time, hoặc đánh dấu tường minh trong prefix rằng "mục này đã bị bãi bỏ vào ngày...". Trong reranking stage, đưa source authority và temporal freshness vào score thay vì chỉ nhìn vào semantic relevance. Trong quá trình indexing, để LLM tạo prefix đồng thời detect và gắn cờ (flag) các mâu thuẫn giữa các chunk (inter-chunk contradictions), tương tự cơ chế versioned conflict detection trong memory.</p>
+</blockquote>
+<p><strong>3. (★★) Multimodal information extraction chuyển đổi biểu đồ thành mô tả văn bản trước khi retrieval. Quá trình "translation" này có thể làm mất các quan hệ không gian trong visual information. Hãy nêu một ví dụ cụ thể về thông tin biểu đồ mà mô tả thuần văn bản không thể truyền tải trọn vẹn, và thiết kế một giải pháp để bảo toàn thông tin đó.</strong></p>
+<blockquote>
+<p>Ví dụ: quan hệ logic trong sơ đồ system architecture, vị trí giao điểm của hai đường cong trên line chart, hoặc quan hệ tương ứng hàng - cột giữa cell và header trong một bảng biểu PDF. Option 1: native multimodal processing; Option 2: cung cấp một multimodal image-analysis tool.</p>
+</blockquote>
+<p><strong>4. (★★★) Luận điểm "Bitter Lesson" của Rich Sutton cho rằng các phương pháp tổng quát (search và learning) cuối cùng sẽ vượt trội hơn hẳn các hand-crafted features. Toàn bộ knowledge system được xây dựng trong chương này (chunking strategies, index structures, retrieval pipelines) liệu có phải là một dạng "hand-crafted design"? Nếu năng lực model trở nên đủ mạnh, liệu những thiết kế này có thể bị thay thế hoàn toàn bằng việc "inputting everything"?</strong></p>
+<blockquote>
+<p>Đây thực sự là hand-crafted design, và một số công đoạn (chunking, fusion tuning) có thể suy giảm vai trò khi context window dài hơn; tuy nhiên case study "mèo đen / mèo trắng" cho thấy việc "inputting everything" cũng là không đủ: attention bản chất là soft retrieval, trong khi việc tổng hợp (aggregation) và thống kê cross-document vẫn cần pre-distillation tại indexing time. Các ràng buộc kỹ thuật hệ thống như knowledge expiry và updating, permission/tenant isolation, auditability, và chi phí hoàn toàn độc lập với năng lực của model. Hơn nữa, retrieval kết hợp với LLM distillation tại indexing time bản thân nó đã là một phương pháp "search + learning" tổng quát, không hề đi ngược lại Bitter Lesson.</p>
+</blockquote>
+<p><strong>5. (★★★) Khi năng lực model ngày càng nâng cao, bạn nghĩ các domain-specific knowledge bases có còn quan trọng không? Liệu một foundation model cực mạnh trong tương lai có thể chứa toàn bộ thông tin của một domain knowledge base, qua đó loại bỏ hoàn toàn nhu cầu về knowledge base hay không?</strong></p>
+<blockquote>
+<p>Vẫn rất quan trọng: training data có cutoff date cố định, trong khi knowledge base có thể update theo thời gian thực bất kỳ lúc nào; quy trình nội bộ của doanh nghiệp, án lệ tư pháp bảo mật và các dữ liệu tương tự hoàn toàn không tồn tại trong public corpus; việc chia sẻ multi-user đòi hỏi permission filtering và tenant isolation nghiêm ngặt, trong khi kiến thức được nén trong parametric weights không thể may đo linh hoạt theo từng caller; external storage cho phép audit, version control, và offline/gỡ bỏ nội dung hết hạn ngay lập tức—parametric memory hầu như không thể làm được điều này; ngay cả khi đi theo hướng parametric (post-training / User as Engram), bạn vẫn phải đối mặt với bài toán cố hữu: "ghi nhớ thì dễ, nhưng vận dụng các facts đó cho multi-hop reasoning thì cực kỳ khó."</p>
+</blockquote>
+<p><strong>6. (★) RAPTOR xây dựng tree index thông qua tóm tắt phân cấp bottom-up (bottom-up hierarchical summarization), trong khi GraphRAG xây dựng graph-structured index dựa trên quan hệ giữa các entity. Hai loại structured index này tối ưu cho việc trả lời những dạng query nào?</strong></p>
+<blockquote>
+<p>RAPTOR: Phù hợp với các query dạng "cross-layer traversal" (duyệt xuyên tầng) đi sâu từ khái niệm vĩ mô xuống chi tiết—chẳng hạn trước tiên định vị summary về "SIMD instruction set" rồi sau đó drill down vào chi tiết SSE—bao quát cả độ chi tiết ở mức tổng quan (overview) lẫn chi tiết sâu (details). GraphRAG: Tối ưu cho multi-hop relational reasoning ("địa chỉ của bệnh viện nơi bác sĩ của tôi làm việc", duyệt qua chuỗi quan hệ - relation chain) và entity disambiguation (phân định thực thể: hai "Dr. Zhang" là hai node khác nhau)—xử lý tốt các query dạng "quan hệ giữa A và B là gì"; bên cạnh đó, community summaries cũng cung cấp khả năng gom cụm theo chủ đề (thematic clustering).</p>
+</blockquote>
+<p><strong>7. (★★) Filesystem paradigm tổ chức tri thức thành một cấu trúc phân cấp tương tự như file system. So với RAG trên vector database truyền thống, phương pháp này mang lại lợi thế trong những kịch bản nào?</strong></p>
+<blockquote>
+<p>Plain text cho phép người dùng trực tiếp đọc, chỉnh sửa, hiệu đính, cũng như quản lý phiên bản (version control) và rollback bằng Git—đặc biệt phù hợp với các kịch bản mà con người và máy móc cùng tham gia bảo trì, review tri thức; với capability <code>write_file</code>, Agent có thể tự chủ ghi lại kinh nghiệm, hình thành chu trình memory tự tiến hóa (externalized learning); cơ chế progressive disclosure theo các tầng L0/L1/L2 cho phép phần lớn query được giải quyết ngay từ tầng L1, giúp tiết kiệm token; điều kiện tiên quyết là phải xây dựng được hệ thống cross-links và các trang index tương tự như Wikipedia—nếu không, số lượng file bị cô lập (isolated files) càng nhiều thì việc retrieval sẽ càng trở nên khó khăn.</p>
+</blockquote>
+<p><strong>8. (★★★) Việc tự động phát hiện "judgment factors" và "factor importance hierarchies" từ structured data (ví dụ: cơ sở dữ liệu phán quyết tư pháp) về bản chất là quá trình Agent quy nạp các rule từ dữ liệu. Liệu phương pháp data-driven knowledge extraction này có thể đạt được chất lượng tương đương với các rule được human expert xây dựng thủ công?</strong></p>
+<blockquote>
+<p>Ưu điểm: Như thực nghiệm CAIL2018 đã chứng minh, factor discovery theo hướng "bottom-up" sẽ khớp sát với dữ liệu thay vì dựa vào human priors (tiên nghiệm của con người), nắm bắt được các kinh nghiệm trade-off ngầm định phân tán qua hàng chục nghìn bản án mà chuyên gia khó có thể hệ thống hóa tường minh, đồng thời có thể lượng hóa được (quantifiable). Hạn chế: Các sai số trích xuất từ LLM dễ gây ra knowledge pollution (ô nhiễm tri thức); kế thừa toàn bộ bias sẵn có trong tập dữ liệu; các clustering prototypes chỉ phản ánh mối tương quan (correlation) chứ không giải thích được quan hệ nhân quả (causation). Giải pháp dung hòa: Kết hợp data-driven modeling với sự kiểm duyệt của expert đối với schema và kết quả đầu ra—model đóng vai trò định hướng đặt câu hỏi (questioning), trong khi dữ liệu thống kê đóng vai trò bảo chứng cho phần diễn giải.</p>
+</blockquote>
+<p><strong>9. (★★★) Hãy thiết kế cả hai workflow incremental-update (cập nhật gia tăng) và periodic-reorganization (tái cấu trúc định kỳ) cho một Markdown user-memory library. Nếu Reviewer và Proposer cùng dùng chung một model và chỉ được tiếp cận các đoạn trích hội thoại do Proposer lựa chọn, những lỗi nào vẫn có nguy cơ bị merge vào hệ thống? Hãy đề xuất giải pháp cải tiến dựa trên ba khía cạnh: model independence, evidence coverage và tool permissions.</strong></p>
+<blockquote>
+<p>Incremental update: Xử lý memory library tương tự như một code repository và điều hướng toàn bộ thay đổi qua PR. Đầu tiên, Proposer thực hiện retrieve các tri thức liên quan hiện có, sau đó đề xuất một diff tối thiểu nhưng hoàn chỉnh, đồng thời duy trì tính nhất quán của links, indexes, time metadata và evidence references; Reviewer độc lập audit dựa trên trạng thái tri thức trước thay đổi, bản diff và raw evidence, nếu reject phải trả về actionable comments chỉ rõ evidence và số dòng cụ thể; quy trình lặp cần giới hạn số lần tối đa hoặc áp cost budget, nếu vượt ngưỡng sẽ escalate lên con người xử lý thay vì mặc định approve. Sau khi merge, CI sẽ kiểm tra format, links, metadata và permission labels, chỉ sau khi vượt qua bước này mới tiến hành rebuild gia tăng các chunks và vector indexes bị ảnh hưởng từ phiên bản vừa merge. </p>
+<p>Periodic consolidation: Kích hoạt full scan theo lịch trình định kỳ hoặc theo ngưỡng số lượng entry mới; tiến hành deduplicate, merge, tách các file quá lớn và rebuild lại các trang entry; cốt lõi là phải đối soát ngược lại raw conversations theo từng đoạn văn để phát hiện xem các bản summary cũ có vô tình làm mất từ phủ định, điều kiện thời gian hay định ngữ bổ nghĩa (qualifier) hay không. Xung đột thông tin không được xử lý theo kiểu "giữ lại bản mới nhất", mà phải truy vết từng claim về source gốc và ghi nhận rõ điều kiện ràng buộc để claim đó đúng; trường hợp thiếu evidence thì bắt buộc phải giữ nguyên conflict và gắn cờ unresolved. Quá trình tái cấu trúc này cũng được submit dưới dạng các PR (có thể tách nhỏ theo thư mục); sau khi tất cả PR được thông qua, hệ thống sẽ rebuild index và chạy replay một tập test cases retrieval điển hình để đảm bảo các tri thức vốn tìm được trước đây không bị ẩn mất.</p>
+<p>Việc dùng cùng một model kết hợp với các snippet được chọn lọc trước từ upstream sẽ bỏ lọt 3 nhóm lỗi nghiêm trọng:
+- <strong>Model independence</strong>: Các model cùng family sẽ chia sẻ chung training priors và blind spots, dẫn đến việc Reviewer có xu hướng diễn giải lại kết luận của Proposer thay vì quay lại kiểm tra evidence gốc, khiến các lỗi đọc hiểu sai (misreading) mang tính hệ thống không bị phát hiện—cần sử dụng các model có năng lực tương đương nhưng khác họ (khác provider/family) để cross-review chéo.
+- <strong>Evidence coverage</strong>: Khi Reviewer chỉ nhìn thấy các snippet do Proposer lọc ra, các lỗi trích dẫn ngoài ngữ cảnh (out of context), lỗi làm mất từ phủ định/tiền điều kiện và xung đột ngữ nghĩa với các file khác đều trở nên vô hình—Reviewer bắt buộc phải có quyền tự chủ query vào toàn bộ knowledge base và raw evidence store trong phạm vi tenant hoặc user scope được phân quyền, thay vì chỉ tiếp nhận thụ động vài đoạn văn bản do upstream đưa sang.
+- <strong>Tool permissions</strong>: Nếu Proposer có quyền ghi trực tiếp vào main branch hoặc can thiệp live index, khâu review sẽ mất đi tính kiểm soát—cần phân tách thẩm quyền tuyệt đối: Proposer chỉ được quyền ghi trên working branch, Reviewer chỉ có quyền read-only đối với evidence và submit phán quyết, chỉ có merge pipeline tự động mới có quyền cập nhật main branch và live index; các bộ verifier và release gate phải nằm ngoài phạm vi có thể bị can thiệp bởi cả hai vai trò trên.</p>
+</blockquote>
+<h2 class="unnumbered" id="chapter-4-tools">Chapter 4: Tools<a class="headerlink" href="#chapter-4-tools" title="Permanent link">#</a></h2>
+<p><strong>1. (★★) Tiêu chuẩn MCP phân tách (decouple) định nghĩa tool khỏi Agent framework. Tuy nhiên, việc chuẩn hóa cũng đồng nghĩa với việc các pattern tương tác tool phức tạp (ví dụ: streaming output, bidirectional communication, stateful session) có thể rất khó biểu đạt trong khuôn khổ một standard protocol. Theo bạn, khả năng mà MCP cần mở rộng nhất trong tương lai là gì?</strong></p>
+<blockquote>
+<p>Khả năng mở rộng cần thiết nhất là tính năng cross-session, event-driven. MCP hiện đã hỗ trợ multi-turn interaction, change subscription và long-running task, nhưng cốt lõi của nó vẫn là chuẩn hóa một lệnh gọi năng lực (capability call) thay vì duy trì một Agent luôn online liên tục. Việc đánh thức (wake) một Agent khi có email mới hoặc external callback, cũng như queuing, resuming và retry nhiều event, về bản chất vẫn thuộc phạm vi xử lý của Agent framework. Các quy ước thống nhất hơn cho quá trình orchestration này sẽ giúp mở rộng MCP mà không làm mất đi tính đơn giản vốn có của protocol.</p>
+</blockquote>
+<p><strong>2. (★★) Trong hệ sinh thái MCP, các MCP server khác nhau có thể cung cấp các tool có chức năng trùng lặp rất lớn. Khi một Agent đối mặt với nhiều tool tương đồng về mặt chức năng đến từ các nguồn khác nhau, nó nên lựa chọn thế nào? Nếu các tool cùng tên từ các nguồn khác nhau có hành vi hơi khác nhau đôi chút (ví dụ: một tool trả về bản tóm tắt, tool khác lại trả về full text), liệu Agent có thể nhận thức và tận dụng sự khác biệt này hay không?</strong></p>
+<blockquote>
+<p>Tiêu chí lựa chọn: trước khi integration, hãy review description, pin version và cấu hình least-privilege credential; đề phòng rủi ro same-name tool shadowing định tuyến các call nhạy cảm tới một bên độc hại (malicious party); tại runtime, thu hẹp danh sách ứng viên thông qua hierarchical classification và dynamic discovery. Việc model có thể nhận thức được sự khác biệt về hành vi hay không phụ thuộc hoàn toàn vào chất lượng của tool description.</p>
+</blockquote>
+<p><strong>3. (★★) Chương này đề xuất một vòng lặp "execute-validate-feedback" (ví dụ: tự động chạy linter sau khi viết code). Pattern "tự động validation ngay sau khi thao tác" (immediate post-operation automatic validation) này có thể được áp dụng cho những kịch bản tool nào khác? Có thao tác nào mà chi phí hoặc rủi ro của chính việc validation lại vượt quá chi phí/rủi ro của bản thân thao tác đó, khiến pattern này trở nên bất khả thi (infeasible) hay không?</strong></p>
+<blockquote>
+<p>Các kịch bản có thể khái quát hóa (generalizable scenario): sau khi thay đổi cấu hình, chạy thực tế trong sandbox để verify xem cấu hình đã có hiệu lực hay chưa; sau khi generate một document/presentation, render nó thành screenshot và tận dụng khả năng multimodal của model để kiểm tra layout. Các trường hợp bất khả thi (infeasible): các thao tác không thể hoàn tác (irreversible) và non-idempotent như gửi email, quay số gọi điện, hoặc chuyển tiền—hoặc là không có gì để quan sát, hoặc bản thân việc validation sẽ kích hoạt một sự kiện ngoài đời thực khác; ở đây bạn nên chuyển sang giải pháp tiền kiểm (ex ante): phê duyệt trước theo cơ chế Proposer-Reviewer (Proposer-Reviewer pre-approval).</p>
+</blockquote>
+<p><strong>4. (★★) Chương này đặt ra bài toán "bùng nổ công cụ" (tool explosion)—độ chính xác khi lựa chọn tool của một Agent sẽ bị suy giảm nghiêm trọng khi đối mặt với hàng nghìn tool. Ngoài proactive tool discovery, còn có những phương pháp tiếp cận nào khác? Hãy cân nhắc dựa trên cách các chuyên gia con người xử lý khi có một tập hợp khổng lồ các tool khả dụng.</strong></p>
+<blockquote>
+<p>① Hierarchical grouping: trước tiên xác định "server/app", sau đó mới chọn tool cụ thể; ② "Consult on demand" theo phong cách Skills: giống như tra cứu một cuốn sách tham khảo—catalog luôn thường trực (resident) trong context, còn thông tin chi tiết chỉ được load on demand; ③ Một vài basic tool thường dùng được "giữ sẵn trong tay" và thường trực trong context, phần còn lại có thể truy cập thông qua catalog index.</p>
+</blockquote>
+<h2 class="unnumbered" id="chương-5-coding-agent-và-code-generation">Chương 5: Coding Agent và Code Generation<a class="headerlink" href="#chương-5-coding-agent-và-code-generation" title="Permanent link">#</a></h2>
+<p><strong>1. (★★) Code generation được gọi là “meta-capability” của một Agent. Tuy nhiên, code execution lại dẫn đến các rủi ro bảo mật—code do Agent sinh ra có thể chứa vulnerabilities, rơi vào infinite loops, hoặc làm cạn kiệt tài nguyên (exhaust resources). Sandboxing có thể giảm thiểu một số rủi ro này, nhưng nó cũng giới hạn khả năng hoạt động của code, ví dụ như chặn quyền truy cập network hoặc file system. Làm thế nào để tìm được điểm cân bằng tối ưu giữa bảo mật và năng lực hoạt động?</strong></p>
+<blockquote>
+<p>Phân tầng sandbox isolation theo từng kịch bản (containers/microVMs); mặc định không có network, sử dụng whitelist proxy để cấp quyền truy cập theo nhu cầu; mount source code ở chế độ read-only và giữ API keys nằm ngoài sandbox; thiết lập sandbox resource limits; quản lý sandbox lifecycle (timeouts).</p>
+</blockquote>
+<p><strong>2. (★★★) Agent bootstrapping—một Agent có khả năng tạo ra các Agent khác—mở ra tiềm năng “tự tái sinh trí tuệ” (self-reproduction of intelligence). Nhưng mỗi vòng lặp bootstrapping đều có thể mang lại các bias hoặc lỗi mới. Liệu các lỗi này có tích tụ qua các thế hệ không? Làm thế nào để ngăn chặn hiện tượng degradation trong Agent bootstrapping?</strong></p>
+<blockquote>
+<p>Nếu mỗi thế hệ liên tục tái sinh dựa trên các artifacts của thế hệ trước, một số lỗi có thể sẽ tích tụ. Điểm mấu chốt là phải thiết lập các verifiable tasks đủ thử thách—chẳng hạn như các bài toán lập trình có độ khó cao.</p>
+</blockquote>
+<p><strong>3. (★★) Khi một code-generation Agent xử lý log parsing, nó có thể tự động thích ứng theo format evolution. Nhưng nếu sự thay đổi format này là một bug chứ không phải chỉnh sửa có chủ đích, khả năng tự thích ứng của Agent có thể vô tình che giấu vấn đề. Agent nên phân biệt giữa “thay đổi cần thích ứng” và “bất thường cần báo cáo” như thế nào?</strong></p>
+<blockquote>
+<p>Chẩn đoán trước khi thích ứng: đối chiếu format mới với tài liệu kiến trúc và PRD để đánh giá xem thay đổi đó có nằm trong dự kiến hay không (tư tưởng của Experiment 5-11); kiểm tra lịch sử version-control để xác nhận thay đổi tương ứng với một code commit hợp lệ thay vì một sourceless drift; tương tự như log_mismatch của τ-bench, ngay cả khi chọn thích ứng, hãy log một alert và tự động tạo issue thay vì âm thầm chấp nhận nó; khi không chắc chắn, định tuyến sang human-in-the-loop để xác nhận. Nguyên tắc: thích ứng và báo cáo song song—sự thích ứng không được phép nuốt chửng các tín hiệu bất thường.</p>
+</blockquote>
+<p><strong>4. (★★) Chương này liên tục sử dụng cơ chế proposer-reviewer trong PPT generation, video editing và log visualization. Nếu gu thẩm mỹ của Reviewer khác biệt so với target user—ví dụ: Reviewer đánh giá mật độ thông tin là hợp lý nhưng user lại thấy quá dày đặc—feedback loop có thể hội tụ về một local optimum sai lệch. Làm thế nào để tích hợp feedback về user-preference vào bên trong Reviewer loop?</strong></p>
+<blockquote>
+<p>Inject user feedback vào trajectory của Agent dưới dạng một structured event có độ ưu tiên cao nhất; tường minh hóa và hợp nhất user preferences bằng cách ghi vào MEMORY.md để các preference có hiệu lực xuyên suốt các tasks; bàn giao tài liệu dưới định dạng HTML thay vì Markdown để user có thể trực tiếp kiểm tra.</p>
+</blockquote>
+<p><strong>5. (★★) Chương này trình bày một số cách để một Coding Agent tích lũy kinh nghiệm thu được qua quá trình execution và debugging ngược trở lại codebase—viết các file knowledge-base, cập nhật tài liệu kiến trúc (architecture documentation), duy trì các file chỉ dẫn dự án (project instruction files), và mã hóa các chuỗi thao tác thành code. Nếu lượng kinh nghiệm này tiếp tục được chắt lọc thành các rule trong system prompt, tập hợp rule sẽ không ngừng phình to theo thời gian. Làm thế nào để thực hiện “garbage collection” trên các rule đã tích lũy nhằm nhận diện và loại bỏ các mục dư thừa hoặc lỗi thời? Tại sao một lần sửa đổi code thành công đơn lẻ vẫn chưa được coi là continuous evolution theo định nghĩa của Chương 9?</strong></p>
+<blockquote>
+<p>Hướng tiếp cận GC: chuyển các rule có thể mã hóa được vào linter, CI, hoặc tool validation ra khỏi prompt; theo dõi hit rate và conflict của các rule, đồng thời định kỳ revalidate chúng với codebase; sử dụng Markdown và Git để bảo toàn provenance, version và khả năng rollback. Một patch thành công chỉ chứng minh rằng nó đã giải quyết được case hiện tại. Continuous evolution đòi hỏi nhiều hơn thế: sự sửa đổi phải xuất phát từ operational evidence có thể truy vết, cải thiện được các task tiếp theo, và vượt qua được regression testing trên các task cũ cũng như safety validation.</p>
+</blockquote>
+<p><strong>6. (★) “Các team thân thiện với remote work thường cũng sẽ thân thiện với AI Agent.” Xét về mặt tài liệu hóa tri thức (knowledge documentation), team hoặc tổ chức của bạn đã tiệm cận mức “AI-ready” đến đâu? Trở ngại lớn nhất là gì?</strong></p>
+<blockquote>
+<p>Câu hỏi mở. Bạn có thể tự đánh giá bằng proxy metric của chương này: một nhân sự mới làm việc remote có thể hoạt động độc lập chỉ dựa vào repository và documentation hay không? Checklist: các quyết định có được ghi lại trong tài liệu; context có được đưa vào issues/PRs; các lệnh build và test có file chỉ dẫn như CLAUDE.md/AGENTS.md hay không; tribal knowledge (kiến thức truyền miệng) đã được đúc kết thành developer guide hay chưa. Trở ngại lớn nhất và phổ biến nhất: văn hóa truyền miệng và bảng trắng dựa vào việc "hỏi đồng nghiệp ngồi cạnh"—Agent không thể đọc được các thỏa thuận miệng, nó chỉ đọc được document.</p>
+</blockquote>
+<p><strong>7. (★★★) Simon Willison đã đề xuất khái niệm “Lethal Triad” cho Agent—quyền truy cập vào private data, phơi nhiễm với untrusted content, và khả năng external communication. Chương này bổ sung thêm yếu tố thứ tư: persistent memory. Bạn sẽ thiết kế chiến lược bảo mật như thế nào cho một production environment buộc phải xử lý đồng thời cả bốn yếu tố này?</strong></p>
+<blockquote>
+<p>Thiết lập phòng thủ đa tầng (layer defenses) dọc theo bốn loại boundary. Data boundary: không mount credentials, source code ở chế độ read-only, áp dụng minimal visibility. Input trust boundary: dán nhãn provenance (provenance labeling), hạ cấp external content xuống dạng dữ liệu "chỉ dùng để tham khảo, không mang giá trị chỉ thị" (loyalty code of conduct). Output impact boundary: mặc định no-network kết hợp whitelisted egress, semantic parsing cho các command thay vì dùng blacklist, review độc lập qua Sidecar cộng với human-in-the-loop—các thao tác critical bắt buộc phải được review bởi một cơ chế nằm ngoài context. Cross-session boundary: các thao tác ghi vào MEMORY.md phải trải qua quy trình trust review tương tự như external content. Mục tiêu: ngay cả khi bị inject, cuộc tấn công vẫn không thể thực thi.</p>
+</blockquote>
+<p><strong>8. (★★) Artifact pattern cho phép một Agent generate mã SQL hoặc visualization code để frontend execute trực tiếp, bỏ qua việc LLM phải xử lý khối lượng lớn data. Ưu và nhược điểm của sự phân công công việc này—“Agent generate code, hệ thống execute code”—so với pattern truyền thống trong đó Agent trực tiếp đưa ra câu trả lời là gì? Hơn nữa, SQL được generate có thể thực thi các thao tác phá hủy (destructive operations), và HTML được generate có thể chứa các lỗ hổng bảo mật (vulnerabilities). Làm thế nào để đảm bảo security của hệ thống?</strong></p>
+<blockquote>
+<p>Trade-offs: Pros: data đi thẳng từ database lên frontend, bỏ qua LLM đóng vai trò "middleman"—nhanh, tiết kiệm token, và loại bỏ hoàn toàn lỗi hallucination khi trích xuất khối lượng lớn data, rất phù hợp để hiển thị các tập data lớn; code có thể audit được, tái sử dụng (reusable), và có thể ghép nối thành các pipeline (kết quả SQL nạp trực tiếp vào visualization code). Cons: LLM không bao giờ nhìn thấy kết quả query, do đó không thể thực hiện tiếp summarization hay đưa ra decision-making dựa trên nội dung data—không phù hợp cho các task đòi hỏi model phải tiêu hóa data trước khi reasoning.</p>
+<p>Security: SQL: execute các query bằng một read-only account với quyền tối thiểu (least-privilege), đồng thời áp dụng resource limits cho CPU, memory,... để ngăn chặn resource exhaustion. HTML/UI: ưu tiên các declarative protocol như A2UI, trong đó Agent chỉ xuất ra JSON mô tả interface và client sẽ render nó từ một catalog các trusted component có sẵn mà không cần execute arbitrary code. Nếu bắt buộc phải dùng arbitrary HTML, nội dung đó phải được hiển thị trong một sandboxed environment để ngăn chặn injection.</p>
+</blockquote>
+<p><strong>9. (★★) Việc mã hóa các business rule thành các validation đối chiếu với database ground truth, kết hợp sử dụng parameter design để định hướng model kiểm tra các policy condition trước khi thực hiện một call, về bản chất là dùng cấu trúc code nhằm ràng buộc hành vi của Agent. Ưu điểm và giới hạn của pattern “code as rules” này so với việc định nghĩa rule bằng natural language là gì?</strong></p>
+<blockquote>
+<p>Advantages: rõ ràng, không mơ hồ (unambiguous), mang tính deterministic, và xử lý rất tốt các tổ hợp điều kiện phức tạp; các fact về policy được lấy trực tiếp từ database ground truth và server-side clock thay vì dựa vào các giá trị do model tự báo cáo, do đó cả hallucination lẫn prompt injection đều không thể bypass được chúng—đây là phòng tuyến cuối cùng (last line of defense) chống lại các thao tác không thể đảo ngược (irreversible operations); các parameter dạng expected_* đồng thời đóng vai trò như một checklist bắt buộc giúp định hướng tư duy (guides thinking). Limitations: code không giải thích được policy cho user, không biết cách tìm giải pháp tình thế (workarounds), và kéo theo chi phí bảo trì (maintenance costs). Conclusion: mang tính bổ trợ (complementary) cho các rule bằng natural language, chứ không phải giải pháp thay thế hoàn toàn.</p>
+</blockquote>
+<h2 class="unnumbered" id="chapter-6-interaction-mở-rộng-observation-space-và-action-space">Chapter 6: Interaction: Mở rộng Observation Space và Action Space<a class="headerlink" href="#chapter-6-interaction-mở-rộng-observation-space-và-action-space" title="Permanent link">#</a></h2>
+<p><strong>1. (★★) Trong một asynchronous Agent architecture, priority strategy cho event queue phải được xác định ngay từ design time. Nhưng nếu việc đánh giá độ ưu tiên đòi hỏi semantic understanding (ví dụ: xác định xem một message mới có khẩn cấp hơn task hiện tại hay không), bên nào nên đưa ra quyết định này—một rules engine hay một LLM call khác? Chi phí (cost) của từng phương án là gì?</strong></p>
+<blockquote>
+<p>Giải pháp phân tầng kết hợp (layered hybrid): các event có type rõ ràng sẽ được hard-code bằng rules—cho latency bằng 0 và tính determinism cao, nhưng không thể hiểu được khác biệt ngữ nghĩa (semantic difference) giữa "dừng lại ngay bây giờ" và "thời tiết hôm nay thế nào"; các event mập mờ về mặt ngữ nghĩa (semantically ambiguous) sẽ được chuyển đến một lightweight classification LLM đóng vai trò như một event router, đánh đổi bằng hàng trăm millisecond latency, chi phí API bổ sung và nguy cơ misjudgment—và tương tự như mô hình Sidecar, nó chỉ được phép đọc các structured fields để phòng chống prompt injection.</p>
+</blockquote>
+<p><strong>2. (★★) Trong cơ chế xử lý event dạng queue-based, các model thường có xu hướng chỉ tập trung vào event cuối cùng. Chương này giảm thiểu vấn đề đó thông qua các marker trên status bar của Agent và kỹ thuật summarization. Tuy nhiên, nếu queue bị tồn đọng (backlog) 20 event (10 tool results + 5 user messages + 5 system alerts), bạn sẽ tổ chức thứ tự hiển thị và format của các event này như thế nào để model không bỏ sót thông tin quan trọng?</strong></p>
+<blockquote>
+<p>Đầu tiên, phân loại và deduplicate bằng rules kết hợp với một lightweight LLM: các event khẩn cấp (alerts, user interruptions) sẽ được xử lý riêng theo cơ chế cancel-style chứ không gộp chung vào batch. Đối với 10 tool results có độ dài quá lớn, tiến hành truncate và persist chúng vào files, chỉ giữ lại phần head, tail và path. Bổ sung một summary list vào system status bar ở cuối context (thống kê số lượng từng event type + yêu cầu bắt buộc phải phản hồi cho từng mục).</p>
+</blockquote>
+<p><strong>3. (★★★) Khi một Agent thay mặt user tương tác với thế giới bên ngoài, về bản chất nó phải đối mặt với sự lựa chọn về danh tính (identity): sử dụng một virtual identity độc lập (email và phone number chuyên dụng) để hoạt động như một third party, hay trực tiếp thao tác trên các tài khoản cá nhân của user với tư cách chính chủ? Phương án đầu tiên cho phép Agent vận hành autonomous background operation, nhưng các bên thứ ba có thể không tin tưởng một non-human identity; phương án thứ hai mang lại context và permissions đầy đủ hơn, nhưng lại kéo theo các vấn đề về authorization, trust và security boundary. Theo bạn, nên lựa chọn từng mode trong những scenario nào?</strong></p>
+<blockquote>
+<p>Mặc định ưu tiên virtual identity: nó có thể vận hành autonomous ở background, đảm bảo tính auditable, và nếu xảy ra lỗi hoặc bị compromise thì không làm lộ toàn bộ digital identity của user—tương tự như việc một thư ký sử dụng email công vụ riêng; bạn sẽ cần xử lý các vấn đề liên quan đến CAPTCHA/IP reputation (residential proxies). Đối với các scenario bắt buộc phải dùng chính identity của user (xác thực danh tính tài khoản, three-way call confirmation—chẳng hạn như khi Pine gọi cho customer service), hãy áp dụng human-in-the-loop authentication: dùng VNC/RDP để user tự đăng nhập trực tiếp qua giao diện trực quan. Tiêu chí quyết định: liệu counterparty có yêu cầu đích danh chủ tài khoản hay không, cùng với mức độ rủi ro của thao tác và phạm vi quyền hạn của credentials.</p>
+</blockquote>
+<p><strong>4. (★★) Mô hình end-to-end cho voice Agents gộp ASR-LLM-TTS vào một model duy nhất, giúp giảm latency nhưng làm mất tính modularity. Nếu mô hình end-to-end gặp lỗi ở một stage cụ thể (ví dụ: speech recognition), việc debug và fix lỗi sẽ khó hơn nhiều so với trong một serial pipeline. Bạn sẽ thiết kế một observability system cho một end-to-end voice Agent như thế nào?</strong></p>
+<blockquote>
+<p>Cho model emit các intermediate representation có thể đọc được song song với output của nó, chẳng hạn như text stream “inner monologue” của Moshi và các acoustic event marker (<code>&lt;emotion&gt;</code>, <code>&lt;noise&gt;</code>). Áp dụng “self-cascading” để định vị error layer: cùng một model sẽ transcribe trước rồi mới reason, và việc so sánh với kết quả end-to-end sẽ chỉ ra lỗi nằm ở tầng perception hay thinking. Ở môi trường offline, chạy các bài regression test chi tiết theo từng khía cạnh như paralinguistic understanding và turn-taking judgment.</p>
+</blockquote>
+<p><strong>5. (★) Step-Audio R1 đạt được khả năng "thinking while speaking" thông qua kiến trúc MPS dual-brain. Tuy nhiên, khi "thinking while speaking", con người thường nói ra trước khi suy nghĩ thấu đáo, tự sửa lời (self-correct), hoặc dùng các từ đệm (filler words). Liệu cơ chế "thinking while speaking" của một Agent có nên mô phỏng những đặc tính này của con người không?</strong></p>
+<blockquote>
+<p>Nên mô phỏng các “imperfections” mang lại signal value: các khoảng dừng (pauses) và filler words giúp biểu đạt quá trình tư duy ra bên ngoài và có thể che giấu latency, trong đó LLM sẽ quyết định vị trí chèn chúng. Không nên mô phỏng kiểu self-correction làm suy giảm trust: mâu thuẫn giữa tư duy nhanh - chậm trong Solution 1 (“tôi có nên mua nó hay không?!”) sẽ phá vỡ trust. Các thử nghiệm trên MPS cho thấy phần đầu của CoT chủ yếu lặp lại câu hỏi; việc mở đầu sớm bằng groundwork là an toàn, không cần phải lỡ lời rồi mới đính chính.</p>
+</blockquote>
+<p><strong>6. (★★) SoM (Set-of-Mark) và các biến thể có cấu trúc của nó (DOM element indexing) chuyển đổi visual localization của Computer Use từ open-ended coordinate prediction sang closed-set ID selection, nhưng tất cả đều yêu cầu detect và annotate các UI element trước—cho dù thông qua một segmentation model hay DOM. Nếu giao diện chứa các non-standard control hoặc dynamic element thay đổi liên tục, các annotation có thể bị thiếu hoặc không chính xác. Trong những trường hợp như vậy, chúng ta có nên fallback về coordinate prediction không?</strong></p>
+<blockquote>
+<p>Coordinate prediction nên được giữ lại làm phương án fallback: đây là con đường duy nhất không phụ thuộc vào annotation và áp dụng được cho cả non-standard control lẫn dynamic element. Thực tế hơn là triển khai một hybrid action space, trong đó các element có thể annotate được vẫn sẽ dùng ID selection. Coordinate prediction bắt buộc phải thực hiện resolution matching và proportional scaling, nếu không sẽ xảy ra systematic offset.</p>
+</blockquote>
+<p><strong>7. (★★) Các nền tảng robot tầm giá nghìn đô như XLeRobot giúp việc thu thập dữ liệu teleoperation trở nên ít tốn kém hơn. Tuy nhiên, chất lượng dữ liệu teleoperation lại phụ thuộc rất lớn vào kỹ năng của operator. Dữ liệu chất lượng thấp từ một operator thiếu kỹ năng sẽ ảnh hưởng thế nào đến việc training một model VLA? Làm thế nào để tự động filter dữ liệu chất lượng thấp ngay trong giai đoạn thu thập dữ liệu (data collection phase)?</strong></p>
+<blockquote>
+<p>VLA chủ yếu dựa vào imitation learning, vì vậy các demonstration chất lượng thấp sẽ dạy cho model sự rung lắc (jitter), đi đường vòng (detours), do dự (hesitation), và các chuyển động thất bại (failed motions) như thể đó là strategy chính xác. Điều này phản ánh đúng nhận định ở Chương 8: data quan trọng hơn architecture.</p>
+</blockquote>
+<p><strong>8. (★★★) Chương này đề cập đến ba interaction modalities: voice, Computer Use, và robotics. Một xu hướng chung giữa các modality này là sự tiến hóa từ serial pipelines sang các end-to-end models. Nếu xu hướng này tiếp tục, interaction layer của Agent có thể trông như thế nào trong 5 năm tới?</strong></p>
+<blockquote>
+<p>Đúng như Thinking Machines Lab lập luận, interactivity sẽ được tích hợp trực tiếp vào bên trong model thay vì được gắn thêm như một harness bên ngoài, cùng scaling song hành với intelligence. Computer Use sẽ chuyển dịch từ frame-by-frame screenshots sang quan sát liên tục (continuous observation). World models cho embodied intelligence sẽ được hiện thực hóa một cách toàn diện, nhưng sự tách biệt nhanh - chậm (fast-slow decoupling) sẽ không biến mất vì các frontier reasoning models phát triển rất nhanh; một kiến trúc trong đó interaction model và SOTA thinking model phối hợp với nhau như những fast và slow thinkers có thể sẽ trở thành một long-term architecture.</p>
+</blockquote>
+<p><strong>9. (★★) Việc indexing phần tử qua DOM/Accessibility Tree hoạt động tốt trên các standard web applications, nhưng ngày càng có nhiều software interfaces (render bằng Canvas/WebGL, các custom-drawn controls đa nền tảng) không cung cấp thông tin có cấu trúc để truy cập (accessible structured information), mà hoàn toàn dựa vào visual annotation hoặc coordinate prediction. Bạn có nghĩ Computer Use nên đặt cược vào hướng tiếp cận thuần visual (purely visual approach), hay duy trì đồng thời cả hai hướng structured và visual? Chi phí và lợi ích của việc duy trì cả hai hướng này là gì?</strong></p>
+<blockquote>
+<p>Trong ngắn hạn, cả hai hướng sẽ cùng tồn tại (coexist): khi có sẵn structured indexing, localization sẽ chính xác và ổn định nhất, không bị lỗi nhận diện sai trong segmentation (segmentation false detections); pure vision là lựa chọn duy nhất cho native software, Canvas và game. Khi bản thân model có khả năng grounding mạnh (click vào các tọa độ chỉ định), structured indexing sẽ không còn mang lại lợi thế đáng kể. Về dài hạn, hướng đi purely visual sẽ có ceiling cao hơn.</p>
+</blockquote>
+<p><strong>10. (★★) Các model VLA sử dụng action chunking—như đã đề cập trong bài, cấu hình điển hình của π₀ sinh ra 25-50 future actions ở tần số 50Hz—để che giấu inference latency bên trong execution time. Tuy nhiên, nếu môi trường thay đổi đột ngột trong quá trình execution (ví dụ: một vật thể bị di chuyển), action sequence được sinh trước đó sẽ trở nên vô hiệu. Làm thế nào để cân bằng giữa lợi thế về hiệu năng của action chunking với nhu cầu phản hồi linh hoạt (responsiveness) trước các thay đổi của môi trường?</strong></p>
+<blockquote>
+<p>Về bản chất, chunking đánh đổi reactivity để lấy độ mượt mà (smoothness)—chunk càng dài, phản hồi càng chậm chạp (duller). Độ dài của chunk chỉ cần thỏa mãn cận dưới (lower bound) “inference time &lt; chunk execution time”; không nên kéo dài nó một cách mù quáng. Hãy giữ cho perception model tiếp tục chạy trong suốt quá trình execution, và khi nó phát hiện môi trường thay đổi đột ngột, hãy discard toàn bộ action còn lại và thực hiện re-infer, tương đương với cơ chế “barge-in” trong kịch bản voice. Độ dài chunk có thể được điều chỉnh linh hoạt (dynamically): long chunks giúp tiết kiệm compute trong các static scenes, trong khi short chunks giúp bảo toàn response latency trong các dynamic scenes.</p>
+</blockquote>
+<p><strong>11. (★★★) Cả ba kịch bản trong chương này (voice, Computer Use, robotics) đều đối mặt với bài toán latency của vòng lặp "perceive-think-act" và đang phát triển theo hướng song song hóa tư duy nhanh và chậm (fast and slow thinking). Trong voice, điều này thể hiện qua việc "nói nhầm rồi sửa"; trong Computer Use, là "click trước, nhìn sau"; trong robotics, là "bước một bước rồi mới quan sát". Làm thế nào để chúng ta đảm bảo rằng các hành động dựa trên fast thinking này không dẫn đến những hậu quả không thể đảo ngược (irreversible consequences)?</strong></p>
+<blockquote>
+<p>Phân cấp hành động theo tính khả nghịch (reversibility). Fast thinking chỉ được phép thực thi các hành động có thể đảo ngược (reversible actions); các thao tác không thể đảo ngược (irreversible operations) bắt buộc phải được slow thinking phê duyệt. Fast model tuyệt đối không được phép thực hiện các tool calls gây ra hậu quả không thể đảo ngược.</p>
+</blockquote>
+<p><strong>12. (★★★) Cùng một tập hợp các primitives (wake-up, safe point, cancellation, preemption, fast/slow separation) xuất hiện lặp lại trong chương này ở các thang thời gian (time scales) khác nhau. Hãy chọn một primitive và giải thích cách hiện thực hóa (implementation) của nó khác nhau như thế nào giữa event-driven processing (vài giây đến vài ngày) và robot action chunking (vài mili-giây). Yếu tố nào quyết định sự khác biệt đó—tốc độ thay đổi của môi trường (speed at which the environment changes), tính khả nghịch của hành động (reversibility of the action), hay chi phí để thu thập observation (cost of obtaining an observation)?</strong></p>
+<blockquote>
+<p>Lấy ví dụ về <strong>cancellation</strong>. Trong event-driven processing, cancellation diễn ra tại một safe point nằm giữa hai tool calls: khi nhận được tín hiệu <code>terminate</code>, Agent sẽ dọn dẹp tài nguyên (clean up resources), trả về xác nhận (acknowledgement) và thoát; mức latency tính bằng giây là hoàn toàn chấp nhận được, bởi vì bản thân một tool call đơn lẻ đã mất từ vài giây đến vài phút. Trong action chunking, cancellation phải có hiệu lực trong vòng vài mili-giây: ngay khoảnh khắc control thread phát hiện một safety event hoặc một thay đổi đáng kể trong observation, nó phải lập tức dừng chuyển động hiện tại, hủy bỏ (discard) phần chunk còn lại và tiến hành re-observe—chậm một nhịp cũng có thể dẫn đến va chạm vật cản.</p>
+<p>Trong ba yếu tố được đưa ra, <strong>chi phí thu thập observation (cost of obtaining an observation)</strong> thực tế là yếu tố ít mang tính quyết định nhất—cả hai bên đều có thể re-observe với chi phí rất rẻ. Điều thực sự tạo nên sự khác biệt là sự kết hợp của hai yếu tố còn lại: <strong>tốc độ thay đổi của môi trường</strong> quyết định mật độ dày đặc của các safe points (đặt giữa các tool calls là đủ vs. một safe point cho mỗi control cycle), và <strong>tính khả nghịch của hành động (reversibility of the action)</strong> quyết định cái giá phải trả khi bỏ lỡ một safe point (lỡ gửi thừa một email thì có thể gửi lời xin lỗi sau đó; nhưng một chiếc cốc đã bị gạt đổ thì không thể hoàn tác).</p>
+<p>Từ đây rút ra một design rule: mật độ của các safe points phải tương ứng với tốc độ thay đổi của môi trường; và mức độ bảo vệ bổ sung cần thiết vượt ngoài phạm vi của các safe points (hardware emergency stop, một safety controller độc lập, secondary confirmation) phụ thuộc vào mức độ không thể đảo ngược (irreversible) của hành động. Điều này cũng giải thích lý do tại sao các thao tác rủi ro cao (high-risk operations) trong Chương 4 yêu cầu phê duyệt trước (prior approval), trong khi robot cần một hardware safety layer độc lập với model—cả hai đều là tuyến phòng thủ thứ hai (second line of defence) được bổ sung khi bản thân các safe points là chưa đủ.</p>
+</blockquote>
+<h2 class="unnumbered" id="chapter-7-evaluating-agents">Chapter 7: Evaluating Agents<a class="headerlink" href="#chapter-7-evaluating-agents" title="Permanent link">#</a></h2>
+<p><strong>1. (★★) LLM-as-a-Judge sử dụng một language model để đánh giá output của một language model khác. Liệu cơ chế "self-evaluation" này có tồn tại các điểm mù mang tính hệ thống không—ví dụ như mô hình có thể liên tục chấm điểm cao cho một phong cách phản hồi nhất định, một thiên kiến không đồng nhất với đánh giá của con người? Làm thế nào để phát hiện và hiệu chỉnh các bias như vậy?</strong></p>
+<blockquote>
+<p>Có: length bias, response-style bias, và hiện tượng các same-family models bị thao túng điểm số (Goodhart's law). Cách phát hiện (Detection): xây dựng một human gold-standard set gồm 100–200 ví dụ và đo lường hệ số Cohen's kappa giữa judge và con người; định kỳ audit mối tương quan giữa điểm số và response length; sử dụng red team để xây dựng các adversarial cases. Cách hiệu chỉnh (Correction): cấu hình rubric xử phạt tường minh đối với sự dài dòng (verbosity) và áp trần độ dài (cap length); sử dụng heterogeneous judges từ các model families khác nhau.</p>
+</blockquote>
+<p><strong>2. (★★★) Thiết kế chống rò rỉ dữ liệu (leakage-proof) cho các evaluation datasets là yếu tố sống còn. Tuy nhiên, trong hệ sinh thái open-source, một khi benchmark data được công khai, nó sẽ nhanh chóng bị đưa vào training data. Liệu "trò chơi mèo vờn chuột" này có hồi kết hay không? Hãy thiết kế một phương pháp đánh giá có khả năng kháng data leakage một cách căn bản.</strong></p>
+<blockquote>
+<p>Một static question bank sẽ không bao giờ có hồi kết—chúng ta chỉ có thể rượt đuổi theo sau. Lối thoát mang tính nền tảng là công khai "cơ chế sinh" (generation mechanism) nhưng giữ kín "các phiên bản thực thi cụ thể" (concrete instances): sử dụng các parameterized templates tương tự như τ²-bench và AndroidWorld, được khởi tạo ngẫu nhiên (randomly instantiated) trong mỗi lần chạy, với cơ chế xác thực dựa trên environment state cuối cùng thay vì dựa trên một chuỗi đáp án cố định.</p>
+</blockquote>
+<p><strong>3. (★★) Bốn tiêu chí của Scale AI (expert guidance, comprehensive coverage, standardized importance weighting, self-contained evaluation) nhằm mục đích triệt tiêu tính chủ quan trong đánh giá. Tuy nhiên, một số khía cạnh của task (ví dụ: "Câu trả lời có hữu ích không?", "Tone giọng có phù hợp không?") vốn dĩ mang tính chủ quan. Làm thế nào để thiết kế các Rubrics đáng tin cậy cho những khía cạnh chủ quan này?</strong></p>
+<blockquote>
+<p>Chuyển hóa các tiêu chí trừu tượng thành các hành vi có thể kiểm chứng được (verifiable behaviors). Cung cấp các ví dụ cụ thể và boundary cases cho từng thang điểm; một rubric là một sản phẩm lặp (iterative product)—hãy thu thập các bất đồng giữa các raters trong quá trình chạy thử để dần phát triển rubric thành một casebook hoàn chỉnh. Bổ sung thêm multi-judge weighting/consistency checks, chuyển các trường hợp bất đồng (disagreement cases) cho human review, và hiệu chuẩn lại tỷ lệ đồng thuận (agreement rate) trên gold-standard set.</p>
+</blockquote>
+<p><strong>4. (★★) τ-bench đánh giá các Agents bằng cách mô phỏng hành vi của người dùng thực tế. Nhưng bản thân simulated user lại là một LLM—nó có thể đánh giá thấp một cách có hệ thống đối với một số edge cases nhất định (ví dụ: người dùng đang kích động cảm xúc hoặc diễn đạt mơ hồ). Làm thế nào để validate chất lượng của chính simulated user đó?</strong></p>
+<blockquote>
+<p>Bài học từ phiên bản đầu tiên của τ-bench: simulator hoạt động quá máy móc và các chỉ dẫn quá đơn giản (Agent có thể đoán trước câu trả lời). Các phương pháp kiểm chứng (Validation methods): spot-check thủ công các phiên hội thoại mô phỏng để kiểm tra xem chúng có tuân thủ progressive disclosure và không tự ý bịa đặt thông tin nằm ngoài script hay không; chạy các đợt thử nghiệm mẫu nhỏ (small-sample tests) với người dùng thực tế để xác nhận xem các thứ hạng (rankings) có khớp với kết quả từ simulated evaluation hay không.</p>
+</blockquote>
+<p><strong>5. (★★) Pairwise comparison (Bradley-Terry model) giả định rằng các preference có tính chất bắc cầu - transitive (nếu A &gt; B và B &gt; C, thì A &gt; C). Tuy nhiên, preference của con người thường vi phạm tính transitivity. Trong Agent evaluation, những scenario nào có thể xuất hiện non-transitive preferences? Điều này ảnh hưởng như thế nào đến độ tin cậy của ranking?</strong></p>
+<blockquote>
+<p>Scenarios: Các multi-dimensional trade-offs (A chính xác nhưng chậm, B nhanh nhưng cộc lốc/terse, C toàn diện/thorough nhưng tốn kém), nơi các judge/task khác nhau gán trọng số cho từng dimension theo cách khác nhau. Ranking của Chatbot Arena về bản chất phụ thuộc vào distribution của user prompt. Impact: BT nén toàn bộ năng lực thành một single score duy nhất, do đó dưới tác động của non-transitivity, ranking sẽ trở nên thiếu ổn định và bị trôi dạt (drift) theo match distribution. Mitigation: Đánh giá ranking riêng biệt theo từng capability dimension và báo cáo ma trận pairwise win-rate matrix.</p>
+</blockquote>
+<p><strong>6. (★★) Chương này phân biệt Pass@k như một trần năng lực (ceiling on capability) với Pass consecutive@k như một thước đo độ tin cậy trong môi trường thực tế (business reliability). Đối với một Agent có single-run success rate chỉ đạt 60%, bạn sẽ kết hợp failure cost, retry cost và side effect của một task như thế nào để quyết định nên báo cáo metric nào và giá trị <span class="arithmatex">\(k\)</span> nên lớn bao nhiêu?</strong></p>
+<blockquote>
+<p>Hãy bắt đầu từ việc liệu một failure có thể rollback được hay không. Khi các failure có thể retry tự động và không để lại external side effect nào (retrieval, draft generation, code completion), bài toán đặt ra là “liệu nó có thể thành công nếu được trao đủ số lần thử”, vì vậy hãy báo cáo Pass@k với <span class="arithmatex">\(k\)</span> được thiết lập theo retry budget thực tế được phép phân bổ. Khi một failure để lại hậu quả không thể đảo ngược (payment, refund, outbound email, production deployment), một lỗi đơn lẻ cũng là một tổn thất thực sự, do đó bắt buộc phải báo cáo Pass^k. Với single-run success rate là 0.6, Pass@5 ≈ 99.0% trong khi Pass^5 ≈ 7.8%—hai con số chênh lệch nhau cả một bậc độ lớn (order of magnitude) cho cùng một Agent; nếu chỉ báo cáo chỉ số đầu sẽ phóng đại mức độ reliability một cách nghiêm trọng.</p>
+<p>Hãy để <span class="arithmatex">\(k\)</span> bám sát deployment reality thay vì chọn con số trông đẹp nhất trên báo cáo: đối với Pass@k, hãy lấy giá trị từ retry budget; đối với Pass^k, hãy lấy số lượng task chạy nối tiếp (back-to-back) trong một shift làm việc hoặc trong một batch. Khi chi phí retry đắt đỏ, hãy đánh giá chấp thuận qua hai giai đoạn (two stages)—sàng lọc candidate bằng Pass@1, sau đó mới chạy Pass^k trên số ít ứng viên vượt qua vòng đầu. Dù báo cáo metric nào, hãy công bố rõ ràng <span class="arithmatex">\(k\)</span> và sampling protocol; đối với các operation có side effect, hãy sample trong một sandbox hoặc môi trường có khả năng rollback (rollback-capable environment) và ghi nhận mọi failure vào thống kê reliability thay vì chỉ đơn thuần “retry cho đến khi chạy được”.</p>
+</blockquote>
+<p><strong>7. (★★) Chương này đề xuất phương pháp khoa học "Observe → Hypothesize → Experiment → Validate". Tuy nhiên, trên thực tế, behavior space của Agent là cực kỳ rộng lớn, và việc validate một hypothesis duy nhất có thể đòi hỏi hàng trăm evaluation runs. Làm thế nào để tối đa hóa information gain thu được từ evaluation trong điều kiện computational budget bị giới hạn?</strong></p>
+<blockquote>
+<p>Trước tiên, hãy cluster các failures và thu hẹp phạm vi pilot vào các tasks mang lại nhiều diagnostic information nhất. Sử dụng các one-variable paired tests chi phí thấp (cheap), và xem một pilot quy mô nhỏ như một gate để mở khóa một run lớn hơn thay vì coi đó là deployment evidence. Về mặt thống kê, dùng standard error như một conservative screen và áp dụng một paired test như McNemar's test trên cùng tập tasks; nếu gain kỳ vọng nhỏ hơn noise band, hãy mở rộng evaluation set. Khi sàng lọc song song nhiều variants, cần hiệu chỉnh cho multiple comparisons và kiểm chứng độc lập các positive results.</p>
+</blockquote>
+<p><strong>8. (★) Trong đợt pilot của AndroidWorld, full element tree đã tăng tỷ lệ success từ 25% lên 100% nhưng lại làm tăng token use lên 2.498× so với nhóm control; kỹ thuật pruning đã bảo toàn được 100% success trong khi giảm token use xuống còn 0.506×. Bạn sẽ thiết kế các automatic pruning rules như thế nào để loại bỏ các UI nodes rỗng về mặt ngữ nghĩa mà không làm mất thông tin cần thiết cho accessibility, state verification, hoặc các actions tiếp theo?</strong></p>
+<blockquote>
+<p>Áp dụng policy phân tầng "drop by default, retain with evidence". Giữ lại các nodes thỏa mãn điều kiện: visible, textual, actionable, focusable, scrollable, state-bearing, hoặc accessibility-labeled, cùng với các ancestor paths ngắn nhất và các adjacent labels cần thiết để diễn giải chúng. Loại bỏ các layout-only containers và summarize các repeated subtrees. Trước và sau khi pruning, hãy verify rằng các actionable IDs, states, và values được bảo toàn, đồng thời giữ screenshot như một visual fallback. Replay rule này trên các failure traces, sau đó test trên tập held-out apps. Success, tokens, và latency là các joint guardrails; bất kỳ accessibility regression nào cũng phải block release.</p>
+</blockquote>
+<p><strong>9. (★★) Cơ chế user simulation của τ-bench áp dụng "progressive information disclosure"—không cung cấp toàn bộ thông tin cùng một lúc mà tiết lộ dần dần dựa trên các câu hỏi của Agent. Thiết kế này ảnh hưởng như thế nào đến kết quả evaluation? Nếu information disclosure strategy của simulated user khác biệt đáng kể so với người dùng thực tế, các kết luận evaluation liệu có còn đáng tin cậy không?</strong></p>
+<blockquote>
+<p>Tác động (Impact): nếu disclosure strategy bị sai lệch (distorted), Agent có thể chỉ học cách "fit the simulator" (Goodhart), và các absolute scores sẽ mất đi reference value; tuy nhiên, relative ranking giữa các models vẫn có thể mang ý nghĩa. Giải pháp khắc phục (Remedies): calibrate simulator bằng các real dialogues, tiến hành spot-check thủ công, và công bố rõ ràng các applicable boundaries của các kết luận rút ra.</p>
+</blockquote>
+<h2 class="unnumbered" id="chapter-8-model-post-training">Chapter 8: Model Post-Training<a class="headerlink" href="#chapter-8-model-post-training" title="Permanent link">#</a></h2>
+<p><strong>1. (★★) Catastrophic forgetting—hiện tượng khi fine-tuning cho một task cụ thể làm triệt tiêu các general capability ban đầu của model, chẳng hạn như general tool calling—là vấn đề đặc biệt nan giải trong các kịch bản Agent. So với full-parameter fine-tuning, LoRA freeze các base weight nên mang rủi ro forgetting thấp hơn, nhưng không hoàn toàn miễn nhiễm. Những chiến lược nào có thể giảm thiểu hơn nữa hiện tượng capability forgetting trong quá trình fine-tuning?</strong></p>
+<blockquote>
+<p>Data mixing: trộn khoảng 20% dữ liệu thuộc general/original-distribution để tỷ trọng của task mới không đè bẹp các capability cũ; kiểm soát training volume: dừng SFT ngay khi "format đã ổn định và các capability cơ bản đã xuất hiện"—early stopping giúp ngăn ngừa sụp đổ (collapse); dùng rank nhỏ (8–32) cho RL và duy trì KL penalty nhằm giữ policy bám sát reference model; freeze các component trọng yếu (ví dụ: chỉ train projection layer của VLM); gắn nhiều LoRA adapter riêng cho từng task để cô lập capability; chạy regression test trên các general benchmark.</p>
+</blockquote>
+<p><strong>2. (★★) Post-training khắc sâu các capability vào model weight, biến chúng thành "muscle memory", trong khi in-context learning nạp tri thức vào input tại inference time. Một số capability, chẳng hạn như domain knowledge, có thể học được qua post-training hoặc cung cấp thông qua các ví dụ few-shot. Bạn sẽ dựa vào những tiêu chí nào để quyết định một capability nên đi theo hướng nào?</strong></p>
+<blockquote>
+<p>Trước hết, hãy xác định xem liệu capability đó có thể biểu đạt trọn vẹn thông qua các symbol bên ngoài hay không: fact và evidence nên thuộc về RAG, các nguyên tắc diễn đạt được bằng ngôn ngữ thuộc về Prompt/Skills, còn các deterministic procedure cùng hard constraint phải nằm trong code chương trình. Các capability mang tính high-dimensional như hiểu ảnh y tế (medical-image understanding), văn phong tự nhiên (natural tone), hay các implicit policy thường đòi hỏi phải cập nhật parameter ngay cả khi domain vẫn đang biến động. Tiếp theo, hãy cân nhắc đến update cost, call volume, tính thời sự (timeliness) và rủi ro: tận dụng context để validation nhanh trong giai đoạn exploration, và chỉ train một khi phương pháp đã chứng minh được tính ổn định, hiệu quả và cần generalization trên diện rộng. Các hard rule, dù ổn định đến đâu, cũng không bao giờ nên phụ thuộc hoàn toàn vào parameter memory.</p>
+</blockquote>
+<p><strong>3. (★★) Model distillation cho phép một model nhỏ học hành vi của một model lớn. Xét theo cấp độ capability, các model được distill có thể chia đại thể thành ba bậc—</strong>Chat models** (single-turn dialogue và trả lời trực tiếp), <strong>Reasoning models</strong> (chuỗi suy luận dài / long chains of thought trước khi trả lời), và <strong>Agentic models</strong> (multi-turn tool calls và tương tác với environment). Những thách thức khác nhau nào xuất hiện khi distill từng loại? (Gợi ý: Bắt đầu từ câu hỏi “chính xác thì thứ gì đang được distill”—style của output, reasoning trajectory hoàn chỉnh, hay policy để tương tác với environment; những token nào trong trajectory cần phải học và những kết quả trả về từ environment (environmental returns) nào thì không; cùng với việc các tín hiệu thành công/thất bại có độ trễ (delayed) và độ thưa thớt (sparse) ra sao.)**</p>
+<blockquote>
+<p>Chat: chỉ học mapping "input → output" và style—standard SFT là đủ, đây là dạng đơn giản nhất. Reasoning: đòi hỏi reasoning trace hoàn chỉnh, vì vậy bạn cần một open-source teacher model; các trajectory có câu trả lời sai bắt buộc phải bị filter out. Agentic: yêu cầu một simulation environment thực tế; offline learning rất dễ gặp lỗi learner-sampler mismatch, do đó On-Policy Distillation dựa trên open-source teacher model được khuyến nghị áp dụng.</p>
+</blockquote>
+<p><strong>4. (★★★) Trong các tương tác Agent multi-turn, credit-assignment problem trở nên trầm trọng hơn nhiều so với các kịch bản single-turn—một kết quả success hoặc failure cuối cùng rất khó để quy về một quyết định được đưa ra ở turn 3 thay vì turn 7. Bạn sẽ thiết kế một reward-allocation strategy như thế nào?</strong></p>
+<blockquote>
+<p>Khi các bước trung gian có thể đánh giá được, hãy bổ sung process rewards (V-IRL gán ±1 cho mỗi step); theo RLVP, sử dụng deterministic rules để cung cấp per-action path signals, khôi phục within-group variance cho các nhóm all-fail/all-pass.</p>
+</blockquote>
+<p><strong>5. (★★★) Nếu bạn có một ngân sách cố định, chẳng hạn $10,000, để cải thiện một customer-service Agent, bạn sẽ phân bổ nó như thế nào giữa context và knowledge, Prompt/Skills, programmatic constraints, và parameter training? Những yếu tố nào sẽ quyết định lựa chọn của bạn?</strong></p>
+<blockquote>
+<p>Trước tiên, hãy dành ngân sách cho một evaluation set và các trajectory validators; nếu không có chúng, bạn sẽ không thể đo lường và so sánh hiệu quả của các khoản đầu tư còn lại. Đưa các thông tin thực tế về sản phẩm (product facts) và chính sách vào một traceable knowledge base. Nhanh chóng thử nghiệm một số lượng nhỏ các nguyên tắc dịch vụ có thể diễn đạt bằng ngôn ngữ thông qua Prompts/Skills. Sử dụng code logic (programs) làm backstop cho các quyền hoàn tiền (refund permissions), quyền riêng tư (privacy), và tính nhất quán giữa cam kết và hành động. Chỉ đầu tư vào parameter training cho những năng lực khó mã hóa thành rules và có tần suất vận hành ở quy mô đủ lớn, chẳng hạn như văn phong tự nhiên (natural tone) và khả năng hiểu ý định phức tạp (complex intent understanding). Tỷ lệ phân bổ chính xác phụ thuộc vào bottleneck, mức độ rủi ro (risk), tần suất cập nhật (update frequency), call volume, và năng lực của model hiện tại.</p>
+</blockquote>
+<p><strong>6. (★★★) Autonomous model learning trong điều kiện dữ liệu mẫu khan hiếm (scarce samples) và không có một reward function rõ ràng được một số người coi là mục tiêu tối thượng của post-training. Các phương pháp RL training hiện tại còn cách mục tiêu này bao xa? Bước đột phá tiếp theo nhiều khả năng sẽ đến từ đâu?</strong></p>
+<blockquote>
+<p>Khoảng cách: như Silver và Sutton đã chỉ ra, RL hiện tại chỉ có thể học từ kết quả success hoặc failure cuối cùng; những feedback phong phú như việc khách hàng nói "Tôi cần 4 chữ số cuối của thẻ tín dụng của bạn" đều bị lãng phí hoàn toàn, đòi hỏi hàng trăm lượt thử nghiệm mù quáng; sample efficiency và verifiable rewards chính là những bottleneck cốt lõi. Các đột phá tiềm năng: generative reward models có khả năng tự thiết lập nguyên tắc và rút ra định hướng chỉ sau một lần failure duy nhất; cùng với hướng tiếp cận world-model để mô hình hóa môi trường (environment).</p>
+</blockquote>
+<p><strong>7. (★★) Chương này chỉ ra rằng LoRA fine-tuning không hề đắt đỏ. Vậy liệu có thể train một bản LoRA chuyên dụng cho từng người dùng hoặc doanh nghiệp khách hàng, ghi trực tiếp user memory hoặc enterprise knowledge vào parameters thay vì lưu trữ trong một external knowledge base như ở Chương 3? Khi nào việc “ghi memory vào parameters” có lợi thế hơn so với “lưu trữ memory trong một knowledge base”, và khi nào nó sẽ phản tác dụng?</strong></p>
+<blockquote>
+<p>LoRA gặp khó khăn trong việc ghi nhớ chính xác khối lượng lớn các facts (điều đó đòi hỏi continued pre-training với chi phí tăng vọt), và ngay cả khi ghi nhớ được, model cũng khó có thể sử dụng các facts đó cho multi-hop reasoning—do đó, dùng LoRA để ghi nhớ facts không phải là một technical route tốt. Hơn nữa, khi facts thay đổi thường xuyên hoặc cần traceable auditing, RAG hoàn toàn vượt trội.</p>
+</blockquote>
+<p><strong>8. (★★★) On-Policy Distillation dựa vào một teacher model mạnh hơn để giám sát student. Tuy nhiên, nghiên cứu Weak-to-Strong Generalization của OpenAI lại đưa ra một phát hiện phản trực giác: sự giám sát từ một weak model đôi khi có thể giải phóng các năng lực tiềm ẩn nhưng chưa được kích hoạt trong một model mạnh hơn. Nếu áp dụng vào Agent training, liệu điều này có mở ra khả năng reverse distillation, trong đó “một model nhỏ dạy cho một model lớn” hay không?</strong></p>
+<blockquote>
+<p>Có, điều đó hoàn toàn khả thi—chìa khóa nằm ở chỗ "verification dễ hơn generation": weak model không nên đóng vai trò là một demonstrator (bởi SFT ceiling chính là ngưỡng trình độ của demonstrator), mà hãy đóng vai trò là một verifier/reward model, để strong model tự do explore và weak model chỉ thực hiện nhiệm vụ đánh giá (judge).</p>
+</blockquote>
+<p><strong>9. (★★) Process Reward Model (PRM) đánh giá từng bước reasoning, trong khi Outcome Reward Model (ORM) chỉ xét kết quả cuối cùng. Trường hợp nào xứng đáng nhận reward cao hơn: “một process đúng dẫn đến kết quả sai”, hay “một process sai tình cờ tạo ra kết quả đúng”? Bạn sẽ cân bằng cả hai như thế nào trong các kịch bản multi-step Agent tool-calling?</strong></p>
+<blockquote>
+<p>Thành công nhờ may mắn nguy hiểm hơn nhiều: các đường tắt phá vỡ quy tắc thường thổi phồng success rate bề nổi (như sửa file test, bỏ qua validation) và là mảnh đất màu mỡ cho reward hacking. Hãy tuân thủ nguyên tắc "reward outcomes, penalize paths" của RLVP: các action (tool calls) sai rất dễ verify—hãy trừ điểm trên từng action; khi các bước trung gian dễ đánh giá, có thể cấp process rewards. Tuy nhiên, đừng đặt các ràng buộc process quá dày đặc—chiến lược vượt trội kiểu "push-cut" được khám phá ra chính là nhờ quyền tự do exploration mà outcome rewards mang lại.</p>
+</blockquote>
+<p><strong>10. (★★★) Các evaluation dataset được thảo luận trong chương này, chẳng hạn như SWE-Bench Verified, τ²-bench và AndroidWorld, đều có thể dùng cho cả evaluation lẫn post-training. Nhưng một khi evaluation set bị đem đi training, nó không còn tính độc lập nữa. Điều này có vi phạm nguyên tắc cơ bản về việc phải tách biệt hoàn toàn training set và test set không? Dynamic parameter generation trong τ²-bench và parameterized templates trong AndroidWorld giảm thiểu vấn đề này ở một mức độ nhất định, nhưng template structure của chúng vẫn cố định. Làm thế nào để khai thác trọn vẹn giá trị training của evaluation data mà vẫn bảo toàn được tính độc lập khi evaluation?</strong></p>
+<blockquote>
+<p>Tái sử dụng environment, không tái sử dụng câu hỏi. Dynamic parameters chỉ ngăn được "học vẹt câu trả lời" (answer memorization) chứ không chặn được template overfitting; do đó bạn nên hold out toàn bộ các batch gồm unseen templates/out-of-domain scenarios để dành riêng cho evaluation (tương tự như cách V-IRL training ở New York và testing trên chín thành phố hoàn toàn xa lạ). Hãy dùng parameterized templates để batch-generate các biến thể training nhằm hỗ trợ curriculum learning, và lấy điểm số OOD làm metric đánh giá generalization thực sự.</p>
+</blockquote>
+<p><strong>11. (★★★) Chương này đề xuất một training paradigm mang tính “hình thức trước, bản chất sau” (form first, spirit second): dừng SFT ngay khi “format đã ổn định và các capability cơ bản đã hình thành”, sau đó chuyển sang RL. Trong thực tế, làm thế nào để xác định khi nào SFT đã “đủ” và là thời điểm thích hợp để switch?</strong></p>
+<blockquote>
+<p>Tín hiệu về format: tool-call outputs có thể được parse và thực thi một cách ổn định, failure rate khi thực thi tool giảm xuống mức cho phép compute reward một cách đáng tin cậy. Tín hiệu về hiệu quả (benefit signal): bổ sung thêm demonstration data vẫn không cải thiện performance trên các kịch bản mới OOD—điều này đồng nghĩa bottleneck đã nằm ở chính mục tiêu học vẹt (memorization objective) của SFT, và điểm tới hạn (tipping point) đã chạm ngưỡng. Tín hiệu overfitting: dừng ngay khi performance trên validation-set bắt đầu suy giảm—thực nghiệm V-IRL cho thấy một khi SFT over-training làm sụp đổ model về training distribution (distribution collapse), thì RL cũng không thể cứu vãn lại OOD performance.</p>
+</blockquote>
+<p><strong>12. (★★★) Training dynamics của ReTool (xem Experiment 7-15) cho thấy một vài response cực dài có thể kéo dài đáng kể toàn bộ training cycle—phần lớn các rollout trong một batch đã generate xong, nhưng system vẫn phải chờ những response dài nhất hoàn tất, khiến GPU utilization của cluster bị kéo xuống thấp. Làm thế nào để cải thiện resource utilization trong training cluster dưới điều kiện long-tail response như vậy?</strong></p>
+<blockquote>
+<p>Ở tầng infra: decouple phase rollout khỏi training cluster và pipeline chúng theo cơ chế asynchronous; lấp đầy các GPU đang idle bằng request mới thông qua continuous batching. Nén long-tail ngay từ gốc: sử dụng kỹ thuật Overlong Reward Shaping của DAPO để phạt nhẹ (softly penalize) các response quá dài.</p>
+</blockquote>
+<p><strong>13. (★★★) When training an Agent against LLM-simulated environments—such as a simulated search engine or simulated users—the target of the Agent's exploitation shifts from “the rules of the real environment” to “the biases and loopholes of the simulator itself.” What concrete reward hacking behaviors can arise in this kind of training, and how should they be prevented?</strong></p>
+<blockquote>
+<p>Các behavior điển hình: hứa hẹn quá mức (over-promising) với "simulated users", liên tục xin lỗi và sử dụng các câu từ xu nịnh (sycophantic phrasing)—simulated users rất dễ bị xoa dịu và không giống như real users, họ không bao giờ truy cứu xem Agent có thực sự thực hiện lời hứa hay không; bịa đặt các fact mà simulator sẽ không verify; tạo ra các leading queries nhắm vào một "simulated search engine" nhằm khai thác xu hướng trả về các document có sẵn đáp án của nó, chọn đi đường tắt thay vì học cách retrieval thực thụ; khi reward đến từ điểm số của simulator hoặc LLM-judge, Agent sẽ sinh ra các response dài dòng (verbose), khuôn mẫu (templated) và "trông có vẻ professional" để farm điểm; và một trường hợp tinh vi hơn—policy co cụm về distribution mà simulator quen thuộc và né tránh các knowledge blind spots của simulator, nơi feedback không đáng tin cậy và thường bị chấm sai, dẫn đến việc Agent chỉ học cách hành động trong "thế giới mà simulator giỏi xử lý". First principle trong phòng thủ là <strong>anchor reward vào programmatically verifiable real state</strong> (task completion, database writes, real API returns), chỉ xem điểm số của simulator hoặc LLM-judge là auxiliary signals, định kỳ audit correlation của chúng với real outcomes, đồng thời kết hợp với các path constraints để penalize các action đáng ngờ. Hơn nữa, cần phân biệt rõ hai loại simulator: đối với nhóm <strong>có real counterpart</strong>, chẳng hạn như search engine, hãy chọn giải pháp "hybrid"—phần lớn interaction chạy qua simulator kết hợp đan xen với các real API calls, và các real calls này được dùng để định kỳ calibrate lại simulator (ví dụ: cơ chế curriculum-style quality degradation của ZeroSearch). Nhưng đối với simulated users, <strong>real users không thể được đưa trực tiếp vào quá trình training</strong>, vì vậy bài toán "simulated user có faithful so với real user hay không" trở thành một vấn đề độc lập chỉ có thể giải quyết bằng online traces: so sánh behavior của real users trong production traces với behavior của simulated user trong cùng các tình huống, xác định các sai khác mang tính hệ thống (real users thường hỏi các câu hỏi tiếp nối, mất kiên nhẫn và đột ngột thoát hội thoại—trong khi simulated users thường không làm vậy), từ đó liên tục calibrate simulator tương ứng; các online real metrics này cũng là release gate duy nhất—mọi điểm số bên trong simulator đều không có giá trị quyết định.</p>
+</blockquote>
+<h2 class="unnumbered" id="chương-9-continuous-agent-evolution">Chương 9: Continuous Agent Evolution<a class="headerlink" href="#chương-9-continuous-agent-evolution" title="Permanent link">#</a></h2>
+<p><strong>1. (★★) Một experience document được bảo chứng bởi 3 trajectory thành công và 1 trajectory thất bại. Trường hợp thất bại xảy ra trên một API version mới hơn. Hệ thống nên xác định thế nào xem experience này đã bị vô hiệu hóa (invalidated) hay các điều kiện áp dụng (applicability conditions) của nó đã thay đổi?</strong></p>
+<blockquote>
+<p>Đầu tiên, hãy phân tầng (stratify) 4 bằng chứng này theo API version, task conditions và environment state thay vì chỉ bỏ phiếu theo số lượng (voting by count). Nếu policy cũ chỉ thành công trên version cũ và liên tục thất bại trên version mới, hãy thu hẹp scope of applicability của experience và tạo ra một candidate cho version mới. Nếu nó cũng thất bại dưới cùng một version và các điều kiện tiên quyết (prerequisites), hãy hạ mức confidence hoặc thu hồi (revoke) nó.</p>
+</blockquote>
+<p><strong>2. (★★) Mức độ hài lòng của người dùng (user satisfaction) đối với một customer-service Agent tăng lên, nhưng tỷ lệ vi phạm quy tắc (rule violations) của nó cũng tăng theo. Tại sao satisfaction không thể đóng vai trò là learning signal duy nhất? Bạn sẽ thiết kế các guardrail metrics như thế nào?</strong></p>
+<blockquote>
+<p>Satisfaction có thể vô tình khuyến khích (reward) các hành vi hoàn tiền trái phép (unauthorized refunds), rò rỉ thông tin (information leakage), hoặc hứa hẹn quá mức (excessive promises); do đó, nó chỉ có thể là một quality metric và không thể override các safety baselines. Guardrails cần bao quát tối thiểu các vi phạm quy tắc (rule violations), rò rỉ quyền riêng tư (privacy leakage), các tuyên bố không có căn cứ (unsupported claims), sự bất nhất giữa lời hứa và hành động (promise-action inconsistency), cùng các thao tác trái phép (unauthorized operations). Các metrics này phải có các ngưỡng cứng (hard thresholds) không thể bị triệt tiêu bởi điểm trung bình (average score). Resolution rate, compliant workarounds, độ súc tích (concision) và satisfaction chỉ nên được đem ra so sánh giữa các candidate đã thỏa mãn tính tuân thủ (compliant candidates).</p>
+</blockquote>
+<p><strong>3. (★★★) Cùng một vấn đề "hứa suông" (“false promise”) có thể được giảm thiểu thông qua Prompt, các bước kiểm tra của Harness (Harness checks), hoặc parameter training. Bạn sẽ dựa vào bằng chứng nào để lựa chọn nơi cần can thiệp chỉnh sửa?</strong></p>
+<blockquote>
+<p>Bắt đầu bằng việc xác định root cause. Nếu model biết rõ tool chưa được thực thi nhưng vẫn dùng ngôn từ khẳng định đã hoàn thành, một Prompt rule tối thiểu có thể khắc phục được. Nếu lời hứa có thể được so sánh một cách deterministic giữa response text và tool state, một Harness check sẽ đáng tin cậy hơn và nên đóng vai trò là tuyến phòng thủ cuối cùng (final defense) trong các kịch bản có rủi ro cao. Nếu vấn đề trải rộng trên nhiều dạng biểu đạt khác nhau và phản ánh năng lực language-action alignment tổng quát, hãy cân nhắc parameter training. Luôn ưu tiên chỉnh sửa nhỏ nhất, dễ validate và rollback nhất, đồng thời đối chuẩn đánh giá trên cả failure set lẫn tập tác vụ cũ được giữ lại (retained set of old tasks).</p>
+</blockquote>
+<p><strong>4. (★★★) Một Agent có thể chỉnh sửa tools và validators, nhưng nó không được phép sửa đổi trusted root vốn có thẩm quyền phê duyệt các bản cập nhật của chính nó. Bạn sẽ phân tách quyền hạn (permissions) và ranh giới mã nguồn (code boundaries) giữa hai phần này như thế nào?</strong></p>
+<blockquote>
+<p>Đặt phần evolvable code trong một low-privilege sandbox chỉ có quyền tạo ra các patches và tests. Hệ thống phân quyền (permission system), API keys, cấu hình release-controller, và các update validators là các security mechanisms; Agent bên trong sandbox hoàn toàn không có quyền đọc hay ghi (read or write access) đối với chúng. Mọi thay đổi mã nguồn (code changes) do Agent sinh ra đều phải được tái hiện và chạy regression-tested bởi các security mechanisms trong một môi trường cô lập trước khi release.</p>
+</blockquote>
+<p><strong>5. (★★) Khi experience knowledge base ngày càng phình to, retrieval errors và knowledge conflicts có thể triệt tiêu hoàn toàn lợi ích của quá trình learning. Cơ chế versioning, freshness và retirement nên được thiết kế như thế nào?</strong></p>
+<blockquote>
+<p>Mỗi experience cần lưu giữ lại source trajectories, applicability conditions, environment version, validation time và confidence score. Các conflicting entries tuyệt đối không được phép ghi đè ngầm (silently overwrite); chúng phải được phân nhánh (branch) theo điều kiện hoặc đánh dấu cảnh báo. Định kỳ kích hoạt tiến trình “sleep learning” để merge các duplicate entries.</p>
+</blockquote>
+<p><strong>6. (★★★) Parameter learning mang lại hiệu quả cao cho natural-language style nhưng rất khó để đảm bảo tính tuân thủ tuyệt đối các business rules khắt khe. Hãy thiết kế một continual-evolution scheme cho hệ sinh thái medical customer service phối hợp chặt chẽ giữa parameters, knowledge, Skills và code-level constraints.</strong></p>
+<blockquote>
+<p>Parameters (một post-trained model) đảm nhiệm vai trò thấu hiểu medical language, diễn đạt tự nhiên, thấu cảm và xử lý complex intent recognition. Knowledge base lưu trữ guidelines mới nhất, thông tin dược phẩm và institutional policies, với quy tắc bắt buộc mọi câu trả lời phải cite sources rõ ràng. Skill định nghĩa workflow cho quá trình thu thập thông tin tư vấn, phân tầng rủi ro (risk stratification), escalation sang con người và follow-up. Server-side code đóng vai trò chốt chặn thực thi identity verification, privacy minimization, contraindication checks, emergency-risk escalation và thiết lập permission boundaries. Các production trajectories trước hết được eval về medical safety, factual reliability, promise-action consistency và quality of expression, sau đó được dùng để sinh ra 4 nhóm candidate updates. Bất kỳ thay đổi nào liên quan đến parameter hoặc workflow đều phải vượt qua retained medical-safety set và qua vòng human review trước khi tiến hành canary release.</p>
+</blockquote>
+<p><strong>7. (★★★) Một exploration policy đạt điểm tuyệt đối trên mọi discovery tree cũ trong suốt quá trình history replay, nhưng hiệu năng lại suy giảm nghiêm trọng (degrade) ngay vòng online exploration kế tiếp. Những yếu tố nào về support-domain bias, randomness và evaluation overfitting có thể dẫn đến hiện tượng này? Bạn sẽ phân vùng (partition) các replay worlds và thiết kế release gates ra sao?</strong></p>
+<blockquote>
+<p>Các discovery tree cũ chỉ bao phủ các states và branches mà những policy tiền nhiệm từng đi qua; chúng hoàn toàn không thể bảo chứng cho performance trên các unexplored regions. Ngoài ra, online tasks, tools hay environment cũng có thể đã bị distribution shift. Seeds, model sampling và tool noise có thể làm xáo trộn rankings, trong khi việc liên tục tối ưu hóa trên cùng một tập tree sẽ gây ra hiện tượng overfit trực tiếp vào evaluation set. Giải pháp là phân chia development, validation và sealed test worlds độc lập theo từng task family, mốc thời gian và independent tree; mỗi tree cùng toàn bộ derived trajectories của nó phải được cô lập trọn vẹn trong một split duy nhất. Khóa cố định model/tool versions cùng compute budgets, thực hiện đánh giá đối chuẩn với baseline thông qua các paired runs trên nhiều seeds khác nhau, sau đó xuất báo cáo chi tiết về gains, uncertainty, cost và violations. Thiết lập trước các hard gates cho quality, safety và cost. Sau khi vượt qua offline acceptance, bắt buộc phải triển khai một online controlled trial quy mô nhỏ để kiểm chứng gain thực tế mà không gây ra guardrail regressions, cuối cùng mới roll out dần theo từng giai đoạn đi kèm rollback criteria rõ ràng.</p>
+</blockquote>
+<h2 class="unnumbered" id="chương-10-multi-agent-collaboration">Chương 10: Multi-Agent Collaboration<a class="headerlink" href="#chương-10-multi-agent-collaboration" title="Permanent link">#</a></h2>
+<p><strong>1. (★★) Trong multi-agent collaboration với shared context, các Agent phía sau sẽ inherit toàn bộ context của các Agent đi trước. Tuy nhiên, framing được kế thừa từ Agent trước có thể làm lệch lạc phán đoán của các Agent sau—ví dụ, một "Code Reviewer" thừa hưởng context từ một "Requirements Analyst" có thể vẫn tiếp cận task dưới góc nhìn requirements thay vì góc nhìn code-quality. Làm thế nào để detect và eliminate hiện tượng inter-role interference này?</strong></p>
+<blockquote>
+<p>Detection: sử dụng một LLM để phân tích Agent trajectory và xác định xem role mới có còn hành xử như role cũ hay không. Elimination: khi switch stage, đồng thời switch cả system prompt lẫn tool set (loại bỏ các questioning tools, đưa vào linter/testing tools) để củng cố identity mới. Sử dụng một system status bar gắn vào cuối context để reinforce thông tin về role hiện tại. Nếu vẫn không thể eliminate được role interference, hãy cân nhắc một collaboration method không sử dụng shared context.</p>
+</blockquote>
+<p><strong>2. (★★) Trong manager pattern, Manager Agent chịu trách nhiệm cho task decomposition và result integration. Nhưng capability của Manager sẽ giới hạn performance của toàn bộ hệ thống: nếu nó không thể decompose task một cách chuẩn xác, thì ngay cả những sub-agent mạnh nhất cũng trở nên vô hiệu. Hệ thống có thể làm gì để đảm bảo Manager đưa ra một sound decomposition?</strong></p>
+<blockquote>
+<p>Dựa trên kết luận của Plan-and-Act rằng “a weak planner is the system bottleneck” (planner yếu chính là nút thắt cổ chai của hệ thống), hãy phân bổ model mạnh nhất cho Manager. Về phía Harness: sử dụng một reviewer LLM để cross-validate các output của decomposition trước khi execution; yêu cầu Manager phải define rõ ràng acceptance criteria và dependencies cho từng subtask ngay khi decompose task.</p>
+</blockquote>
+<p><strong>3. (★★) Decentralized pattern kế thừa các best practice từ các tổ chức con người. Tuy nhiên, các tổ chức con người cũng tồn tại rất nhiều failure mode—giao tiếp kém, đùn đẩy trách nhiệm (buck-passing), xung đột mục tiêu (goal conflicts). Theo bạn, những "organizational pathologies" (bệnh học tổ chức) nào dễ xuất hiện nhất trong một Agent society? Làm thế nào để prevent chúng?</strong></p>
+<blockquote>
+<p>Đối chiếu với 3 phân loại của MAST: interfaces không rõ ràng và chồng chéo trách nhiệm; hiểu sai lệch mục tiêu và thông tin bị hiểu sai ở downstream; báo cáo "done" giả tạo (falsely claiming “done”). Ngoài ra còn có: cascading error amplification (hiệu ứng tam sao thất bản - the telephone game), cyclic handoffs giữa các role, và các group chat giữa các Agent bị diverge mà không thể converge. Về Prevention: thiết lập contractual interfaces cùng một unified message envelope, task state machines đi kèm acceptance verification, cross-validation từ góc nhìn độc lập (independent-perspective), và detection cơ chế đùn đẩy trách nhiệm (buck-passing) giữa các role.</p>
+</blockquote>
+<p><strong>4. (★★★) Trong manager pattern, khi nhiều sub-agent execute song song (in parallel), phát hiện của một sub-agent có thể khiến công việc của các sub-agent khác trở nên vô nghĩa (ví dụ: trong một search task, một Agent đã tìm thấy câu trả lời). Hãy thiết kế một cascading termination mechanism hiệu quả để đạt được cơ chế "one succeeds, all stop".</strong></p>
+<blockquote>
+<p>Sub-agent gửi <code>target_found</code> về Manager, Manager sau đó sẽ broadcast <code>terminate</code>. Mỗi sub-agent sẽ định kỳ check termination signal này tại các safe point trong ReAct loop và exit sau khi thực hiện graceful cleanup (đóng các browser session, release lock, và hoàn tất file write).</p>
+</blockquote>
+<p><strong>5. (★★★) Cơ chế optimistic locking được giới thiệu trong chương này giúp giải quyết các concurrent write conflicts đối với một file đơn lẻ. Tuy nhiên, trong một multi-agent system thực tế, shared file systems còn đối mặt với các vấn đề như cross-file semantic conflicts, namespace pollution (các Agent tùy tiện tạo file dẫn đến tình trạng directory chaos), và single points of failure (một Agent vô tình xóa sạch toàn bộ files). Bạn sẽ thiết kế một cơ chế file system governance mạnh mẽ hơn như thế nào?</strong></p>
+<blockquote>
+<p>Partitioned governance: phân chia system thành 4 zone như trong Table 10-4, sử dụng các private scratchpads để cô lập những vùng trial-and-error. Semantic conflicts: orchestration layer chỉ định các directory-level lock files và bắt buộc phải acquire directory lock trước khi thực hiện modification. Namespace pollution: áp dụng các directory conventions và naming conventions. Single points of failure: triển khai một version-control system để version history có thể được roll back, đồng thời áp dụng nguyên tắc minimize permissions.</p>
+</blockquote>
+<p><strong>6. (★★★) Mô hình Agent collaboration dựa trên market-mechanism (Pinchwork, RentAHuman) giới thiệu các transactional relationships: một Agent trả tiền cho một Agent khác (hoặc một con người) để hoàn thành một task. Làm thế nào để employer Agent tự động đo lường quality của delivered results từ executor? Nếu executor tuyên bố đã hoàn thành nhưng employer đánh giá quality không đạt chuẩn (substandard), ai sẽ đứng ra phân xử dispute? Làm sao để chúng ta ngăn chặn hiện tượng bad money driving out good?</strong></p>
+<blockquote>
+<p>Quá trình acceptance không thể chỉ đơn thuần là đọc Agent trajectory; hãy áp dụng deterministic external verification như test execution, rendered screenshots và tool checks. Tận dụng tính bất đối xứng về độ khó giữa generation và verification (generation-verification difficulty asymmetry) để giảm thiểu acceptance costs. Các dispute sẽ do một bên thứ ba độc lập là review Agent phân xử, với ngân sách được giữ trong escrow. Để chống lại hiện tượng bad money driving out good: xây dựng một reputation system dựa trên historical deliveries, gắn chặt price signals với quality.</p>
+</blockquote>
+<p><strong>7. (★★) RentAHuman cho phép các Agent thuê con người thông qua cryptocurrency, đảo ngược hoàn toàn mối quan hệ human-machine truyền thống. Nếu model này trở nên phổ biến, con người sẽ đóng vai trò gì trong Agent economy? Liệu họ có đơn thuần chỉ thực hiện các physical tasks mà Agent không thể hoàn thành?</strong></p>
+<blockquote>
+<p>Con người làm được nhiều hơn là chỉ thực thi các physical tasks mà Agent không thể hoàn tất. Họ còn cung cấp những thông tin mà Agent không thể tiếp cận tại generation time, bao gồm on-site perception và real-world feedback; đóng vai trò là các final acceptors và dispute arbitrators; gánh vác trách nhiệm về authorization và accountability với tư cách là các chủ thể pháp lý và trách nhiệm; thiết lập goals và đưa ra các value judgments; đồng thời thực hiện các bước checks tại những nơi tồn tại information asymmetry hoặc chạm đến các ranh giới đạo đức (moral boundaries).</p>
+</blockquote>
+<p><strong>8. (★★) Xã hội loài người cần division of labor vì năng lực của mỗi cá thể là có giới hạn—frontend developer có thể không biết backend, và designer có thể không biết ops. Tuy nhiên, large models lại tiệm cận với hình mẫu "generalists". Nghiên cứu cho thấy trong các pure text reasoning tasks, multi-agent debate không vượt trội hơn một single Agent nếu xét trên cùng mức compute. Vậy lợi thế thực sự của multiple Agents nằm ở đâu?</strong></p>
+<blockquote>
+<ol>
+<li>Đưa vào external feedback như execution results và visual screenshots, bổ sung thêm những thông tin vốn chưa từng tồn tại ở generation time.</li>
+<li>Multiple Agents với các objectives và role definitions khác nhau có thể thảo luận và cạnh tranh lẫn nhau như trong xã hội loài người, giúp triệt tiêu các blind spots của một single Agent.</li>
+<li>Context isolation giữa multiple Agents giúp vượt qua giới hạn của context-window limit và hỗ trợ thực thi các tool-call chains cực dài.</li>
+</ol>
+</blockquote>
+<p><strong>9. (★★★) Chương này coi "shared context" đối chiếu với "non-shared context" là một design dimension cốt lõi của multi-agent systems. Shared context cho phép toàn bộ các Agent nhìn thấy cùng một lượng thông tin, thoạt nhìn có vẻ tạo điều kiện thuận lợi cho việc coordination. Tuy nhiên, trong <em>Tam Thể (The Three-Body Problem)</em>, tư duy của người Tam Thể hoàn toàn trong suốt, nhưng sự phát triển công nghệ của họ lại rơi vào đình trệ; thí nghiệm tưởng tượng về chiếc kẹp giấy (paperclip thought experiment) cũng chỉ ra rằng khi một tập thể hội tụ vào cùng một mục tiêu, diversity sẽ biến mất. Trong một multi-agent system, làm thế nào để chúng ta cân bằng giữa efficiency và diversity?</strong></p>
+<blockquote>
+<p>Full sharing sẽ khuếch đại thinking inertia và error cascades; chính isolation mới mang lại cognitive diversity. Hãy sử dụng các prompt hoặc model khác nhau để tạo ra các thinking bias riêng biệt (brainstorm, debate), đồng thời yêu cầu cross-validators chỉ kiểm tra raw evidence thay vì toàn bộ thought process trước đó.</p>
+</blockquote>
+<p><strong>10. (★★★) Gán cho một Coding Agent một budget gồm 30 steps và 300 steps. Work strategy của nó nên khác biệt như thế nào? Các nghiên cứu chỉ ra rằng việc chỉ đơn thuần tăng step budget không đảm bảo sẽ mang lại performance improvement—các Agent có thể rơi vào tình trạng "saturate" sớm sau những đợt shallow search. Hãy thiết kế một cơ chế "budget-aware" cho phép Agent nhanh chóng đạt được core functionality khi budget nhỏ, đồng thời bổ sung các phase planning, testing và review khi budget lớn, nhằm tận dụng tối đa computational resources bổ sung.</strong></p>
+<blockquote>
+<p>Mechanism: inject total budget và remaining budget vào prompt tại mỗi step, đồng thời dynamically adjust trọng số exploration/exploitation dựa trên tỷ lệ tài nguyên còn lại. Ví dụ, với budget nhỏ (30 steps), bỏ qua planning và review, đi thẳng vào core functionality kèm basic verification. Với budget lớn (300 steps), thực hiện plan, implement, test, sau đó review và improve, sử dụng các milestone checkpoint để đánh giá tiến độ và ngăn ngừa tình trạng shallow saturation.</p>
+</blockquote>
+<p><strong>11. (★★) Bảng 10-3 map từng hàng của multi-agent systems sang operating systems. Hãy mở rộng bảng này thêm vài hàng nữa: virtual memory và paging, file permissions, deadlock detection, cùng với scheduling algorithms tương ứng với những khái niệm nào trong Agent world? Và những khái niệm nào của operating system không có counterpart trong Agent world, tại sao?</strong></p>
+<blockquote>
+<p>Các extension tiềm năng: virtual memory/paging \ensuremath{\leftrightarrow} context compression và retrieval (hot information được giữ trong window, cold information được swap out sang files và memory stores rồi fetch lại khi cần); file permissions \ensuremath{\leftrightarrow} tool whitelists, read-only mounts và credential boundaries; deadlock detection \ensuremath{\leftrightarrow} detection của cyclic handoffs và mutual waiting (áp dụng handoff-count caps và timeouts); scheduling algorithms \ensuremath{\leftrightarrow} asynchronous event handling (Chương 4). Những khái niệm thiếu vắng counterpart bắt nguồn từ sự khác biệt trong cơ chế enforcement: các instruction của một process được enforce trực tiếp bởi hardware, trong khi Agent chỉ tuân thủ prompt với một xác suất cao (high probability).</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Cập nhật lần cuối">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2 tháng 11, 2026 15:35:13 UTC">2 tháng 11, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Tạo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2 tháng 11, 2026 15:35:13 UTC">2 tháng 11, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Trở lại mục lục
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Chân trang" >
+        
+          
+          <a href="../afterword/" class="md-footer__link md-footer__link--prev" aria-label="Trước: Lời kết: Trở lại với Agent = LLM + Context + Tools">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Trước
+              </span>
+              <div class="md-ellipsis">
+                Lời kết: Trở lại với Agent = LLM + Context + Tools
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../tags/" class="md-footer__link md-footer__link--next" aria-label="Sau: Tra cứu Tags">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Sau
+              </span>
+              <div class="md-ellipsis">
+                Tra cứu Tags
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tooltips", "content.tabs.link", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u0110\u00e3 sao ch\u00e9p", "clipboard.copy": "Sao ch\u00e9p v\u00e0o b\u1ed9 nh\u1edb t\u1ea1m", "search.result.more.one": "1 t\u1eeb kh\u00e1c trong trang", "search.result.more.other": "# t\u1eeb kh\u00e1c trong trang", "search.result.none": "Kh\u00f4ng t\u00ecm th\u1ea5y t\u00e0i li\u1ec7u li\u00ean quan", "search.result.one": "1 t\u00e0i li\u1ec7u li\u00ean quan", "search.result.other": "# t\u00e0i li\u1ec7u li\u00ean quan", "search.result.placeholder": "Nh\u1eadp \u0111\u1ec3 b\u1eaft \u0111\u1ea7u t\u00ecm ki\u1ebfm", "search.result.term.missing": "Kh\u00f4ng", "select.version": "Ch\u1ecdn phi\u00ean b\u1ea3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../../../javascripts/nav-collapse.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../../javascripts/mermaid-init.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
