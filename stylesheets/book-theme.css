@@ -413,10 +413,10 @@ body:has(#mkdocs-decrypt-form) .md-content {
 .md-typeset h1 {
   font-size: 2.2rem !important;
   font-weight: 650 !important;
-  line-height: 1.1 !important;
+  line-height: 1.25 !important;
   letter-spacing: -0.045em !important;
   margin-top: 0 !important;
-  margin-bottom: 28px !important;
+  margin-bottom: 2rem !important;
   border: none !important;
 }
 
@@ -520,18 +520,30 @@ body:has(#mkdocs-decrypt-form) .md-content {
 
 /* ── 11. Giao diện Mobile Responsive ─────────────────────────────────────── */
 @media screen and (max-width: 600px) {
+  /* 1. Khung đệm an toàn 24px hai bên mép màn hình */
+  .md-content__inner {
+    margin: 0 0 1.2rem;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    padding-top: 1.2rem !important;
+  }
   .md-typeset p,
   .md-typeset ul,
   .md-typeset ol,
   .md-typeset blockquote p {
     font-family: 'Literata', Georgia, Cambria, serif !important;
     line-height: 1.68 !important;        /* Thoáng đãng cho dấu tiếng Việt */
-    font-weight: 450 !important;         /* Nét đầm, sắc sảo trên màn hình di động */
+    font-weight: 400 !important;         /* Nét đầm, sắc sảo trên màn hình di động */
     font-optical-sizing: auto;
     letter-spacing: -0.01em;
     text-wrap: pretty;
   }
-  .md-typeset p { font-size: 0.9rem !important; }
+  .md-typeset p,
+  .md-typeset ul,
+  .md-typeset ol {
+    font-size: 0.8rem !important;
+  }
+  .md-typeset blockquote p { font-size: 0.76rem !important; }
   .md-typeset h1 { font-size: 2.16rem !important; }
   .md-typeset h2 { font-size: 1.2rem !important; }
   .md-top, 
