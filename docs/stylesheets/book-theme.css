@@ -260,6 +260,14 @@ body {
   display: block;
 }
 
+/* ── Ẩn triệt để icon ổ khóa / khiên bảo mật của plugin mã hóa ─────────── */
+.md-sidebar--primary .md-nav__link svg:not(.md-nav__icon *),
+.md-sidebar--primary .md-nav__link [class*="encrypt"],
+.md-sidebar--primary .md-nav__link [class*="lock"],
+.md-sidebar--primary .md-nav__link img {
+  display: none !important;
+}
+
 /* ── 7. Sidebar Phải (TOC - "TRONG CHƯƠNG NÀY") ─────────────────────────── */
 /* ── Sidebar Phải (TOC): Thu gọn chiều rộng & Font-size ─────────────────── */
 @media screen and (min-width: 76.25em) {

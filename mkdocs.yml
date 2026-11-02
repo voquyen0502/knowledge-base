@@ -62,6 +62,7 @@ plugins:
       type: date
       fallback_to_build_date: true
   - encryptcontent:
+      title_prefix: ""
       title: "Tài liệu bảo mật"
       summary: "Kho tri thức này được bảo vệ. Vui lòng nhập mật khẩu để mở khóa."
       placeholder: "Nhập mật khẩu truy cập..."
