@@ -260,11 +260,24 @@ body {
   display: block;
 }
 
-/* ── Ẩn triệt để icon ổ khóa / khiên bảo mật của plugin mã hóa ─────────── */
-.md-sidebar--primary .md-nav__link svg:not(.md-nav__icon *),
-.md-sidebar--primary .md-nav__link [class*="encrypt"],
-.md-sidebar--primary .md-nav__link [class*="lock"],
-.md-sidebar--primary .md-nav__link img {
+/* ── 1. TRẠNG THÁI KHÓA (Mặc định): Hiện icon ổ khóa thanh mảnh, tinh tế ── */
+.md-sidebar--primary .md-nav__link svg:not(.md-nav__icon *) {
+  display: inline-block !important;
+  opacity: 0.45;                             /* Để mờ 45% cho đỡ nặng mắt */
+  width: 14px;
+  height: 14px;
+  margin-left: auto;                         /* Đẩy icon về sát mép phải dòng */
+  vertical-align: middle;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.md-sidebar--primary .md-nav__link:hover svg:not(.md-nav__icon *) {
+  opacity: 0.85;                             /* Rê chuột vào thì sáng rõ hơn */
+}
+
+/* ── 2. TRẠNG THÁI MỞ KHÓA (.is-unlocked): Ẩn hoàn toàn icon ổ khóa ────── */
+html.is-unlocked .md-sidebar--primary .md-nav__link svg:not(.md-nav__icon *),
+html.is-unlocked .md-sidebar--primary .md-nav__link [class*="encrypt"] {
   display: none !important;
 }
 
@@ -328,6 +341,26 @@ body {
   font-weight: 650 !important;
   margin-left: -1px !important;
   padding-left: 13px !important;
+}
+
+/* ── Ẩn toàn bộ Mục lục bên phải (Desktop & Mobile) khi chưa mở khóa ────── */
+
+/* 1. Kỹ thuật CSS :has() — Ẩn tức thì 0ms, không chờ JavaScript chạy */
+body:has(#mkdocs-decrypt-form) .md-sidebar--secondary,
+html.is-locked .md-sidebar--secondary {
+  display: none !important;
+}
+
+/* 2. Ẩn nút icon TOC trên thanh Header của màn hình điện thoại/tablet */
+body:has(#mkdocs-decrypt-form) .md-header__button[for="__toc"],
+html.is-locked .md-header__button[for="__toc"] {
+  display: none !important;
+}
+
+/* 3. Tối ưu vùng đọc: Khi sidebar phải ẩn, khung bài viết tự động căn giữa */
+body:has(#mkdocs-decrypt-form) .md-content {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* ── 8. Typography Nội dung Đọc (Editorial Prose) ────────────────────────── */
