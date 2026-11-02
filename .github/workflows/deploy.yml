@@ -1,0 +1,34 @@
+name: Deploy Knowledge Base
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Bắt buộc cho git-revision-date-localized
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Cache Pip
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-mkdocs-${{ hashFiles('**/requirements.txt') }}
+          path: ~/.cache/pip
+
+      - name: Install dependencies
+        run: |
+          pip install mkdocs-material mkdocs-git-revision-date-localized-plugin
+
+      - name: Build and Deploy
+        run: mkdocs gh-deploy --force
