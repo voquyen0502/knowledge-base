@@ -436,6 +436,13 @@
     
   </span>
   
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
   
 
       </a>
@@ -463,6 +470,13 @@
 
     
   </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
   
   
 
@@ -492,6 +506,13 @@
     
   </span>
   
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
   
 
       </a>
@@ -519,6 +540,13 @@
 
     
   </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
   
   
 
@@ -548,6 +576,13 @@
     
   </span>
   
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
   
 
       </a>
@@ -575,6 +610,13 @@
 
     
   </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
   
   
 
@@ -604,6 +646,13 @@
     
   </span>
   
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
   
 
       </a>
@@ -631,6 +680,13 @@
 
     
   </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
   
   
 
@@ -660,6 +716,13 @@
     
   </span>
   
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
   
 
       </a>
@@ -688,6 +751,13 @@
     
   </span>
   
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
   
 
       </a>
@@ -715,6 +785,13 @@
 
     
   </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
   
   
 
@@ -753,6 +830,13 @@
     
   </span>
   
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -770,6 +854,13 @@
 
     
   </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
   
   
 
@@ -841,6 +932,13 @@
     
   </span>
   
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
+  
   
 
       </a>
@@ -883,6 +981,13 @@
 
     
   </span>
+  
+    
+  
+  
+    <span class="md-status md-status--encrypted"></span>
+  
+
   
   
 
@@ -972,40 +1077,34 @@
   
 
 
-<h1 class="unnumbered" id="lời-kết-trở-lại-với-agent--llm--context--tools">Lời kết: Trở lại với Agent = LLM + Context + Tools<a class="headerlink" href="#lời-kết-trở-lại-với-agent--llm--context--tools" title="Permanent link">#</a></h1>
-<p>Cuốn sách này mở đầu bằng một công thức: <strong>Agent = LLM + Context + Tools</strong>. Toàn bộ mười chương sách đều được phát triển xoay quanh ba từ khóa cốt lõi này.</p>
-<p><strong>Chương 1</strong> thiết lập cách tiếp cận ba tầng đối với công thức trên—implementation layer, intuitive layer, và academic layer—đồng thời mở ra orchestration spectrum trải dài từ các workflow cơ bản cho đến autonomous Agent. Các chương tiếp theo lần lượt được triển khai tuần tự theo mạch: “Building — Evaluation and Evolution — Collaboration”.</p>
-<ul>
-<li><strong>Building Agent (Chương 2–6).</strong> Context engineering quyết định những gì Agent có thể quan sát trong phạm vi một task, trong khi memory và knowledge base mở rộng thông tin xuyên suốt nhiều session. Tools định nghĩa những gì Agent có thể thực thi, code generation cung cấp meta-capability để tạo ra các tool và hệ sinh thái mới, còn chương về tương tác (interaction) mở rộng observation space và action space vượt ra ngoài giới hạn text turn-taking để tiến vào voice, GUI, và thế giới vật lý.</li>
-<li><strong>Evaluation and Evolution (Chương 7–9).</strong> Evaluation chuyển hóa performance thành các signal đáng tin cậy, post-training ghi trực tiếp các high-dimensional capability vào model parameter, và continuous evolution biến trải nghiệm thực tế trên môi trường production thành các bản cập nhật có kiểm soát (controlled updates) vào knowledge, instruction, program hoặc parameter.</li>
-<li><strong>Collaboration (Chương 10).</strong> Multi-agent collaboration tiếp tục tái cấu trúc cách phân bổ context, tools, và trách nhiệm (responsibility) giữa các thực thể trong hệ thống.</li>
-</ul>
-<p>Ba tầng kiến trúc này không phải là các ngăn chứa tách biệt độc lập. Đặc biệt, Chương 9 được xây dựng dựa trên toàn bộ nền tảng đã thiết lập trước đó: nếu không có trajectory và knowledge system, kinh nghiệm sẽ không có nơi lưu trữ; nếu thiếu code capability, Agent không thể tự tùy biến tools và Harness; và nếu không có evaluation, hệ thống không thể định lượng được liệu một thay đổi là bước tiến (progress) hay thụt lùi (regression). Do đó, Chương 9 chính là điểm hội tụ (convergence point), nơi cuốn sách chuyển dịch trọng tâm từ “cách xây dựng một Agent” sang “cách làm cho Agent tự tiến hóa và cải thiện trong dài hạn”.</p>
-<h2 class="unnumbered" id="two-clouds">Two Clouds<a class="headerlink" href="#two-clouds" title="Permanent link">#</a></h2>
-<p>Năm 1900, Lord Kelvin từng nhận định rằng vẫn còn hai đám mây bao phủ bầu trời quang đãng của vật lý học—về sau, một đám mây phát triển thành thuyết tương đối và đám mây còn lại là cơ học lượng tử. Ngày nay, bầu trời phía trên Agents cũng chẳng hề quang đãng, và tôi cũng nhìn thấy hai đám mây như vậy.</p>
-<p><strong>Đám mây thứ nhất là làm thế nào để Agents có thể tương tác với môi trường theo cơ chế streaming, real-time.</strong> Hiện nay, đại đa số Agents vẫn vận hành theo chế độ turn-by-turn "request-response": bạn nói xong một câu, nó tư duy qua cả một đoạn văn rồi mới nhả kết quả ra cùng một lúc. Nhưng thế giới thực không hề dừng lại chờ nó suy nghĩ xong—lời nói bị ngắt quãng, bối cảnh liên tục thay đổi, email mới dồn dập gửi đến. Một Agent thực sự "sống động" phải có khả năng vừa lắng nghe vừa tư duy, vừa nói vừa suy nghĩ, bắt đầu planning ngay khi bạn mới nói được nửa câu, và tự nhận thức được rằng "email này cần phải xử lý" ngay cả khi chưa có ai yêu cầu. Có hai hướng tiếp cận để đạt được năng lực real-time này, và chúng thường được theo đuổi song song. Một là <strong>phân tách kiến trúc nhanh và chậm (architectural separation of fast and slow)</strong>—tính phản hồi real-time và trí thông minh gần như là hai trục trực giao (orthogonal) mà một model đơn lẻ rất khó bao quát trọn vẹn, do đó một frontend model tốc độ cao sẽ đảm bảo nhịp điệu hội thoại trong khi một backend model tốc độ chậm hơn sẽ thực hiện deep thinking. Hướng tiếp cận còn lại là <strong>tăng tốc chính quá trình inference</strong>—khi decode speed đủ cao, thời gian chờ turn-by-turn sẽ ngắn đến mức gần như biến mất, xóa nhòa ranh giới giữa turn-by-turn và "real-time". Hướng đi này đang được thúc đẩy nhanh chóng bởi các dòng chip và inference engines: Xiaomi MiMo đã đưa một model 1T parameters vượt mốc 1000 token/s trên một 8-GPU node duy nhất<sup id="fnref:mimo"><a class="footnote-ref" href="#fn:mimo">1</a></sup>, trong khi các giải pháp chuyên dụng hardcode toàn bộ model trực tiếp vào chip (như Taalas HC1) đẩy một model 8 tỷ parameters lên mức khoảng 17000 token/s với response time dưới 100 milliseconds<sup id="fnref:taalas"><a class="footnote-ref" href="#fn:taalas">2</a></sup>. Khi một model có thể nhả ra hàng nghìn từ mỗi giây, khoảng cách trải nghiệm giữa "nghĩ xong mới nói" và "vừa nghĩ vừa nói" xem như bị xóa bỏ hoàn toàn.</p>
-<p><strong>Đám mây thứ hai là làm thế nào để Agents, tương tự con người, có thể liên tục tích lũy kinh nghiệm từ những thành công và thất bại khi tương tác với môi trường.</strong> Các model ngày nay giống như một thiên tài có trí nhớ siêu phàm nhưng không thể học thêm bất cứ điều gì mới: trong giai đoạn training, chúng ghi nhớ tri thức nhân loại đến từng chi tiết nhỏ nhất, nhưng khi đưa vào vận hành thực tế thì chúng hầu như không phát triển thêm—sau mỗi task, những cạm bẫy từng vấp phải và những kinh nghiệm tự đúc kết được phần lớn đều bị loại bỏ cùng với context. Việc đây có phải là một vấn đề thực sự hay không phụ thuộc vào hai giả thuyết đối lập nhau.</p>
-<p>Một là <strong>"Small World Hypothesis"</strong>: một model đủ lớn—chẳng hạn với hàng nghìn tỷ parameters—đã chứa đựng gần như toàn bộ tri thức tổng quát quan trọng của thế giới vật lý; chỉ cần học một lần là đủ. Những người theo quan điểm này (bao gồm các nhà nghiên cứu tại OpenAI và Anthropic) sẽ chỉ ra rằng lập trình là lĩnh vực duy nhất mà AI mạnh nhất hiện nay—không phải vì code có gì đặc thù đối với models, mà vì lập trình là lĩnh vực mở nhất của nhân loại: một khối lượng khổng lồ open-source code luôn sẵn sàng để học hỏi, trong khi hầu hết các ngành công nghiệp khác đều không có dữ liệu hay thông tin công khai. Vì vậy, điều mà các frontier labs thực sự đang làm là đi qua từng ngành công nghiệp, hợp tác để "distill" năng lực chuyên môn của từng ngành vào cùng một large model. Theo góc nhìn này, bottleneck không nằm ở capacity của model hay khả năng học tập của nó, mà là liệu có đủ dữ liệu hay không—nạp dữ liệu vào, train một lần, và bài toán được giải quyết.</p>
-<p>Ngược lại, <strong>“Big World Hypothesis”</strong> lại chỉ ra một tầng tri thức không thể đáp ứng bằng việc "train một lần": tri thức đặc thù của một người dùng hoặc một doanh nghiệp cụ thể. Coding standards và phong cách trình bày của một công ty nhất định, hay tính khí và thói quen riêng biệt của một khách hàng cụ thể, đều hoàn toàn vắng bóng trong mọi training corpus và thay đổi liên tục. Để thích ứng với "thế giới lớn" được cấu thành từ vô số tình huống đặc thù này, model buộc phải tiếp tục học sau khi deployment; nó không thể xuất xưởng từ nhà máy với mọi thứ đã được cấu hình sẵn. Đây chính xác là định hướng được khám phá qua khía cạnh memory ở Chương 3 và continuous evolution ở Chương 9: liệu kinh nghiệm nên được ghi vào tài liệu tri thức, instructions hay programs, hay kinh nghiệm chọn lọc nên được dùng để cập nhật model parameters? Nhìn rộng hơn, cả “RSI (recursive self-improvement)” lẫn “AI for Science” đều đang đẩy Agents tiến tới những vùng biên giới tri thức nơi chưa hề có sẵn câu trả lời. Ở đó, một Agent chỉ có thể tự học thông qua những lần thử nghiệm thành công và thất bại lặp đi lặp lại thay vì phải dựa vào con người cho mỗi quyết định. Do đó, năng lực mạnh nhất của model sau cùng sẽ không phải là ghi nhớ, mà là học hỏi và khả năng adaptation.</p>
-<p>Cả hai đám mây này đều sẽ không thể bị thổi bay chỉ bằng một đợt nâng cấp model đơn lẻ. Để hiểu được chúng sẽ dần tan biến như thế nào, trước hết chúng ta cần nhìn rõ một điều: models và Agents chưa từng có mối quan hệ upstream và downstream tách biệt; chúng đồng hành và cùng nhau tiến bước.</p>
-<h2 class="unnumbered" id="the-co-evolution-of-models-and-agents">The Co-Evolution of Models and Agents<a class="headerlink" href="#the-co-evolution-of-models-and-agents" title="Permanent link">#</a></h2>
-<p>Nhìn lại các tầng fallback logic trong các harness đó—multi-level context compression, retry logic chỉ kích hoạt circuit breaker sau hàng nghìn lần thất bại, permission checks với mặc định bi quan là "unsafe"—mỗi đoạn code tưởng chừng xấu xí kiểu "spaghetti code" đều ghi dấu lại những điểm mà model vẫn còn chưa ổn định. Khi thế hệ model tiếp theo internalize được các ràng buộc này, phần code tương ứng có thể được xóa bỏ; và lý do model có thể internalize chúng chính là vì các Agent đã thay mặt model vấp ngã qua những "cái hố" đó trong business thực tế, đúc kết các bài học thành signals cho vòng training tiếp theo. Người dùng đặt ra các bài toán thực tế; application layer dùng harness để vá víu những điểm model chưa làm tốt; những bản patch đó ngược lại trở thành training signals cho vòng iteration tiếp theo của model. Đây chính là một self-reinforcing flywheel.</p>
-<p>Flywheel này cũng trả lời cho câu hỏi còn bỏ ngỏ ở Chương 1: <strong>liệu models cuối cùng có nuốt chửng Harness hay không? Quan điểm của cuốn sách này là có—nhưng không phải diễn ra cùng một lúc. Models sẽ nuốt chửng nó theo từng layer, và tiến trình này sẽ không bao giờ kết thúc.</strong> Mỗi capability mà model internalize ổn định đều cho phép layer Harness tương ứng bị xóa bỏ—interaction model ở Chương 6 là một trường hợp như vậy: các behavior như interruption và interjection từng phải ghép nối bằng một harness bên ngoài thì nay đã được tích hợp trực tiếp vào bên trong model. Nhưng quá trình "nuốt chửng" này sẽ không bao giờ hoàn tất. Thứ nhất, training mất hàng tháng trời—model có thể đợi, nhưng business thì không. Thứ hai, một model không thể internalize toàn bộ ràng buộc và preference của business thực tế; luôn tồn tại một ranh giới mới nhất cần logic bên ngoài làm điểm tựa (backstop). Thứ ba, mỗi thế hệ model đều mở ra một capability frontier mới, và frontier chính là nơi model hoạt động kém tin cậy nhất. Do đó, Harness sẽ không biến mất; nó chỉ đơn giản là tiếp tục dịch chuyển, đồng hành cùng model tiến tới từng frontier mới. Đây cũng là cách Bitter Lesson được diễn giải trong kỷ nguyên Agent: general methods cuối cùng sẽ chiến thắng—nhưng từng chặng đường dẫn tới đích đến "cuối cùng" đó đều được trải nhựa bởi Harness.</p>
-<p>Và flywheel sẽ quay nhanh nhất trong tay những người nắm giữ cả hai đầu. Những gì Anthropic đang làm với Claude Code chính là minh chứng rõ ràng: để model và harness của chính họ tương hỗ lẫn nhau và cùng co-evolve. Model hiểu rõ harness sẽ call nó như thế nào; harness biết ranh giới của model nằm ở đâu; mỗi thay đổi ở bất kỳ đầu nào đều lập tức feedback ngược lại cho đầu kia. Trong một thử nghiệm, chỉ thay đổi duy nhất harness—vẫn giữ nguyên model—đã nâng task accuracy từ 52.8% lên 66.5%. Con số đó cho thấy harness mang lại leverage lớn đến mức nào ở thời điểm hiện tại, nhưng đó cũng là lời nhắc nhở: harness nắm giữ leverage lớn như vậy chính là vì model vẫn chưa tiến tới ngưỡng đó. Và cũng vì lý do tương tự, bản thân flywheel này là moat sâu nhất của kỷ nguyên hiện nay: business thực tế, feedback data và model iteration càng gắn kết chặt chẽ bao nhiêu, kẻ bên ngoài càng khó có cơ hội đuổi kịp bấy nhiêu.</p>
-<p>Ý nghĩa của điều này đối với bạn phụ thuộc vào việc bạn đang đứng ở đầu nào của flywheel. Nếu bạn đang build models, moat ở đây là làm cho flywheel này quay—để feedback từ các real-world scenarios chảy ngược về training nhanh nhất có thể. Nếu bạn đang build applications on top of models, harness là technical lever sắc bén nhất trong ngắn hạn của bạn, nhưng hãy tỉnh táo: mỗi khi model internalize một layer ràng buộc, nó sẽ—gần như chỉ bằng một cú lướt qua—xóa sổ một loạt lợi thế từng được xây dựng dựa trên harness đơn thuần. Những moat thực sự bền vững ở application layer thường nằm ngoài công nghệ: exclusive data, distribution channels vững chắc, user trust, network effects, và các kịch bản thế giới thực đòi hỏi con người và Agents phải phối hợp làm việc. Nước đi khôn ngoan là dùng harness để mua thời gian, và dùng thời gian đó để xây dựng các rào cản vượt ra ngoài ranh giới công nghệ.</p>
-<p>Vì vậy, đừng lo lắng về việc liệu framework bạn đang cầm trên tay có trở nên lỗi thời hay không. Models iterate vài tháng một lần; các APIs, products và leaderboards cụ thể rồi cũng sẽ thay đổi toàn bộ. Nhưng ba câu hỏi cốt lõi—nó nhìn thấy gì (what it sees), nó có thể làm gì (what it can do), và làm sao để verify nó đang làm đúng (how to verify it's doing things right)—sẽ không bao giờ lỗi thời. Chúng không mô tả cách sử dụng một model cụ thể, mà mô tả phương thức căn bản mà một hệ thống thông minh tương tác với thế giới. Làm chủ được chúng, bất kể thế hệ models tiếp theo mang lại capability mới nào, bạn cũng sẽ biết nó khớp vào đâu trong công thức—và bạn sẽ thấy ngay trong nháy mắt nó còn cách bao xa để thổi bay hai đám mây kia.</p>
-<p>Công nghệ Agent vẫn đang tiến hóa với tốc độ tối đa; không một cuốn sách nào có thể bắt kịp từng sự thay đổi. Nhưng nếu điều cuốn sách này để lại cho bạn không phải là cách sử dụng cụ thể của một API nào đó, mà là năng lực nhận định để giữ một cái đầu tỉnh táo giữa những làn sóng công nghệ, thì nó đã hoàn thành sứ mệnh của mình. Toàn bộ nội dung văn bản, minh họa và companion experiment code của cuốn sách này đều là open source. Bạn luôn được chào đón ghé thăm repository, tự tay chạy các experiments, và submit issues cũng như PRs. Và điều hấp dẫn nhất ở Agents chính là: chúng có thể tạo ra các capability mới bằng cách viết code, thậm chí tự cải thiện chính mình. Đọc đến đây, bạn đã nắm giữ các nguyên lý của sự "sáng tạo". Giờ thì, hãy bắt tay vào tạo ra thứ gì đó.</p>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:mimo">
-<p>Xiaomi MiMo-V2.5-Pro-UltraSpeed, thông qua model-system co-design với FP4 quantization, DFlash parallel speculative decoding, và inference system TileRT, lần đầu tiên đẩy generation speed của một 1T-parameter model vượt mốc 1000 token/s trên một general-purpose 8-GPU node đơn lẻ. Xem blog kỹ thuật chính thức của Xiaomi MiMo, "Pushing 1T-Parameter Model Generation Speed to 1000 TPS," 2026. https://mimo.xiaomi.com/blog/mimo-tilert-1000tps&#160;<a class="footnote-backref" href="#fnref:mimo" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-<li id="fn:taalas">
-<p>Taalas HC1 hardcode toàn bộ model Llama 3.1 8B lên một chip 6nm, đạt khoảng 17000 token/s với response time dưới 100 milliseconds; đánh đổi lại là chip chỉ có thể chạy model đã được hardcode, và việc cập nhật model đòi hỏi phải tape-out một chip mới. Xem Karl Freund, "Taalas Launches Hardcore Chip With 'Insane' AI Inference Performance," Forbes, 2026. https://www.forbes.com/sites/karlfreund/2026/02/19/taalas-launches-hardcore-chip-with-insane-ai-inference-performance/&#160;<a class="footnote-backref" href="#fnref:taalas" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-</ol>
+<div id="mkdocs-encrypted-content" style="display:none">14yo0UAbsqnRty/AyQvJTQ==;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</div>
+<div id="mkdocs-decrypted-content" style="display:none">
+    <form id="mkdocs-decrypt-form" class="md-content__inner md-typeset">
+        <h1>Kho tri thức này được bảo vệ. Vui lòng nhập mật khẩu để mở khóa.</h1>
+        <p>Contact your administrator for access to this page.</p>
+        <input class="md-input" type="password" id="mkdocs-content-password" placeholder="Nhập mật khẩu truy cập...">
+        
+        <p id="mkdocs-decrypt-msg"></p>
+    </form>
 </div>
+
+<script type="text/javascript">
+var encryptcontent_id = "encryptcontent_1";
+var encryptcontent_path = "knowledge-base/books/ai-agents/afterword/";
+var decryption_failure_message = "Invalid password.";
+var encryptcontent_keystore = ["Lfxks3EuHfbRLWz764LvxA==;sKV/LPM0iFy+OTQY40nylqfIU1Pne40KVmQOOvFLsLczVBPZfwlgm5phvBA+nQLOVwhO1YcR6AJsJrt1+rhhyZ3rFsptvYtkWSYd+VAkwHiTdtayf3rqzyWzSQL9oCjO;V8afLH0DRMGPpz8ViXhuEw=="];
+var encryptcontent_obfuscate = 0;
+
+const encryptcontent_event = new Event("encryptcontent_event");
+var encryptcontent_done = false;
+</script>
+<script type="module">
+if (!window.hasOwnProperty("init_decryptor")) {
+    import("../../../assets/javascripts/decrypt-contents.js");
+} else {
+    init_decryptor();
+}
+</script>
 
 
 
