@@ -1,24 +1,28 @@
 site_name: Engineering Wiki
 site_description: Personal Technical Knowledge Base & System Architecture Notes
-site_url: https://<username>.github.io/<repo-name>/
-repo_url: https://github.com/<username>/<repo-name>
-repo_name: <repo-name>
+site_url: https://voquyen0502.github.io/knowledge-base/
+# repo_url: https://github.com/voquyen0502/knowledge-base
+# repo_name: knowledge-base
 edit_uri: edit/main/docs/
 
 theme:
   name: material
   language: vi
+  custom_dir: overrides
+  icon:
+    logo: material/book-open-page-variant-outline
+    repo: fontawesome/brands/github
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
+      primary: white
       accent: indigo
       toggle:
         icon: material/weather-night
         name: Chuyển sang Dark Mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
+      primary: slate
       accent: indigo
       toggle:
         icon: material/weather-sunny
@@ -27,7 +31,7 @@ theme:
     text: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
     code: JetBrains Mono, SFMono-Regular, Consolas, monospace
   features:
-    # Điều hướng SPA & Trải nghiệm đọc
+    # Điều hướng SPA & TOC
     - navigation.instant
     - navigation.instant.progress
     - navigation.tracking
@@ -35,7 +39,6 @@ theme:
     - navigation.indexes
     - navigation.top
     - navigation.footer
-    # Sidebar phải (Table of Contents)
     - toc.follow
     # Tương tác nội dung & Mã nguồn
     - content.code.copy
@@ -58,6 +61,16 @@ plugins:
       enable_git_follow: false
       type: date
       fallback_to_build_date: true
+  - encryptcontent:
+      title: "Tài liệu bảo mật"
+      summary: "Kho tri thức này được bảo vệ. Vui lòng nhập mật khẩu để mở khóa."
+      placeholder: "Nhập mật khẩu truy cập..."
+      # Đọc mật khẩu từ ENV của GitHub Actions, fallback về mật khẩu local khi test máy cá nhân
+      password: !ENV [WIKI_PASSWORD, "MatKhauLocalTamThoi2026!"]
+      remember_password: true     # Lưu token vào sessionStorage (không phải nhập lại mỗi khi chuyển trang)
+
+hooks:
+  - hooks/auto_encrypt.py
 
 markdown_extensions:
   - admonition
@@ -65,7 +78,7 @@ markdown_extensions:
   - footnotes
   - md_in_html
   - toc:
-      permalink: true
+      permalink: "#"
       slugify: !!python/object/apply:pymdownx.slugs.slugify
         kwds:
           case: lower
@@ -85,8 +98,31 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.details
 
+extra_css:
+  - stylesheets/book-theme.css
+
 extra_javascript:
+  - javascripts/nav-collapse.js
   - https://unpkg.com/mermaid@11/dist/mermaid.min.js
   - javascripts/mermaid-init.js
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Trang chủ: index.md
+  - Tủ sách:
+      - AI Agents in Depth:
+          - books/ai-agents/introduction.md
+          - books/ai-agents/chapter-01.md
+          - books/ai-agents/chapter-02.md
+          - books/ai-agents/chapter-03.md
+          - books/ai-agents/chapter-04.md
+          - books/ai-agents/chapter-05.md
+          - books/ai-agents/chapter-06.md
+          - books/ai-agents/chapter-07.md
+          - books/ai-agents/chapter-08.md
+          - books/ai-agents/chapter-09.md
+          - books/ai-agents/chapter-10.md
+          - books/ai-agents/afterword.md
+          - books/ai-agents/reference-answers.md
+  - Tra cứu Tags: tags.md

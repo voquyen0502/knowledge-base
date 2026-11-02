@@ -1,19 +1,21 @@
 window.MathJax = {
   tex: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
     processEscapes: true,
-    processEnvironments: true
+    processEnvironments: true,
   },
   options: {
-    ignoreHtmlClass: ".*|",
-    processHtmlClass: "arithmatex"
-  }
+    ignoreHtmlClass: '.*|',
+    processHtmlClass: 'arithmatex',
+  },
 };
 
-// Re-typeset mỗi khi SPA chuyển trang
 document$.subscribe(() => {
-  if (typeof MathJax !== "undefined" && MathJax.typesetPromise) {
+  if (typeof MathJax !== "undefined" && MathJax.startup) {
+    MathJax.startup.output.clearCache();
+    MathJax.typesetClear();
+    MathJax.texReset();
     MathJax.typesetPromise();
   }
 });

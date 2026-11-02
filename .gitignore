@@ -31,3 +31,4 @@ desktop.ini
 .env
 .env.*
 !.env.example
+encryptcontent.cache

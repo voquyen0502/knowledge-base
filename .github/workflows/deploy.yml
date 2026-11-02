@@ -25,10 +25,24 @@ jobs:
         with:
           key: ${{ runner.os }}-mkdocs-${{ hashFiles('**/requirements.txt') }}
           path: ~/.cache/pip
+          restore-keys: |
+            ${{ runner.os }}-mkdocs-
 
       - name: Install dependencies
         run: |
-          pip install mkdocs-material mkdocs-git-revision-date-localized-plugin
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-encryptcontent-plugin
+          fi
+
+      - name: Configure Git Bot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Build and Deploy
+        env:
+          WIKI_PASSWORD: ${{ secrets.WIKI_PASSWORD }}
         run: mkdocs gh-deploy --force
