@@ -1,8 +1,8 @@
-# Context Engineering
+# Chương 2: Context Engineering
 
 Như Chương 1 đã trình bày, một Agent chỉ có thể hành động dựa trên những thông tin mà nó tiếp cận được. Việc thiết kế và quản trị các thông tin đó được gọi là **Context Engineering**. Context là toàn bộ dữ liệu mà AI thực sự "nhìn thấy" trong mỗi lượt tương tác với bạn. Nó không chỉ bao gồm lịch sử hội thoại, mà còn chứa các quy tắc hành vi do developer thiết lập (System Prompt / system instructions), mô tả về các năng lực bên ngoài mà AI có thể sử dụng (Tool descriptions), cùng nhiều thông tin phụ trợ khác. Dưới góc nhìn Harness được giới thiệu ở Chương 1, Context Engineering là thành phần triển khai cốt lõi của tầng "Context and Tools" trong Harness: nó quyết định Agent sẽ nhìn thấy thông tin gì tại từng thời điểm ra quyết định và cách thức cấu trúc thông tin đó ra sao. Một Context được thiết kế tối ưu sẽ cung cấp đầy đủ dữ liệu cần thiết để Agent vận dụng năng lực suy luận vào từng tác vụ cụ thể.
 
-![Figure 2-1: Overview of the Context Window Composition](images/fig2-1.svg)
+![Figure 2-1: Overview of the Context Window Composition](./figures/fig2-1.svg)
 
 ## Context: Yếu Tố Quyết Định Năng Lực Của Agent
 
@@ -57,7 +57,7 @@ Các tool definition không phải là message. Chúng được cung cấp trong
 
 ### Single-Turn Request: API Call đơn giản nhất
 
-![Figure 2-2: Request and Response Structure of a Single-Turn API Call](images/fig2-2.svg)
+![Figure 2-2: Request and Response Structure of a Single-Turn API Call](./figures/fig2-2.svg)
 
 Hãy bắt đầu với trường hợp đơn giản nhất, không có tool call: người dùng hỏi "Hello, who are you?". Ví dụ này sử dụng model Qwen3-0.6B được deploy cục bộ:
 
@@ -96,7 +96,7 @@ Request này chỉ chứa hai message: một system message chứa các quy tắ
 
 Các Agent workflow trong thực tế thường phức tạp hơn một lượt Q&A dạng single-turn. Khi người dùng hỏi: "Hiện tại là mấy giờ và thời tiết ở Vancouver thế nào?", model không thể trả lời dựa trên knowledge sẵn có của nó (nó không biết thời điểm "hiện tại" là lúc nào, chưa nói đến thời tiết), do đó nó buộc phải gọi các external tool. Ví dụ dưới đây sẽ đi qua từng lượt tương tác giữa Agent framework và model.
 
-![Figure 2-3: Complete Interaction Sequence cho hai lượt gọi Model API](images/fig2-3.svg)
+![Figure 2-3: Complete Interaction Sequence cho hai lượt gọi Model API](./figures/fig2-3.svg)
 
 Hai call trong hình đều chỉ **các lượt call đến model API**, chứ không phải hai tool được gọi tuần tự. Trong ví dụ này, argument timezone của `get_current_time` cùng các argument city và unit của `get_weather` đều có thể được xác định ngay từ đầu; bản thân weather service tự trả về thời tiết mới nhất của thành phố và không phụ thuộc vào output từ time tool, vì vậy Agent framework có thể thực thi chúng song song (in parallel). Nếu argument của một tool chạy sau bắt buộc phải lấy từ kết quả của tool chạy trước, model sẽ phải yêu cầu tool đó ở round tiếp theo, và hai tool này bắt buộc phải thực thi tuần tự (serially).
 
@@ -373,7 +373,7 @@ Quá trình này cho thấy **một trong những trách nhiệm cốt lõi củ
 
 Ví dụ trên minh họa cấu trúc Context hoàn chỉnh mỗi khi Agent gọi model:
 
-![Figure 2-4: Context Composition Each Time the Agent Calls the Model](images/fig2-4.svg)
+![Figure 2-4: Context Composition Each Time the Agent Calls the Model](./figures/fig2-4.svg)
 
 Phần phía trên (System Prompt + Tool Definitions) được giữ nguyên xuyên suốt cuộc hội thoại, trong khi phần phía dưới (lịch sử hội thoại, tức **trajectory** đã được định nghĩa ở Chương 1) sẽ dài thêm sau mỗi lượt tương tác. Đây là cách 5 thành phần của Context từ Chương 1 xuất hiện ở cấp độ API: System Prompt và Tool Definitions tạo thành một static prefix, trong khi các user message, phản hồi từ model và kết quả thực thi tool tạo thành một message history tăng dần theo thời gian. Cấu trúc "static prefix + trajectory" này chính là nền tảng cho các nội dung thảo luận phía sau về tối ưu hóa KV Cache, Context Compression và các kỹ thuật liên quan: prefix cần được giữ ổn định, trong khi các đoạn trajectory phía sau có thể được tóm tắt hoặc thay thế khi trade-off mang lại hiệu quả xứng đáng.
 
@@ -403,7 +403,7 @@ Giữ System Prompt và các định nghĩa core tool ổn định nhất có th
 > **Thực nghiệm 2-1 ★: Triển khai Dịch vụ LLM Cục bộ và Tool Calling**
 >
 >
-> ![Figure 2-5: Local LLM Tool Calling Architecture](images/fig2-5.svg)
+> ![Figure 2-5: Local LLM Tool Calling Architecture](./figures/fig2-5.svg)
 >
 >
 > Trước khi chương này đi sâu vào các cơ chế chuyên sâu của Context trong Agent, project này sẽ chứng minh những gì một Small Model có thể làm được. Project `local_llm_serving` làm sáng tỏ một điểm quan trọng: các Model có khả năng suy luận Chain-of-Thought (CoT) và thực hiện Tool Calling không nhất thiết phải sở hữu số lượng tham số khổng lồ. Ngay cả một Model 0.6B tham số cũng có thể thực hiện Tool Calling một cách đáng tin cậy khi được kết hợp với Prompt Engineering hợp lý và kiến trúc hệ thống phù hợp.
@@ -476,7 +476,7 @@ Chỉ một dòng timestamp đó đã làm cho chuỗi token bị sai lệch k�
 > Cụ thể hơn, quá trình tính toán gồm ba bước. Đầu tiên, "怎么样" tạo ra Query Vector của riêng nó, đại diện cho nội dung mà Token hiện tại đang tìm kiếm. Thứ hai, Query được so sánh với Key của từng từ đứng trước thông qua phép Dot Product, tạo ra điểm số liên quan; điểm số càng cao thể hiện mức độ khớp càng lớn. Cuối cùng, các điểm số này trở thành Attention Weights, được dùng để tính Weighted Sum của các Value. Những từ có trọng số cao hơn sẽ đóng góp nhiều hơn vào Representation cuối cùng, trong khi những từ có trọng số thấp hơn sẽ đóng góp ít hơn.
 >
 >
-> ![Figure 2-6: Intuitive Understanding of the Attention Mechanism](images/fig2-6.svg)
+> ![Figure 2-6: Intuitive Understanding of the Attention Mechanism](./figures/fig2-6.svg)
 >
 >
 > Phần phía trên của Hình 2-6 minh họa cách từ "怎么样" (thế nào) khớp với từng từ đứng trước nó: mức độ khớp mạnh nhất là với "天气" (thời tiết, 0.55), có liên quan phần nào đến "北京" (Bắc Kinh, 0.35), hầu như không liên quan đến "的" (trợ từ, 0.05), và trọng số còn lại khoảng 0.05 thuộc về chính "怎么样"—tổng tất cả các trọng số bằng 1. Output cuối cùng chủ yếu khai thác thông tin từ "天气", hoàn toàn khớp với trực giác thực tế.
@@ -488,7 +488,7 @@ Chỉ một dòng timestamp đó đã làm cho chuỗi token bị sai lệch k�
 > Khi đã nắm được nền tảng cơ bản về attention mechanism, chúng ta có thể quan sát phân phối attention của một model thực tế thông qua thử nghiệm `attention_visualization`.
 >
 >
-> ![Figure 2-7: Attention Heatmap Visualization](images/fig2-7.png)
+> ![Figure 2-7: Attention Heatmap Visualization](./figures/fig2-7.png)
 >
 >
 > Attention heatmap chỉ ra một số pattern then chốt:
@@ -509,13 +509,13 @@ Chỉ một dòng timestamp đó đã làm cho chuỗi token bị sai lệch k�
 
 Chat Template là một **khái niệm nền tảng xuyên suốt cuốn sách này**. Nó không chỉ ảnh hưởng đến hành vi của KV Cache, mà còn tác động trực tiếp tới các cơ chế như multi-turn tool calls, duy trì Chain-of-Thought, và status bar injection. Do đó, cơ chế này xứng đáng có một phần giải thích chuyên sâu. Chuỗi Token trong thử nghiệm trực quan hóa attention (ví dụ: các special token như `<|im_start|>`, `<|im_end|>`) trông rất khác so với các API message định dạng JSON đã đề cập trước đó. Nguyên nhân là vì các API message có cấu trúc bắt buộc phải được chuyển đổi thành một linear token stream mà model có thể xử lý được. Thành phần chịu trách nhiệm cho quá trình chuyển đổi này chính là **Chat Template**.
 
-![Figure 2-8: Token Structure of Chat Template](images/fig2-8.svg)
+![Figure 2-8: Token Structure of Chat Template](./figures/fig2-8.svg)
 
 Một cách trực quan để hiểu Chat Template là ví nó như một **định dạng phong bì thư** (envelope format). API message đóng vai trò là nội dung bức thư, trong khi Chat Template chỉ định cách ghi thông tin người gửi, người nhận và ranh giới hiển thị trên phong bì. Nó sử dụng các special token (ví dụ: `<|im_start|>system`, `<|im_end|>`) để đánh dấu role và ranh giới của từng message. Các họ model khác nhau (Qwen, Llama, Gemma) sử dụng các định dạng phong bì khác nhau. API server (vLLM, Ollama, v.v.) sẽ tự động thực hiện việc chuyển đổi này dựa trên Chat Template của model, do đó developer thường không cần phải xử lý thủ công.
 
 Lấy dòng model Qwen làm ví dụ, cùng một cuộc hội thoại nhưng lại xuất hiện dưới hai hình thái hoàn toàn khác biệt ở tầng API và bên trong model:
 
-![Figure 2-9: Conversion from API Messages to Model Token Stream](images/fig2-9.svg)
+![Figure 2-9: Conversion from API Messages to Model Token Stream](./figures/fig2-9.svg)
 
 Bên trái là JSON message có cấu trúc, và bên phải là linear token stream mà model thực sự xử lý. `<|im_start|>` cùng `<|im_end|>` là các special token báo cho model biết role và ranh giới của từng message.
 
@@ -535,7 +535,7 @@ Vì vậy, DeepSeek đã **đảo ngược hoàn toàn** chính sách này trên
 
 Để hiểu rõ giá trị của KV Cache, trước hết hãy xem điều gì sẽ xảy ra nếu không có nó. Giả sử một Agent đã đi đến lượt hội thoại (conversation round) thứ sáu và tích lũy được 2.000 context tokens. Nếu không có caching, mỗi token mới sinh ra đều đòi hỏi model phải tính toán lại toàn bộ các vector K và V cho toàn bộ prefix. Mặc dù năm lượt đầu tiên không hề thay đổi, lượt thứ sáu vẫn phải tính toán lại chúng từ đầu, và prefix càng dài thì chi phí của lượt này càng tốn kém hơn lượt đầu tiên. Khi không có caching, việc tính toán attention trong prefill phase (giai đoạn model xử lý toàn bộ input tokens trước khi sinh phản hồi) sẽ tăng theo cấp số nhân bậc hai ($O(N^2)$) theo context length, khiến latency và chi phí tăng vọt khi cuộc hội thoại càng kéo dài. Vấn đề này đặc biệt nghiêm trọng đối với các tác vụ Agent đòi hỏi nhiều tool calls.
 
-![Figure 2-10: Prompt Cache: Reusing the Prefix KV Cache Across Requests](images/fig2-10.svg)
+![Figure 2-10: Prompt Cache: Reusing the Prefix KV Cache Across Requests](./figures/fig2-10.svg)
 
 **Hiểu về KV Cache qua một ví dụ đơn giản.** Giả sử context có 4 tokens [A, B, C, D], và model chuẩn bị sinh ra token thứ năm, E. Phép toán attention cốt lõi hoạt động như sau: vector Query ở bước này đến từ token đã biết cuối cùng, D, và được đem so sánh với các vector Key của cả 4 tokens A, B, C, D để tính toán match scores (để hiểu trực quan về dot product, xem Thí nghiệm 2-2). Sau đó, nó dùng các điểm số này để tính tổng có trọng số (weighted sum) của các vector Value từ 4 tokens đó, tạo ra output representation tại vị trí của D — đây chính là thông tin model dùng để dự đoán token tiếp theo, E. Bộ ba Q, K và V của chính E chỉ được tính toán sau khi E đã được sample và feed ngược trở lại vào model.
 
@@ -777,7 +777,7 @@ Cũng cần đặc biệt lưu ý rằng các cơ chế như Skills (sẽ đư�
 
 ## Dynamic Prompts và Agent Skills
 
-![Figure 2-11: Skills Progressive Disclosure Mechanism](images/fig2-11.svg)
+![Figure 2-11: Skills Progressive Disclosure Mechanism](./figures/fig2-11.svg)
 
 Khi một Agent được yêu cầu xử lý ngày càng nhiều kịch bản, system prompt có xu hướng phình to: quy định hoàn tiền cho nghiệp vụ chăm sóc khách hàng, coding standards cho tác vụ lập trình, yêu cầu định dạng cho tác vụ tạo tài liệu, v.v. Việc dồn tất cả vào một prompt duy nhất dẫn đến hai vấn đề:
 
@@ -834,9 +834,9 @@ Khi đánh giá context cost của Skill, cần tách biệt metadata catalog kh
 
 Các Harness tiến hóa rất nhanh, do đó cách biểu diễn cụ thể của chúng có thể thay đổi. Nguyên lý thiết kế bất biến ở đây là **duy trì một catalog tinh gọn luôn ở trạng thái discoverable và chỉ nạp toàn bộ body on demand**. Đây chính là yếu tố giúp Skills kết hợp được khả năng nạp động (dynamic loading) với việc kiểm soát context cost. Hai hình dưới đây minh họa vị trí Skills xuất hiện trong trajectory và cách KV Cache biến đổi khi chúng được nạp.
 
-![Figure 2-12: Cấu trúc hoàn chỉnh của Agent Trajectory sau khi kích hoạt Skills](images/fig2-12.svg){height=55%}
+![Figure 2-12: Cấu trúc hoàn chỉnh của Agent Trajectory sau khi kích hoạt Skills](./figures/fig2-12.svg){height=55%}
 
-![Figure 2-13: Sự tiến hóa của KV Cache khi Agent Trajectory tăng dần](images/fig2-13.svg)
+![Figure 2-13: Sự tiến hóa của KV Cache khi Agent Trajectory tăng dần](./figures/fig2-13.svg)
 
 Một quan niệm sai lầm phổ biến cần được làm rõ: "KV Cache-friendly" không đồng nghĩa với "zero cost". Catalog vẫn phải được xử lý trong lần đầu tiên nó đi vào request, và việc nạp body của Skill sẽ phát sinh thêm chi phí tính toán khi được gọi lần đầu; các request sau đó mới có thể tái sử dụng cache khi prefix đã thiết lập vẫn giữ nguyên trạng thái ổn định. Mỗi Harness có cách xử lý khác nhau trong việc rebuild catalog, nhưng lợi ích chung là chúng không cần preload body của tất cả các Skills hay phải ghi đè lại context đã xác lập mỗi khi một Skill mới được invoke.
 
@@ -869,7 +869,7 @@ Dưới góc độ quản lý context, cơ chế Skills đặc biệt KV Cache-f
 
 ## Agent Status Bar: Duy Trì Khả Năng Nhận Biết Tiến Độ Nhiệm Vụ Cho Model
 
-![Figure 2-14: Agent Status Bar Architecture](images/fig2-14.svg)
+![Figure 2-14: Agent Status Bar Architecture](./figures/fig2-14.svg)
 
 Phần trước đã tập trung vào việc Skills cung cấp những năng lực nào theo nhu cầu (on-demand). Phần này sẽ giải quyết một bài toán riêng biệt: làm thế nào để Agent giúp model luôn nhận biết được tiến độ nhiệm vụ, những thay đổi của môi trường và số lượng lượt gọi tool (tool-call counts). Agent framework sẽ đóng gói thông tin động này thành structured state và inject nó vào context; cơ chế này được gọi là **Agent Status Bar**.
 
@@ -932,7 +932,7 @@ Side-channel information của một event thường được append cùng lúc 
 
 ### Vị trí cụ thể của Agent Status Bar trong Context
 
-![Figure 2-15: Insertion Position of the Agent Status Bar in the API Message List](images/fig2-15.svg)
+![Figure 2-15: Insertion Position of the Agent Status Bar in the API Message List](./figures/fig2-15.svg)
 
 Một chi tiết triển khai quan trọng là ở cấp độ API, Agent Status Bar được chèn vào cuối context dưới dạng **một message có role `user`**, thay vì chỉnh sửa `system` message ban đầu. Nguyên nhân xuất phát từ ràng buộc của KV Cache đã phân tích trước đó: việc chỉnh sửa `system` message sẽ làm vô hiệu hóa cache của toàn bộ prefix. Có một điểm cần làm rõ: role `user` ở đây là một lựa chọn kỹ thuật ở tầng giao thức API, không đồng nghĩa với "input từ end-user" như định nghĩa trong Chương 1. Harness mượn slot message role `user` để inject thông tin system state do chính Agent framework sinh ra. Nội dung này không đến từ user thực tế; nó đơn thuần sử dụng định dạng message `user` để đính kèm thông tin state vào cuối context.
 
@@ -1057,7 +1057,7 @@ Trước khi đi sâu vào các chiến lược Compression cụ thể, chúng t
 
 Nếu model liên kết chặt chẽ phần thinking với prefix (xem lại phần "Caching as an Architectural Constraint" ở trước), cái giá phải trả của Compression không chỉ dừng lại ở cache. Cách tiếp cận phổ biến là "tóm tắt các turn cũ, giữ nguyên vẹn vài turn gần nhất" sẽ hoàn toàn đổ vỡ trong trường hợp này: phần thinking trong các turn được giữ lại vốn được sinh ra dựa trên lịch sử gốc đặt phía trước nó chứ không phải bản tóm tắt, do đó prefix của nó đã thay đổi và toàn bộ thinking đó đều trở nên invalid; việc truncate trực tiếp các tool result cũ cũng thất bại vì lý do tương tự. Anthropic khuyến nghị một trong hai hướng xử lý: hoặc nén toàn bộ session thành một message tóm tắt duy nhất và không truyền lại bất kỳ thinking cũ nào, để model reason lại từ đầu từ bản tóm tắt đó; hoặc để server tự động compact hoặc clear context—các chỉnh sửa phía server-side dạng này không bị tính là hành vi làm thay đổi prefix.
 
-![Figure 2-16: Comparison of Context Compression Strategies](images/fig2-16.svg)
+![Figure 2-16: Comparison of Context Compression Strategies](./figures/fig2-16.svg)
 
 > **Experiment 2-10 ★★★: So sánh các chiến lược Context Compression**
 >
@@ -1080,7 +1080,7 @@ Nếu model liên kết chặt chẽ phần thinking với prefix (xem lại ph�
 > Mặc dù tổng lượng Token tiêu thụ tương đối cao (174.601), nhưng các iterations đầu tiên vẫn giữ trọn vẹn thông tin gốc, mang lại sự linh hoạt tối đa cho giai đoạn thu thập thông tin diện rộng ban đầu.
 >
 >
-> ![Figure 2-17: Processing Flow of Six Compression Strategies](images/fig2-17.svg)
+> ![Figure 2-17: Processing Flow of Six Compression Strategies](./figures/fig2-17.svg)
 >
 >
 

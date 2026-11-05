@@ -1,4 +1,4 @@
-# Model Post-Training
+# Chương 8: Model Post-Training
 
 Công thức cốt lõi của cuốn sách này là Agent = LLM + Context + Tools. Chương này sẽ tập trung vào bản thân LLM—"bộ não". Đầu tiên, chúng ta sử dụng Mid-training để lấp đầy các khoảng trống về domain knowledge và foundational capabilities, sau đó áp dụng các phương pháp post-training như SFT và RL để định hình cách model sử dụng context và tools. Phần cuối của Chương 7 đã chỉ ra rằng evaluation system và simulation environment là hai nền tảng cốt lõi của post-training: evaluation environment mang lại cho quá trình training môi trường thực hành, còn evaluation metrics xác định mục tiêu cần hướng tới. Chương này được xây dựng dựa trên những nền tảng đó và đi sâu vào cách thức trực tiếp thay đổi model weights—cách đưa năng lực (capability) ăn sâu vào các parameters.
 
@@ -63,7 +63,7 @@ Một khi đã nắm được bản chất này, bạn sẽ hiểu rõ tại sao
 
 Nói một cách ngắn gọn, SFT sử dụng sample efficiency cực cao để **encode một input-to-output mapping và protocol ổn định vào trong model parameters**. Nó encode **protocol knowledge**—cách diễn đạt hoặc thực hiện một việc gì đó, bao gồm format, style, và process—thay vì một lượng lớn **factual knowledge**—những gì model thực sự biết. Phần sau sẽ phụ thuộc vào pre-training hoặc RAG.
 
-> **Training Cost: LoRA Parameter-Efficient Fine-Tuning.** Cả SFT và quá trình RL tiếp theo đều yêu cầu cập nhật model parameters, trong khi full-parameter fine-tuning đòi hỏi dung lượng VRAM rất lớn (cần lưu trữ gradients và optimizer states cho hàng tỷ parameters). **LoRA** (Low-Rank Adaptation) là phương pháp tối ưu chi phí phổ biến nhất: thay vì sửa đổi các weight matrices gốc có kích thước lớn, nó gắn thêm một "bản vá" nhỏ (low-rank matrix) để học task. Số lượng parameter chỉ chiếm khoảng 1%–5% so với ban đầu, nhưng có thể đạt hiệu năng tiệm cận full fine-tuning. Vì các weight gốc đã được freeze, LoRA cũng ít gây xáo trộn đến các capability hiện có của base model, giúp giảm thiểu rủi ro catastrophic forgetting. Một vài rule of thumb đã được kiểm chứng[^ch8-1]: Bạn **bắt buộc** phải áp dụng LoRA cho tất cả các weight matrices chính (đặc biệt là các MLP layer, nơi chiếm số lượng parameter lớn nhất); nếu chỉ áp dụng cho attention layers sẽ làm suy giảm accuracy. **Learning rate tối ưu thường gấp khoảng 10 lần so với full fine-tuning** (đúng cho cả SFT lẫn RL, một transfer rule rất thực tế). Sử dụng rank từ trung bình đến cao (64–256) cho SFT; do lượng thông tin thu được ở mỗi round trong RL khá nhỏ, một rank thấp (8–32) hoặc thậm chí rank=1 là đã đủ. Khi deployment, một inference server đơn lẻ có thể load đồng thời nhiều LoRA adapters để phục vụ multi-tenant service. Cuốn sách này coi LoRA là lựa chọn kỹ thuật mặc định cho tất cả các phương pháp post-training và sẽ không đi sâu giải thích riêng lẻ nữa.
+> **Training Cost: LoRA Parameter-Efficient Fine-Tuning.** Cả SFT và quá trình RL tiếp theo đều yêu cầu cập nhật model parameters, trong khi full-parameter fine-tuning đòi hỏi dung lượng VRAM rất lớn (cần lưu trữ gradients và optimizer states cho hàng tỷ parameters). **LoRA** (Low-Rank Adaptation) là phương pháp tối ưu chi phí phổ biến nhất: thay vì sửa đổi các weight matrices gốc có kích thước lớn, nó gắn thêm một "bản vá" nhỏ (low-rank matrix) để học task. Số lượng parameter chỉ chiếm khoảng 1%–5% so với ban đầu, nhưng có thể đạt hiệu năng tiệm cận full fine-tuning. Vì các weight gốc đã được freeze, LoRA cũng ít gây xáo trộn đến các capability hiện có của base model, giúp giảm thiểu rủi ro catastrophic forgetting. Một vài Quy tắc bỏ túi đã được kiểm chứng[^ch8-1]: Bạn **bắt buộc** phải áp dụng LoRA cho tất cả các weight matrices chính (đặc biệt là các MLP layer, nơi chiếm số lượng parameter lớn nhất); nếu chỉ áp dụng cho attention layers sẽ làm suy giảm accuracy. **Learning rate tối ưu thường gấp khoảng 10 lần so với full fine-tuning** (đúng cho cả SFT lẫn RL, một transfer rule rất thực tế). Sử dụng rank từ trung bình đến cao (64–256) cho SFT; do lượng thông tin thu được ở mỗi round trong RL khá nhỏ, một rank thấp (8–32) hoặc thậm chí rank=1 là đã đủ. Khi deployment, một inference server đơn lẻ có thể load đồng thời nhiều LoRA adapters để phục vụ multi-tenant service. Cuốn sách này coi LoRA là lựa chọn kỹ thuật mặc định cho tất cả các phương pháp post-training và sẽ không đi sâu giải thích riêng lẻ nữa.
 
 ### Khi nào cần củng cố Foundation trước khi áp dụng SFT hoặc RL
 
@@ -127,7 +127,7 @@ Về bản chất, **Reinforcement Learning (RL)** là việc học cách lựa 
 
 Để hiểu tương tác này một cách trực quan hơn, sơ đồ dưới đây mô tả một RL loop tiêu chuẩn—tại mỗi time step, Agent quan sát environment state, output ra một action, sau đó environment sẽ trả về reward và chuyển sang một state mới dựa trên action đó.
 
-![Figure 8-1: Reinforcement Learning Agent-Environment Interaction Loop](images/fig8-1.svg)
+![Figure 8-1: Reinforcement Learning Agent-Environment Interaction Loop](./figures/fig8-1.svg)
 
 Quá trình tương tác này tạo ra một **trajectory**—bản ghi đầy đủ theo chuỗi "state → action → reward → new state → action → reward...". Chất lượng của một policy sau cùng sẽ được phản ánh qua chất lượng của các trajectory. Một **value function** sẽ trả lời cho câu hỏi: "Nếu hiện tại tôi đang ở state này và tiếp tục hành động theo policy hiện tại, thì tổng reward cuối cùng tôi tích lũy được sẽ là bao nhiêu?" Điều này tương tự như việc một kỳ thủ cờ vua giàu kinh nghiệm nhìn vào một thế cờ và có thể ước lượng trực giác tỷ lệ thắng mà không cần phải tính toán đến tận nước cuối cùng. (Khi "current policy" được thay thế bằng "optimal policy", chúng ta sẽ có được optimal value function; khái niệm này sẽ được sử dụng ở phần sau của chương khi thảo luận về Bellman optimality equation.) Ranh giới giữa Agent và environment tuân theo một nguyên lý đơn giản: **bất cứ thứ gì mà Agent không thể tùy ý thay đổi đều thuộc về environment.**
 
@@ -163,7 +163,7 @@ Bảng trên chỉ ra một điểm phân hóa quan trọng. Các môi trường
 
 MDP (Markov Decision Process) là framework toán học của reinforcement learning, định nghĩa các thành phần cốt lõi như state, action, và reward. Giả định cốt lõi của nó là **Markov property**: tương lai chỉ phụ thuộc vào state hiện tại—nơi phải chứa toàn bộ lịch sử (history) có liên quan đến quyết định đưa ra. Ví dụ trong cờ vua, state không chỉ bao gồm vị trí quân cờ (piece placement) mà còn cả lượt đi (side to move), quyền castling và en passant, cùng các thông tin cần thiết cho luật fifty-move và repetition. Khi có một định nghĩa state hoàn chỉnh (sufficient state definition), ta không cần phải đọc lại toàn bộ lịch sử ván cờ (game record) cho mỗi transition. Nếu một observation bỏ sót history cần thiết, history đó phải được bổ sung vào state hoặc xử lý bằng một partially observable model.
 
-![Figure 8-2: Markov Decision Process (MDP) Diagram](images/fig8-2.svg)
+![Figure 8-2: Markov Decision Process (MDP) Diagram](./figures/fig8-2.svg)
 
 Các môi trường RL tiêu biểu trong phần này sử dụng **predefined action spaces**. 361 vị trí nước đi trong cờ vây (Go) tuy lớn nhưng hữu hạn; các action trong cờ vua vẫn có thể liệt kê (enumerate) được; và các game Atari thường chỉ expose từ vài đến hàng chục discrete primitive action. **Robotic Agents** sử dụng continuous action space nhưng có giới hạn (bounded): góc khớp (joint angle), vận tốc (velocity), và lực kẹp (grip force) là các giá trị liên tục, nhưng có physical bound rõ ràng và số chiều cố định dựa theo degrees of freedom của robot.
 
@@ -179,9 +179,9 @@ trong đó $r$ là immediate reward, $s'$ là state tiếp theo đạt được 
 
 Hai hình dưới đây thể hiện quá trình exploration của Q-learning trong một grid world và sự hội tụ dần của các Q-value.
 
-![Figure 8-3: Q-learning Grid World](images/fig8-3.svg)
+![Figure 8-3: Q-learning Grid World](./figures/fig8-3.svg)
 
-![Figure 8-4: Q-value Update Visualization](images/fig8-4.svg)
+![Figure 8-4: Q-value Update Visualization](./figures/fig8-4.svg)
 
 Q-learning là một phương pháp **off-policy**: nó có thể học một optimal policy từ dữ liệu được sinh ra bởi một exploratory policy khác với target policy. Nó vẫn đòi hỏi coverage đầy đủ trên các cặp state-action liên quan cũng như các điều kiện hội tụ và learning-rate thích hợp; nó không tự động hội tụ trên một data distribution tùy ý. Các định nghĩa chuẩn xác về phương pháp on-policy và off-policy, cũng như cách chúng ánh xạ sang LLM post-training, sẽ được thảo luận ở phần sau trong mục "RL Algorithms: From 16 Rollouts to One Parameter Update".
 
@@ -215,7 +215,7 @@ Các variable-length compositional action tạo ra một search space lớn hơn
 
 Sau đó, RL post-training sẽ sử dụng các external reward để huấn luyện LLM áp dụng các pattern này hiệu quả hơn vào một task cụ thể. Cấu trúc ngôn ngữ không phải là một "internal reward" tách biệt; nó đóng vai trò như một **prior distribution** bên trong pretrained policy. Một pattern xuất hiện nhất quán trong training data, chẳng hạn như "chúng ta cần đổi ngoại tệ, vì vậy bước đầu tiên là tra cứu tỷ giá", có thể bắt đầu với generation probability cao hơn hẳn so với một nhánh không liên quan như kiểm tra thời tiết. RL sẽ tận dụng task reward thực tế để tái định hình xác suất của các path xuất phát từ distribution ban đầu đó.
 
-![Figure 8-5: Comparison of Classic RL and Modern LLM Agent](images/fig8-5.svg)
+![Figure 8-5: Comparison of Classic RL and Modern LLM Agent](./figures/fig8-5.svg)
 
 Pretrained language policy cho phép LLM Agent hiểu được các instruction chưa từng gặp (zero-shot generalization) và thích ứng với các task mới chỉ từ một vài demonstration (few-shot adaptation), tạo nên sự tương phản rõ rệt với thiết lập tabular Q-learning không có prior (prior-free) ở trên.
 
@@ -223,7 +223,7 @@ Việc mở rộng từ các primitive action được định nghĩa trước (
 
 Các model như Kimi K3, vốn được tối ưu hóa cho tool use và long-chain reasoning, minh họa cho định hướng điển hình của LLM+RL paradigm: pre-training ngôn ngữ quy mô lớn đóng vai trò nền tảng, còn post-training giúp tăng cường khả năng phân rã bài toán (problem decomposition), tool use và self-correction. **OpenVLA**[^ch8-21] (được trình bày chi tiết ở Chương 6) thể hiện architecture paradigm của VLA (Vision-Language-Action) trong kỷ nguyên LLM: một vision encoder xử lý các observation từ environment, một language model hiểu instruction và thực hiện reasoning, còn action decoder sẽ sinh ra các control signal, từ đó hiện thực hóa khả năng language-conditioned control và cross-task generalization. Cần làm rõ rằng, bản thân OpenVLA được train thông qua imitation learning trên gần một triệu **demonstration trajectories** của robot, do đó về bản chất nó là SFT chứ không phải RL. SimpleVLA-RL, được giới thiệu trong Experiment 8-13 ở phần sau của chương này, là ví dụ tiêu biểu cho việc đưa RL vào robotics bằng cách sử dụng reward để tối ưu hóa sâu hơn kiến trúc VLA này.
 
-![Figure 8-6: Evolution of OpenAI Training Paradigms](images/fig8-6.svg)
+![Figure 8-6: Evolution of OpenAI Training Paradigms](./figures/fig8-6.svg)
 
 **OpenAI's Exploration Path** (được ghi chép bởi Shunyu Yao, Trợ lý Giáo sư tại Đại học Princeton và là tác giả của paper ReAct, trong "The Second Half"[^ch8-2]) phác họa sự tiến hóa trong tư duy của toàn bộ lĩnh vực này. **Phase 1 (2015-2016), Algorithm-Centric:** Niềm tin chủ đạo lúc bấy giờ là thuật toán tốt hơn chính là chìa khóa. Các bước tiến đã đạt được trong những environment tiêu chuẩn như Atari, nhưng mỗi environment mới đều đòi hỏi phải retrain lại từ đầu (from scratch). **Phase 2 (2016-2018), The Importance of Environment:** Gym chuẩn hóa hàng loạt task; Universe và World of Bits cố gắng biến toàn bộ internet thành một RL training environment; còn Dota 2 theo đuổi superhuman performance trong một environment phức tạp cụ thể. Ý tưởng rất rõ ràng, nhưng khả năng general computer use và web navigation vẫn nằm ngoài tầm với.
 
@@ -232,7 +232,7 @@ Các model như Kimi K3, vốn được tối ưu hóa cho tool use và long-cha
 > **Experiment 8-2 ★★: Comparative Study of Traditional RL and LLM Agent**
 >
 >
-> ![Figure 8-7: Architecture Comparison of Q-learning and LLM Agent in a Treasure Hunt Game](images/fig8-7.svg)
+> ![Figure 8-7: Architecture Comparison of Q-learning and LLM Agent in a Treasure Hunt Game](./figures/fig8-7.svg)
 >
 >
 > Chúng tôi đã so sánh Q-learning với một LLM Agent—Kimi K3, duy trì một buffer lên đến 50 experiences—trong cùng một treasure hunt game. Kết quả thật đáng kinh ngạc: **LLM Agent đã hoàn thành game chỉ trong 18 steps ngay lần thử đầu tiên**.
@@ -249,7 +249,7 @@ Chương 1 đã cung cấp một conceptual map về cách contextual adaptation
 
 Để hiểu được tại sao các kỹ thuật post-training lại hiệu quả, trước hết cần nắm rõ những gì mà pre-training đã thiết lập. Về bản chất, post-training (SFT và RL) chỉ tối ưu hóa bên trong representation space do pre-training tạo dựng—cấu trúc tri thức được định hình từ pre-training sẽ quyết định ceiling (mức trần năng lực) của post-training. Do đó, chúng ta sẽ xem xét các khía cạnh cốt lõi của pre-training thông qua hai thực nghiệm: huấn luyện một language model quy mô nhỏ from scratch và mở rộng visual capabilities. Hai thực nghiệm trong phần này mang tính bổ trợ, nhằm xây dựng trực giác trực quan về pre-training—tức quá trình initial training trên quy mô dữ liệu lớn (large-scale data) giúp model nắm bắt các pattern ngôn ngữ cơ bản cùng world knowledge. Thực nghiệm 8-5, vốn đảm nhận việc inject tri thức ngôn ngữ mới vào một base model sẵn có, sẽ được trình bày riêng trong phần Mid-training tiếp theo.
 
-![Figure 8-8: Pre-training Next Token Prediction](images/fig8-8.svg)
+![Figure 8-8: Pre-training Next Token Prediction](./figures/fig8-8.svg)
 
 Quy trình training một language model thường tuân theo pipeline: "tokenization — pre-training (kèm Mid-training khi cần thiết) — post-training". Tokenization phân tách văn bản thành các đơn vị rời rạc. Ví dụ, câu "I like programming" có thể được tokenize thành "I", "like", "program", "ming". Các token này là đơn vị văn bản nhỏ nhất mà model xử lý. Về mặt khái niệm, bài toán pre-training rất đơn giản: đưa cho model phần đầu của một đoạn text và yêu cầu nó dự đoán next token. Bằng cách so sánh dự đoán với kết quả thực tế (chênh lệch này gọi là loss; loss càng nhỏ đồng nghĩa với dự đoán càng chính xác), model liên tục cập nhật các parameter của mình. Sau quá trình training lặp đi lặp lại trên khối lượng dữ liệu khổng lồ (massive text data), model sẽ dần học được các quy luật ngôn ngữ, world knowledge và năng lực reasoning cơ bản. Kết thúc giai đoạn pre-training, model đã có thể generate văn bản trôi chảy, nhưng output vẫn thiếu cấu trúc rõ ràng và rất khó follow instruction. Khi đó, post-training sẽ chuyển hóa model thành một trợ lý thực thụ thông qua SFT (huấn luyện trên các cặp input-output đã được gán nhãn) và preference optimization (chẳng hạn như DPO, giúp định hướng model generate các phản hồi phù hợp với kỳ vọng của con người).
 
@@ -262,7 +262,7 @@ Quy trình training một language model thường tuân theo pipeline: "tokeniz
 > **Experiment 8-4 ★★: Tự train một VLM cho riêng bạn**
 >
 >
-> ![Figure 8-9: Kiến trúc Vision-Language Model (VLM)](images/fig8-9.svg)
+> ![Figure 8-9: Kiến trúc Vision-Language Model (VLM)](./figures/fig8-9.svg)
 >
 >
 > Các VLM hợp nhất visual perception và language understanding trong một model duy nhất. Thách thức cốt lõi là cross-modal alignment — làm cho "những gì nhìn thấy" tương ứng với "những gì được diễn đạt". Kiến trúc này bao gồm ba thành phần: một **Vision Encoder** (ví dụ: CLIP, parameters frozen) trích xuất semantic features từ hình ảnh; một **Projection Layer** (lightweight, phần duy nhất được train from scratch) đóng vai trò như một "phiên dịch viên" giữa visual features và language model, ánh xạ các visual features vào một representation space mà language model có thể hiểu được; và một **Language Model** dùng để sinh ra descriptive text. Quá trình training áp dụng chiến lược "freeze LLM + train only projection layer" để tránh catastrophic forgetting (quên các kỹ năng cũ sau khi học các kỹ năng mới); sau giai đoạn alignment pre-training, LLM sẽ được unfreeze và thực hiện SFT trên các cặp image-description chất lượng cao, giúp cải thiện đáng kể độ chi tiết và độ chính xác của các mô tả.
@@ -315,7 +315,7 @@ Một khi model đã tích lũy đủ tri thức và năng lực nền tảng, b
 
 ## SFT (Supervised Fine-Tuning)
 
-![Figure 8-10: Supervised Fine-Tuning (SFT) Pipeline](images/fig8-10.svg)
+![Figure 8-10: Supervised Fine-Tuning (SFT) Pipeline](./figures/fig8-10.svg)
 
 Phần "From Pre-training to RL: An Overview of the Four Training Stages" đã giải thích bản chất của SFT ("predict the next token" với tập data khác biệt và loss chỉ được tính toán trên response). Phần này sử dụng bốn thực nghiệm để làm rõ cơ chế này—ghi trực tiếp các mapping và protocol ổn định vào parameters—được củng cố vững chắc (solidify) như thế nào qua các task khác nhau. Giá trị cốt lõi của SFT không nằm ở việc nạp thêm tri thức mới mà là **solidifying protocols**: ghi các mapping, interaction format và quy chuẩn style vào parameters để model có thể sinh ra output chuẩn chỉnh tại inference time mà không cần prompt dài dòng. Thông thường, chỉ cần vài nghìn đến vài chục nghìn example chất lượng cao là đủ để thiết lập khả năng hội thoại cơ bản và instruction following.
 
@@ -390,7 +390,7 @@ Hai thí nghiệm Bad Case được bổ sung trong chương này minh họa cho
 
 Phần "From Pre-training to RL: An Overview of the Four Training Stages" đã giải thích cơ chế của cả ba phương pháp training. Phần này cung cấp một chẩn đoán mang tính thực tế: **trước tiên hãy xác định phần còn thiếu là foundation, protocol, hay policy; đừng quy chụp mọi model failure đều cần đến RL.**
 
-![Figure 8-11: SFT→RL Two-Stage Training Pipeline; Mid-training Precedes These Two Behavioral-Alignment Stages](images/fig8-11.svg)
+![Figure 8-11: SFT→RL Two-Stage Training Pipeline; Mid-training Precedes These Two Behavioral-Alignment Stages](./figures/fig8-11.svg)
 
 Bảng 8-4 Tiêu chí lựa chọn Mid-training, SFT, và RL
 
@@ -465,7 +465,7 @@ Yếu tố "relative" trong GRPO xuất phát từ việc so sánh các rollout 
 > **Experiment 8-11 ★★: GeneralPoints—So sánh "Memory and Generalization" trong Single-Turn RL**
 >
 >
-> ![Figure 8-12: GeneralPoints Experimental Architecture (Training and Testing Design for GP-L and GP-VL Variants)](images/fig8-12.svg)
+> ![Figure 8-12: GeneralPoints Experimental Architecture (Training and Testing Design for GP-L and GP-VL Variants)](./figures/fig8-12.svg)
 >
 >
 > GeneralPoints là một card game về arithmetic reasoning được đề xuất bởi Chu et al.[^ch8-3], được thiết kế chuyên biệt nhằm đánh giá model generalization. Mục tiêu tương tự như "24 Game": sử dụng mỗi số trong bốn số hiển thị trên các lá bài đúng một lần, kết hợp chúng bằng các phép cộng, trừ, nhân, chia để đạt được số mục tiêu là 24. Thực nghiệm thiết kế hai biến thể: biến thể text-only GP-L và biến thể image-based GP-VL, cho phép chúng ta kiểm tra rule generalization và visual generalization trong cùng một framework.
@@ -494,7 +494,7 @@ Yếu tố "relative" trong GRPO xuất phát từ việc so sánh các rollout 
 
 **Step 4: Update policy bằng gradient descent.** Chương trình training chuyển đổi các relative advantages thành training loss, tính toán gradients, và sử dụng một optimizer (như AdamW, Muon, v.v.) để thực hiện gradient descent, nhằm tăng xác suất của các lựa chọn mà model đã đưa ra trong các trajectories có positive advantage và giảm xác suất trong các trajectories có negative advantage. Hệ thống không ghi nhớ nguyên văn (verbatim) một patch thành công nào đó; nó điều chỉnh dần dần qua nhiều tasks và rollouts, sao cho khi một bug tương tự xuất hiện sau này, chuỗi hành vi "reproduce vấn đề, kiểm tra boundary condition, thay đổi implementation, và chạy tests" sẽ có xác suất xuất hiện cao hơn, trong khi hành vi "nuốt exception (swallow the exception), chỉnh sửa tests, submit khi chưa verify" sẽ bị giảm xác suất.
 
-![Figure 8-13: 16 Rollouts, Verification, và Relative Advantage trên cùng một SWE-bench Task](images/fig8-13.svg)
+![Figure 8-13: 16 Rollouts, Verification, và Relative Advantage trên cùng một SWE-bench Task](./figures/fig8-13.svg)
 
 Bốn bước này cùng nhau tạo thành một **training iteration**, tức là một **step**: step $k$ sinh ra một batch rollouts bằng policy hiện tại, hoàn thành việc tính toán reward, advantage, và gradient, rồi để optimizer cập nhật parameters; step $k+1$ sau đó sẽ rollout lại với policy đã được cập nhật. Training trong 100 steps đồng nghĩa với việc lặp lại loop này khoảng 100 lần. Một RL training framework cụ thể có thể đếm riêng các lượt cập nhật minibatch nội bộ, do đó khi đọc training logs bạn vẫn cần xác nhận lại cách framework đó định nghĩa một `step`.
 
@@ -568,9 +568,9 @@ Một deterministic verifier "chi phí thấp" (cheap) không đồng nghĩa v�
 
 ### Thách thức Cốt lõi của Multi-Turn Tasks
 
-![Figure 8-14: Comparison of Single-Turn RL and Multi-Turn RL](images/fig8-14.svg)
+![Figure 8-14: Comparison of Single-Turn RL and Multi-Turn RL](./figures/fig8-14.svg)
 
-![Figure 8-15: Credit Assignment in Multi-Turn Interactions](images/fig8-15.svg)
+![Figure 8-15: Credit Assignment in Multi-Turn Interactions](./figures/fig8-15.svg)
 
 Chuyển từ single-turn sang multi-turn là một bước nhảy vọt về độ phức tạp. Policy không chỉ phải chọn action tối ưu nhất ở hiện tại mà còn phải tính đến value của các future states; nó không chỉ xử lý immediate feedback mà còn phải giải bài toán **credit assignment** dưới các delayed rewards—tức là xác định xem bước nào trong một chuỗi multi-step đóng góp nhiều nhất vào kết quả cuối cùng. Giả sử một customer-service Agent mất 10 turns đối thoại để giải quyết vấn đề của người dùng và cuối cùng nhận được đánh giá tích cực—vậy credit nên được tính cho câu hỏi chuẩn xác ở turn 2, hay lời giải thích kiên nhẫn ở turn 7?
 
@@ -588,7 +588,7 @@ Tương tác multi-turn được thảo luận ở đây chính là ReAct loop �
 
 Một khi multi-turn task kết nối với các external tool, action không còn đơn thuần là "move or answer" nữa mà mở rộng thành searching, executing code, editing files, querying databases và composing nhiều API. Do đó, Tool Calling lập tức đẩy credit assignment, environment engineering và safety constraints lên vị trí trọng tâm cùng một lúc.
 
-![Figure 8-16: Tool Calling RL Reward Loop](images/fig8-16.svg)
+![Figure 8-16: Tool Calling RL Reward Loop](./figures/fig8-16.svg)
 
 Search-R1[^ch8-25] đại diện cho lộ trình retrieval-augmented: model tự quyết định khi nào cần search và search nội dung gì, sau đó sử dụng kết quả trả về để tiếp tục reasoning. Ngược lại, ReTool nhúng trực tiếp một code interpreter vào thinking loop, buộc model phải học được khi nào nên execute code, cách đọc feedback và cách tự sửa lỗi từ các error message. AWorld-train cung cấp một MCP multi-tool sandbox, mở rộng thêm các bài toán về tool selection, dependency management, state reset và replayability.
 
@@ -596,7 +596,7 @@ Tool trajectory có một implementation detail cực kỳ quan trọng: các to
 
 > **Experiment 8-14 ★★★: ReTool—Giải toán nâng cao với Code Interpreter**
 >
-> ![Figure 8-17: ReTool Interleaving Text-Code Thinking and Sandbox Execution Feedback Loop](images/fig8-17.svg)
+> ![Figure 8-17: ReTool Interleaving Text-Code Thinking and Sandbox Execution Feedback Loop](./figures/fig8-17.svg)
 >
 > Sau giai đoạn SFT warm-up, ReTool được train bằng PPO trên chuỗi xen kẽ (interleaved) giữa text reasoning, code execution và interpreter feedback. Thí nghiệm này cho thấy tool feedback đã làm thay đổi thinking strategy như thế nào: model dần học được cách chủ động execute, đọc thông báo lỗi và tự sửa sai (self-correction). Training data được lấy từ DAPO-Math-17k, nhưng optimization algorithm vẫn là PPO tiêu chuẩn[^ch8-26][^ch8-27].
 >
@@ -604,7 +604,7 @@ Tool trajectory có một implementation detail cực kỳ quan trọng: các to
 
 > **Experiment 8-15 ★★★: AWorld-train—Học cách sử dụng Tool trong Sandbox**
 >
-> ![Figure 8-18: AWorld-train MCP Sandbox Training Architecture and Tool Ecosystem](images/fig8-18.svg)
+> ![Figure 8-18: AWorld-train MCP Sandbox Training Architecture and Tool Ecosystem](./figures/fig8-18.svg)
 >
 > AWorld-train sử dụng một MCP server sandbox cung cấp các tool về web, document, multimedia, code và knowledge-retrieval. Trọng tâm của open-ended experiment này không phải là chạy đua điểm số trên GAIA, mà là vận hành một multi-tool training loop chạy end-to-end có khả năng reset và replay, đồng thời quan sát xem tool-call success rate cùng các composition strategy có cải thiện qua quá trình training hay không.
 

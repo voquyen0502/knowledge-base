@@ -1,4 +1,4 @@
-# Multi-Agent Collaboration
+# Chương 10: Multi-Agent Collaboration
 
 Chín chương đầu tiên tập trung vào một single Agent: khởi đầu bằng việc xây dựng context, knowledge, tools và khả năng interaction của nó, sau đó áp dụng evaluation, post-training và continual evolution để liên tục tối ưu theo thời gian. Chương này nâng tầm bài toán từ “Làm thế nào để xây dựng và cải tiến một Agent?” lên thành “Làm thế nào để tổ chức multiple Agents?”—nhằm tận dụng division of labor, communication và mutual verification để xử lý những tác vụ vượt quá khả năng đảm đương của một Agent đơn lẻ.
 
@@ -28,7 +28,7 @@ Do các Agent không chia sẻ context, thông tin bắt buộc phải được 
 
 Ánh xạ vào hai paradigms của IPC, shared file system tương ứng với "shared memory", trong khi tool call parameters và message bus là các biến thể của "message passing". Tool parameters được truyền synchronously cùng với lời gọi hàm; còn messages trên bus được phân phối asynchronously qua một thực thể trung gian. Mỗi paradigm đều có những đánh đổi (trade-offs) riêng. Ngôn ngữ Go có một châm ngôn kinh điển: "Do not communicate by sharing memory; instead, share memory by communicating." (Đừng giao tiếp bằng cách chia sẻ bộ nhớ; thay vào đó, hãy chia sẻ bộ nhớ bằng cách giao tiếp).
 
-![Figure 10-1: Shared Context vs. Non-Shared Context](images/fig10-1.svg)
+![Figure 10-1: Shared Context vs. Non-Shared Context](./figures/fig10-1.svg)
 
 ### Dimension 2: Collaboration Topology
 
@@ -147,7 +147,7 @@ Một multi-agent system hoàn chỉnh thường tổ chức file system của m
 
 Figure 10-2 minh họa cách bốn loại area này được mount đồng nhất dưới một directory tree duy nhất: Agent truy cập toàn bộ tree thông qua một unified interface, users upload và download files từ shared space, các external data sources được mount thông qua adapters, và built-in system resources được cung cấp hoàn toàn dưới dạng read-only.
 
-![Figure 10-2: Mounting structure of the four area types in the Agent Virtual File System](images/fig10-2.svg)
+![Figure 10-2: Mounting structure of the four area types in the Agent Virtual File System](./figures/fig10-2.svg)
 
 Bảng 10-3 so sánh bốn loại area này qua bốn chiều kích—visibility, lifecycle, read/write permissions, và concurrency control—đóng vai trò như một checklist cho việc thiết kế layout của file system.
 
@@ -234,7 +234,7 @@ Giá trị cốt lõi của hướng đi này là tách rời task continuity kh
 
 #### Proposer-Reviewer Paradigm
 
-![Figure 10-3: Proposer-Reviewer Loop](images/fig10-3.svg)
+![Figure 10-3: Proposer-Reviewer Loop](./figures/fig10-3.svg)
 
 Proposer-Reviewer là peer-collaboration paradigm kinh điển. Chương 5 đã trình bày các design principles cùng ứng dụng thực tế của nó qua ba experiment: PPT generation, video editing và log visualization. Proposer Agent thực hiện generate code, trong khi Reviewer Agent render execution results, đánh giá chất lượng của chúng bằng một vision-language model và cung cấp các structured suggestions để cải thiện. Cả hai iterate liên tục cho đến khi kết quả đạt chuẩn yêu cầu.
 
@@ -320,7 +320,7 @@ return summarize_failures(workers)
 
 **Sequential Coordination Pattern.**
 
-![Figure 10-4: Manager Sequential Coordination](images/fig10-4.svg)
+![Figure 10-4: Manager Sequential Coordination](./figures/fig10-4.svg)
 
 Manager gọi các Agent chuyên biệt theo kiểu sequential. Mỗi Agent trả về kết quả sau khi hoàn thành, và Manager sẽ quyết định bước tiếp theo. Control flow có tính tuyến tính, đơn giản và tường minh, đặc biệt phù hợp cho các kịch bản mà các subtask có sequential dependency rõ ràng.
 
@@ -348,13 +348,13 @@ Manager gọi các Agent chuyên biệt theo kiểu sequential. Mỗi Agent tr�
 > 4. So sánh single Agent với manager pattern về chất lượng dịch thuật, execution efficiency và resource consumption
 >
 >
-> ![Figure 10-5: Book Translation Agent Architecture](images/fig10-5.svg)
+> ![Figure 10-5: Book Translation Agent Architecture](./figures/fig10-5.svg)
 >
 >
 
 **Parallel Coordination Pattern.**
 
-![Figure 10-6: Manager Parallel Coordination](images/fig10-6.svg)
+![Figure 10-6: Manager Parallel Coordination](./figures/fig10-6.svg)
 
 Khi nhiều subtask có thể chạy song song (in parallel), sequential pattern sẽ trở nên kém hiệu quả. Parallel coordination cho phép nhiều Agent làm việc đồng thời, giúp tăng mạnh throughput của hệ thống. Manager Agent phải lập kế hoạch cho các parallel task, monitor toàn bộ Agent đang chạy trong real time, điều phối giao tiếp giữa chúng và đưa ra các quyết định mang tính system-wide khi các Agent thành công hoặc thất bại. Kiến trúc này thường yêu cầu một **message bus** làm infrastructure—hãy hình dung nó như một "public bulletin board" nơi các Agent có thể publish message và subscribe các message type mà chúng quan tâm, từ đó kích hoạt khả năng asynchronous, non-blocking communication. Hai implementation phổ biến, từ đơn giản đến phức tạp hơn, là **Redis Pub/Sub** và các message queue như **RabbitMQ**. Redis Pub/Sub rất lightweight và deliver message tức thì, nhưng không persist chúng, do đó một receiver đang offline sẽ bị bỏ lỡ message. RabbitMQ và các hệ thống tương tự sẽ persist message xuống disk, bảo toàn dữ liệu khi receiver tạm thời offline. Message thường sử dụng một JSON envelope chứa sender ID, target Agent (hoặc một broadcast marker), message type và payload.
 
@@ -380,7 +380,7 @@ Phần còn lại trong thiết kế của Lingtai cũng đồng nhất với c�
 >
 > **Requirements and evidence**: Chứng minh khả năng autonomous launch, các ReAct loop độc lập, bidirectional messaging, true overlap, field validation và re-asking, page-error feedback, timeout, cancellation và cleanup tài nguyên browser/audio. Ghi nhận launch decision, message ordering, latency, success rate, lượng token/resource sử dụng cùng tất cả các failure path, sau đó so sánh giữa fixed mode và autonomous mode dựa trên các phép đo này. Bắt buộc phải có explicit consent đối với real voice và explicit authorization trước khi submit.
 >
-> ![Figure 10-7: Phone and Computer Dual Agent Architecture](images/fig10-7.svg)
+> ![Figure 10-7: Phone and Computer Dual Agent Architecture](./figures/fig10-7.svg)
 > **Experiment 10-4 ★★★: Agent thu thập thông tin đồng thời từ nhiều Website (Agent Collecting Information from Multiple Websites Simultaneously)**
 >
 > **Prerequisites**: Khuyến nghị người đọc xem lại các cơ chế event-driven và interrupt từ Chương 6 trước khi bắt đầu.
@@ -410,7 +410,7 @@ Phần còn lại trong thiết kế của Lingtai cũng đồng nhất với c�
 > 6. Đo lường và so sánh thời gian thực thi tuần tự (serial) và song song (parallel) để định lượng mức tăng tốc (speedup) từ việc song song hóa (parallelization)
 >
 >
-> ![Figure 10-8: Parallel Web Scraping Architecture](images/fig10-8.svg)
+> ![Figure 10-8: Parallel Web Scraping Architecture](./figures/fig10-8.svg)
 >
 >
 
@@ -440,7 +440,7 @@ Ba trường hợp dưới đây thể hiện một lộ trình phát triển r�
 
 **MetaGPT: Mô phỏng Software Company theo SOP (SOP-Driven Software Company Simulation).**
 
-![Figure 10-9: MetaGPT Multi-Agent Collaboration Network](images/fig10-9.svg)
+![Figure 10-9: MetaGPT Multi-Agent Collaboration Network](./figures/fig10-9.svg)
 
 Insight cốt lõi của MetaGPT là: các **Standard Operating Procedures** (SOP) được tích lũy bởi các software company con người về bản chất chính là một collaboration protocol đã được kiểm chứng qua thực tế — mã hóa SOP này vào một multi-Agent system, để mỗi role tạo ra các deliverable chuẩn hóa tương tự một khâu chuyên môn hóa trên dây chuyền sản xuất (assembly line), và các deliverable đó sẽ tự nhiên trở thành communication interface giữa các role.
 
@@ -577,7 +577,7 @@ Các case study trong phần này có thể được tiếp cận từ ba chiề
 ### Stanford AI Town: Social Simulation của Generative Agents
 
 
-![Figure 10-10: AI Town Architecture](images/fig10-10.svg)
+![Figure 10-10: AI Town Architecture](./figures/fig10-10.svg)
 
 
 Vào năm 2023, các nhà nghiên cứu từ Đại học Stanford và Google đã công bố bài paper mang tính bước ngoặt: "Generative Agents: Interactive Simulacra of Human Behavior", giới thiệu khái niệm "generative agents". Đột phá cốt lõi ở đây là không còn giới hạn Agent trong các predefined tasks, mà thay vào đó trang bị cho chúng khả năng memory, reflection và planning gần như con người, cho phép chúng sinh sống, tương tác xã hội và phát triển một cách tự chủ (autonomously) trong một môi trường xã hội mở.
@@ -691,7 +691,7 @@ Werewolf đại diện cho khía cạnh thứ ba của phần này, **strategic 
 > - Reasoning của Villager Agents phải dựa trên phân tích logic từ statements và behaviors, không đoán mò ngẫu nhiên (random guessing)
 > - Game có thể xác định chính xác winner khi kết thúc
 >
-> ![Figure 10-11: Voice Werewolf Agent System](images/fig10-11.svg)
+> ![Figure 10-11: Voice Werewolf Agent System](./figures/fig10-11.svg)
 >
 >
 

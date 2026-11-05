@@ -1,4 +1,4 @@
-# Continual Evolution of Agents
+# Chương 9: Continual Evolution of Agents
 
 Các Agent ngày nay đang đối mặt với một nghịch lý năng lực rõ rệt: chúng có thể giải quyết các task phức tạp chưa từng gặp theo phương thức zero-shot, nhưng sau khi xử lý hàng vạn task tương tự, ngày mai chúng vẫn có thể lặp lại chính những sai lầm từng mắc phải trong ngày đầu tiên. Một khi model đã đưa vào vận hành, liệu nó có thể liên tục làm tốt hơn công việc đó như cách một nhân sự mới tiến bộ hay không? **Khả năng tự học hỏi từ kinh nghiệm**—điều hiện được gọi là **continual learning**—đang trở thành yếu tố cốt lõi để các Agent tiến từ mức "có thể hoàn thành task" lên "có thể làm việc một cách đáng tin cậy", và đây cũng là chủ đề nghiên cứu trung tâm cho thế hệ model tiếp theo. Khái niệm "continual learning" hiện nay không còn là bài toán giống như hướng nghiên cứu trước đây về việc "học một task mới và quên task cũ": forgetting chỉ là một bài toán con, phần thách thức hơn nằm ở chỗ không ai chỉ ra cho model biết phần nào trong kinh nghiệm hôm nay nó đã làm đúng và phần nào làm sai. Ở thời điểm hiện tại, các model vẫn còn khoảng cách rất xa mới có thể tự thực hiện continual learning.
 
@@ -12,7 +12,7 @@ Do đó, trong khi bản thân các model chưa thể học hỏi một cách li
 
 Các chương trước đã giới thiệu các component cốt lõi cần thiết cho hệ thống này. Chương 2 giải quyết within-task state, Chương 3 cung cấp knowledge infrastructure, Chương 5 trao cho Agent meta-capability để tạo tool và sửa đổi hệ thống, Chương 7 thiết lập evaluation và verification, và Chương 8 giải thích cách cập nhật model parameters. Nhiệm vụ của Chương 9 là kết nối và tổ chức các component này thành một continual evolution loop như được minh họa trong Figure 9-1.
 
-![Figure 9-1 Overall loop of continual Agent evolution](images/fig9-1.svg)
+![Figure 9-1 Overall loop of continual Agent evolution](./figures/fig9-1.svg)
 
 Continual evolution phải bắt nguồn từ traceable operational experience, làm thay đổi hành vi tiếp theo và phải được verify để không gây ra sự suy giảm chất lượng đáng kể. Chương này trước hết sẽ thảo luận về cách xác định chính xác điều gì đã diễn ra suôn sẻ hoặc gặp lỗi trong một run; sau đó so sánh bốn update methods cùng ranh giới ứng dụng của chúng; cuối cùng, phân tích cách các bản update này được verify, release, revise và retire trong quá trình vận hành dài hạn.
 
@@ -22,7 +22,7 @@ Continual evolution phải bắt nguồn từ traceable operational experience, 
 
 Việc evaluate một trajectory tương đương với việc trả lời lần lượt ba câu hỏi: **task đã được hoàn thành chưa, nó có được hoàn thành theo phương thức được cho phép không, và người dùng đã được phục vụ tốt hay chưa?** Figure 9-2 tổ chức các câu hỏi này thành một cấu trúc verification ba lớp (three-layer verification structure).
 
-![Figure 9-2 Three-layer trajectory verification from environmental outcomes to an LLM Rubric](images/fig9-2.svg)
+![Figure 9-2 Three-layer trajectory verification from environmental outcomes to an LLM Rubric](./figures/fig9-2.svg)
 
 **Outcome verifier ở tầng đáy trả lời câu hỏi: “Task có thực sự được hoàn thành hay không?”** Nó đọc test results, database states, và tool returns: một Coding Agent có thể chạy tests, type checks, và performance benchmarks; một Agent xử lý refund cho user có thể query order status và refund amount thực tế. Các tín hiệu như vậy đến từ real environmental states và nhìn chung đáng tin cậy hơn so với việc model tự mô tả behavior của chính nó, điều này khiến đây là tầng cần phải thiết lập đầu tiên.
 
@@ -56,7 +56,7 @@ Bảng 9-1 Trajectory evaluation dimensions cho một customer-service Agent
 
 Learning signals chỉ ra rằng một Agent cần phải thay đổi, nhưng không chỉ ra sự thay đổi đó nên diễn ra ở đâu. Cơ sở cốt lõi để lựa chọn một update method không phải là trải nghiệm đó đã tồn tại bao lâu, mà là liệu target capability có thể được biểu diễn một cách tự nhiên bằng một phương tiện cụ thể hay không. Facts và experience phù hợp với các knowledge document; các strategy có thể diễn đạt rõ ràng bằng ngôn ngữ thuộc về Prompts hoặc Skills; các quy trình và ràng buộc có thể thực thi chính xác cần được mã hóa thành program; còn các high-dimensional capability như perception, language style và implicit strategies bắt buộc phải đưa vào model parameters. Figure 9-3 minh họa bốn phương pháp này cùng mối quan hệ giữa chúng.
 
-![Figure 9-3 Four update methods for continual evolution](images/fig9-3.svg)
+![Figure 9-3 Four update methods for continual evolution](./figures/fig9-3.svg)
 
 Bảng 9-2 cung cấp một so sánh cô đọng. Bốn phương pháp này không loại trừ lẫn nhau: một medical-imaging Agent dựa vào parameters để nhận diện tổn thương, dùng knowledge base để cung cấp các guideline hiện hành, và dùng code để tính toán các chỉ số rủi ro. Một customer-service model có được giọng văn tự nhiên từ post-training, lấy các chính sách đặc thù của doanh nghiệp từ knowledge và Skills, đồng thời dựa vào server-side code để thực thi các yêu cầu compliance quan trọng.
 
@@ -79,7 +79,7 @@ Các raw trajectories không phù hợp để dùng làm các formal knowledge u
 
 Thiết kế này chia sẻ cùng nguyên lý hai giai đoạn (two-stage principle) với User-as-Code ở Chương 3. User-as-Code trước tiên sẽ append các fact từ hội thoại vào một immutable log, sau đó định kỳ rebuild lại một structured user model. Experience learning cũng tương tự: cần lưu trữ evidence trước, rồi mới generate các mutable knowledge theo hình thức offline sau đó. Hình 9-4 minh họa quy trình này. Việc tách biệt giữa bước ghi nhận (recording) và bước tổ chức dữ liệu (organization) giúp ngăn chặn tình trạng một lần run thành công do may mắn hay một lỗi network đột xuất làm thay đổi Agent ngay lập tức, đồng thời cho phép hệ thống chỉ đúc kết ra các common pattern sau khi đã quan sát đủ nhiều ca thành công và thất bại.
 
-![Figure 9-4 From evaluated trajectories to experience knowledge documents](images/fig9-4.svg)
+![Figure 9-4 From evaluated trajectories to experience knowledge documents](./figures/fig9-4.svg)
 
 Các experience document không đơn thuần là bản tóm tắt trajectory. Nội dung có khả năng chuyển giao (transferable content) chỉ xuất hiện thông qua việc so sánh: các successful trajectory cùng loại đã làm những gì, các failed trajectory thiếu sót điều gì, một strategy đạt hiệu quả trong phiên bản environment nào, và nó sụp đổ dưới những điều kiện tiên quyết (prerequisite) nào. Chương 3 đã trình bày về knowledge extraction, clustering và retrieval, vì vậy chương này sẽ không nhắc lại các thuật toán đó. Thay vào đó, trọng tâm sẽ là cách trajectory evaluation trở thành điều kiện tiên quyết cho quá trình extraction, và liệu lượng knowledge được trích xuất đó có thực sự cải thiện performance trên các task kế tiếp hay không.
 
@@ -290,7 +290,7 @@ Theo phân loại của chương này, history replay không phải là phương
 
 Bốn phương pháp update chỉ thực sự trở thành continual evolution thay vì one-off optimization khi được tích hợp vào cùng một autonomous loop. Hình 9-5 minh họa một dual-loop architecture mạnh mẽ hơn dành cho các production system: online execution loop chỉ thực hiện task và ghi nhận evidence mà không trực tiếp ghi đè lên production Agent; offline evolution loop sẽ tổng hợp các trajectory, chẩn đoán root cause, tạo các candidate modification và chỉ release phiên bản mới sau khi vượt qua các validation gate. Hai loop này được kết nối với nhau thông qua versioned experience repository và các evaluation set.
 
-![Figure 9-5 Dual loops for online execution and offline evolution](images/fig9-5.svg)
+![Figure 9-5 Dual loops for online execution and offline evolution](./figures/fig9-5.svg)
 
 Voyager[^voyager-2023] là minh chứng cho một continual-evolution loop tương đối hoàn chỉnh. Trong Minecraft, nó chọn các goal mới dựa trên capability hiện tại, lặp lại quá trình tinh chỉnh (iterative refine) chương trình bằng environmental feedback, lưu trữ code đã được validate thành công vào một skill library, sau đó kết hợp các skill sẵn có để giải quyết những task khó hơn. Một automatic curriculum, các executable skill và environmental validation đều là những thành phần không thể thiếu: nếu có skill library mà thiếu curriculum, Agent sẽ không biết cần học gì tiếp theo; nếu có self-reflection nhưng thiếu environmental validation, skill library sẽ tích lũy lỗi; nếu có exploration nhưng thiếu persistence, mọi task vẫn sẽ phải bắt đầu lại từ đầu. Mặc dù knowledge, Prompt, tool và parameter của các Agent ngoài đời thực phức tạp hơn nhiều, nhưng learning process cơ bản vẫn tương tự.
 

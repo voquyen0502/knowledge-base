@@ -1,4 +1,4 @@
-# Coding Agent và Code Generation
+# Chương 5: Coding Agent & Code Generation
 
 Các chương trước đã đi sâu vào context engineering (Chương 2 và 3) cùng tool design (Chương 4). Chương này sẽ kết hợp các building block đó lại để trả lời câu hỏi cốt lõi: **Kiến trúc của một general-purpose Agent có khả năng xử lý các tác vụ tùy ý sẽ trông như thế nào?**
 
@@ -61,7 +61,7 @@ Các sản phẩm general-purpose Agent như Manus và OpenClaw kết hợp ba c
 
 Bởi vì hầu như mọi quy trình content generation hiệu quả cuối cùng đều quy về code. Các bài thuyết trình PowerPoint và tài liệu Word về bản chất chính là code ở định dạng OOXML (Office Open XML, chuẩn mở của Microsoft dành cho tài liệu văn phòng). Các báo cáo PDF có thể được generate thông qua Markdown, HTML hoặc LaTeX; các Python script có thể thực hiện data analysis và visualization; thậm chí chuỗi browser-operation thành công từ GUI work cũng có thể được ghi lại dưới dạng reusable code (xem Chương 9). Quá trình search và tổng hợp thông tin của Deep Research có thể được triển khai thông qua các web request và parsing điều khiển bằng code. Computer Use linh hoạt hơn, nhưng việc gọi trực tiếp qua code hoặc API nhìn chung luôn rẻ hơn, nhanh hơn và tin cậy hơn cho các operation tương đương. Code generation chính là nền tảng capability hiệu quả nhất, chi phí tối ưu nhất và có khả năng tái sử dụng cao nhất.
 
-![Figure 5-1: Coding Agent Core in OpenClaw Architecture](images/fig5-1.svg)
+![Figure 5-1: Coding Agent Core in OpenClaw Architecture](./figures/fig5-1.svg)
 
 Hãy hiểu kiến trúc này thông qua một execution flow cụ thể. Giả sử user yêu cầu: "Help me analyze last quarter's sales data and create a summary report."
 
@@ -81,7 +81,7 @@ Xuyên suốt quy trình, file system đóng vai trò là hub trung tâm của i
 
 ### Workflow tổng thể của một Coding Agent
 
-![Figure 5-2: Coding Agent Workflow](images/fig5-2.svg)
+![Figure 5-2: Coding Agent Workflow](./figures/fig5-2.svg)
 
 **Project Documentation.**
 
@@ -270,7 +270,7 @@ Năm kỹ thuật triển khai này—parallelism và streaming, context managem
 
 Việc định vị code liên quan trong một codebase lớn là điểm khởi đầu cho công việc của một Coding Agent. Hình 5-3 so sánh một số search tool có tính bổ trợ lẫn nhau, minh họa cách một Coding Agent trưởng thành nên lựa chọn các phương pháp retrieval dựa trên bản chất của task.
 
-![Figure 5-3: Comparison of Coding Agent Search Tools](images/fig5-3.svg)
+![Figure 5-3: Comparison of Coding Agent Search Tools](./figures/fig5-3.svg)
 
 **Regex Content Matching** (grep/ripgrep): Phương pháp search truyền thống nhất, quét qua nội dung file từng dòng một để tìm các pattern match. Khi Agent biết chính xác đoạn text cần tìm (function name, variable name, error message), nó có thể định vị mọi vị trí xuất hiện một cách nhanh chóng và chuẩn xác. Khả năng biểu đạt của regular expression (cú pháp mô tả text pattern bằng các ký tự đặc biệt, ví dụ: `def handle.*` match tất cả các function definition bắt đầu bằng `handle`) cho phép bắt các pattern phức tạp—không chỉ text thuần túy, mà cả code tuân theo một cấu trúc cụ thể. Trong thực tế, các tính năng file type filtering (chỉ search trong file Python) và path pattern filtering (loại trừ các test directory) cũng cần được hỗ trợ để giảm thiểu noise. Giới hạn cốt lõi: nó chỉ tìm thấy các match về mặt textual và hoàn toàn không hiểu semantics—search cụm từ "user authentication" sẽ không bao giờ trả về một function xử lý login logic nếu function đó vô tình không chứa từ "authentication".
 
@@ -293,7 +293,7 @@ Bốn phương pháp search này tạo thành một toolbox mang tính bổ tr�
 
 Độ khó của file editing không nằm ở chính thao tác thực thi, mà nằm ở việc làm thế nào để dùng một LLM chỉ dẫn cho hệ thống một cách hiệu quả và đáng tin cậy: "cần thay đổi cái gì và thay đổi như thế nào". Figure 5-4 so sánh 5 cơ chế file editing, minh họa cho sự giằng co căn bản giữa khả năng diễn đạt bằng ngôn ngữ tự nhiên của con người và yêu cầu thực thi chính xác của máy móc.
 
-![Figure 5-4: Comparison of Five File Editing Schemes](images/fig5-4.svg)
+![Figure 5-4: Comparison of Five File Editing Schemes](./figures/fig5-4.svg)
 
 **Diff Description + Apply Model**: Model không trực tiếp chỉ định cách edit file; thay vào đó, nó sinh ra một change description—có thể là một diff text tương tự như git diff (định dạng xuất ra từ lệnh `git diff`, chỉ rõ "dòng nào bị xóa và dòng nào được thêm vào"), hoặc một code skeleton kèm theo các omission markers (dùng comment dạng "remain unchanged here" để bỏ qua các phần không sửa đổi). Bản mô tả này sau đó được chuyển giao cho một "Apply Model" chuyên trách—thường là một LLM khác nhỏ hơn, nhanh hơn—chịu trách nhiệm merge nó với file gốc để tạo ra file mới hoàn chỉnh. Sự phân tách trách nhiệm (separation of concerns) này cho phép main model tập trung vào code logic bậc cao, trong khi apply model chuyên tâm vào các thao tác xử lý text cấp thấp. Điểm mong manh của một naive implementation nằm ở bước merge: khi có những sai lệch nhỏ giữa change description và code thực tế trong file, hệ thống phải tự xác định xem chúng có cùng trỏ tới một vị trí hay không; khi có nhiều đoạn code tương đồng nhau, nó rất dễ merge nhầm vị trí. Cursor là đại diện tiêu biểu cho sự tiến hóa liên tục của hướng tiếp cận này: main model output một code skeleton có omission markers, một fast-apply small model được huấn luyện chuyên biệt sẽ rewrite toàn bộ file, và speculative decoding (sử dụng nội dung file gốc làm draft để parallel verification) đã đẩy tốc độ merge lên tới hàng nghìn tokens per second—sự đầu tư mạnh mẽ về mặt engineering đã mang lại cả độ tin cậy lẫn tốc độ vượt trội cho phương pháp này.
 
@@ -511,7 +511,7 @@ Việc tạo lập nhiều tài liệu phức tạp về bản chất chính là
 
 Việc tạo PPT vốn nổi tiếng là tốn nhiều công sức. Một academic presentation điển hình thường dài tới hàng chục slide, mỗi slide đều đòi hỏi layout cẩn thận, chắt lọc key points và lựa chọn chart phù hợp. Tuy nhiên, khi tái định hình bài toán tạo PPT thành một bài toán code generation, phần lớn độ phức tạp sẽ được triệt tiêu. Các presentation framework hiện đại như Slidev áp dụng một triết lý thiết kế tinh gọn: định nghĩa content bằng Markdown và HTML. Việc tạo một slide chỉ tốn vài dòng markup ngắn gọn, trong khi framework sẽ chịu trách nhiệm xử lý rendering, layout và animation. Đối với một Agent đã làm chủ code generation, đây là môi trường lý tưởng.
 
-![Figure 5-5: Proposer-Reviewer mechanism for PPT generation](images/fig5-5.svg)
+![Figure 5-5: Proposer-Reviewer mechanism for PPT generation](./figures/fig5-5.svg)
 
 Dẫu vậy, việc chỉ generate code là chưa đủ. **Một khi Agent đã viết xong code, nó hoàn toàn không biết kết quả thực tế sẽ render ra sao**: content quá dày đặc, text bị tràn (overflow), hình ảnh sai kích thước — không có vấn đề nào trong số này hiển hiện cho đến khi các slide thực sự được render. Do đó, cơ chế **Proposer-Reviewer** (minh họa trong Figure 5-5) là cần thiết để phân chia tác vụ code generation và quality review cho hai Agent độc lập:
 
@@ -540,7 +540,7 @@ Vòng lặp iterative ở đây và cơ chế **pre-approval** trong Chương 4 
 > **Acceptance criteria**: Xuất ra video có thời lượng từ 5 đến 15 phút, trong đó thời gian hiển thị của mỗi slide khớp chính xác với phần narration tương ứng và nội dung narration phải đồng bộ với các visual element trên màn hình.
 >
 >
-> ![Figure 5-6: End-to-end pipeline from paper to explanation video](images/fig5-6.svg)
+> ![Figure 5-6: End-to-end pipeline from paper to explanation video](./figures/fig5-6.svg)
 >
 >
 
@@ -627,7 +627,7 @@ Code generation mang lại một giải pháp automated cho khâu chẩn đoán.
 > **Technical Approach**: Agent phân tích một tập hợp các production trajectory song song với system architecture documents và PRD nhằm nhận diện các problem pattern cùng những module liên quan. Sau đó, Agent generate các problem report có cấu trúc gồm priority, module, description và các đề xuất cải tiến. Agent cũng generate các regression test gắn liền với trajectory ID và các interaction round; test framework sẽ replay các case này và verify kết quả. Cuối cùng, Agent tạo GitHub Issue thông qua MCP.
 >
 >
-> ![Figure 5-7: Intelligent Production Log Diagnostic Pipeline](images/fig5-7.svg)
+> ![Figure 5-7: Intelligent Production Log Diagnostic Pipeline](./figures/fig5-7.svg)
 >
 >
 
@@ -666,7 +666,7 @@ Khi các yêu cầu còn mơ hồ hoặc chưa đầy đủ, Agent bắt buộc 
 
 Thông qua code generation, Agent có thể tạo ra các structured interactive interface để thay thế text-based Q&A. Hình 5-8 minh họa dynamic form generation process, cho thấy cách Agent chuyển đổi các câu hỏi làm rõ thành một structured interface có thể điền hoàn tất trong một lần duy nhất. Agent sinh ra một HTML form chứa nhiều loại input control—text box cho thông tin mở, dropdown menu cho các predefined option, checkbox cho việc chọn nhiều mục, và date picker để đơn giản hóa việc nhập thời gian. Các phiên bản nâng cao hơn có thể sử dụng JavaScript để tạo cascading form giúp ẩn/hiện các câu hỏi tiếp theo và cập nhật các option khả dụng tùy theo lựa chọn của user. User sẽ điền toàn bộ form trong một lần, loại bỏ nhiều dialogue round, đồng thời nhìn thấy rõ ràng toàn bộ thông tin được yêu cầu cùng mối quan hệ logic giữa các câu hỏi.
 
-![Figure 5-8: Dynamic Form Generation Process](images/fig5-8.svg)
+![Figure 5-8: Dynamic Form Generation Process](./figures/fig5-8.svg)
 
 
 > **Experiment 5-12 ★★: Intent Clarification System with Dynamic Forms**
@@ -686,7 +686,7 @@ Cách tiếp cận đầu tiên nhìn qua có vẻ "thông minh" hơn nhưng l�
 
 SQL và visualization code được generate tuyệt đối không được execute trực tiếp. Execution layer cần sử dụng database credentials có quyền read-only, parse cú pháp SQL, chỉ cho phép các câu lệnh `SELECT` đã được phê duyệt, đồng thời reject thẳng các câu lệnh DDL, DML cũng như multi-statement queries. Các giá trị do user cung cấp phải được bind dưới dạng server-side parameters, đi kèm với các giới hạn (limits) về query time, số lượng row trả về, các table được phép truy cập và date ranges. Visualization code phải được chạy bên trong một sandbox cô lập hoàn toàn với network và filesystem, đồng thời chỉ được trả về đúng result format đã được quy định. Artifact pattern giúp rút ngắn data path, nhưng nó không thể thay thế cho các cơ chế authorization check hay execution isolation.
 
-![Figure 5-9: SQL Query Agent Workflow](images/fig5-9.svg)
+![Figure 5-9: SQL Query Agent Workflow](./figures/fig5-9.svg)
 
 
 Phát triển xa hơn, Agent có thể generate ra hai artifact kết hợp với nhau tạo thành một pipeline: một SQL query và visualization code, chẳng hạn như code dựng bar chart. Frontend sẽ truyền trực tiếp kết quả trả về từ SQL vào visualization code. LLM đảm nhiệm generate code nhưng hoàn toàn không can thiệp vào data path—đây chính là bản chất cốt lõi của tư duy xem code generation như một interface.
@@ -742,7 +742,7 @@ Việc chuyển authorization xuống tầng dưới không đồng nghĩa với
 
 Các phần trước đã theo dõi code generation trải dài qua hết domain này đến domain khác—từ mathematical reasoning đến document creation cho tới interface customization. Khi đẩy những năng lực này đến giới hạn tối đa, một câu hỏi tất yếu sẽ xuất hiện: liệu một Agent có thể dùng code generation để tạo ra một Agent khác?
 
-![Figure 5-10: Agent Bootstrapping Loop](images/fig5-10.svg)
+![Figure 5-10: Agent Bootstrapping Loop](./figures/fig5-10.svg)
 
 **Agent Self-Repair: OpenClaw Doctor.**
 
@@ -780,7 +780,7 @@ Khi một Agent nhận task phát triển một Agent mới, trước hết nó 
 > **Acceptance Criteria**: Agent được sinh ra phải chạy thành công và hoàn thành các task cơ bản. Cần verify rằng Agent này sử dụng standard message format và tool-call protocol chuẩn, tích hợp các model và API được khuyến nghị hiện hành, đồng thời đảm bảo context và state management hoạt động chuẩn xác qua nhiều conversation turns. So sánh phương pháp generation from scratch với example-based modification để xác nhận rằng việc tinh chỉnh dựa trên code mẫu giúp tối ưu cả chất lượng lẫn efficiency.
 >
 >
-> ![Figure 5-11: Pipeline of an Agent That Can Create Agents](images/fig5-11.svg)
+> ![Figure 5-11: Pipeline of an Agent That Can Create Agents](./figures/fig5-11.svg)
 >
 >
 

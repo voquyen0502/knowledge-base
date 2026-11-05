@@ -113,18 +113,58 @@ extra_javascript:
 nav:
   - Trang chủ: index.md
   - Tủ sách:
+      - books/index.md
       - AI Agents in Depth:
-          - books/ai-agents/introduction.md
-          - books/ai-agents/chapter-01.md
-          - books/ai-agents/chapter-02.md
-          - books/ai-agents/chapter-03.md
-          - books/ai-agents/chapter-04.md
-          - books/ai-agents/chapter-05.md
-          - books/ai-agents/chapter-06.md
-          - books/ai-agents/chapter-07.md
-          - books/ai-agents/chapter-08.md
-          - books/ai-agents/chapter-09.md
-          - books/ai-agents/chapter-10.md
-          - books/ai-agents/afterword.md
-          - books/ai-agents/reference-answers.md
+          - books/ai-agents-in-depth/index.md
+          - books/ai-agents-in-depth/introduction.md
+          - books/ai-agents-in-depth/chapter-01.md
+          - books/ai-agents-in-depth/chapter-02.md
+          - books/ai-agents-in-depth/chapter-03.md
+          - books/ai-agents-in-depth/chapter-04.md
+          - books/ai-agents-in-depth/chapter-05.md
+          - books/ai-agents-in-depth/chapter-06.md
+          - books/ai-agents-in-depth/chapter-07.md
+          - books/ai-agents-in-depth/chapter-08.md
+          - books/ai-agents-in-depth/chapter-09.md
+          - books/ai-agents-in-depth/chapter-10.md
+          - books/ai-agents-in-depth/afterword.md
+          - books/ai-agents-in-depth/reference-answers.md
+      - A Philosophy of Software Design:
+          - books/a-philosophy-of-software-design/index.md
+          - books/a-philosophy-of-software-design/preface.md
+          - books/a-philosophy-of-software-design/ch01.md
+          - books/a-philosophy-of-software-design/ch02.md
+          - books/a-philosophy-of-software-design/ch03.md
+          - books/a-philosophy-of-software-design/ch04.md
+          - books/a-philosophy-of-software-design/ch05.md
+          - books/a-philosophy-of-software-design/ch06.md
+          - books/a-philosophy-of-software-design/ch07.md
+          - books/a-philosophy-of-software-design/ch08.md
+          - books/a-philosophy-of-software-design/ch09.md
+          - books/a-philosophy-of-software-design/ch10.md
+          - books/a-philosophy-of-software-design/ch11.md
+          - books/a-philosophy-of-software-design/ch12.md
+          - books/a-philosophy-of-software-design/ch13.md
+          - books/a-philosophy-of-software-design/ch14.md
+          - books/a-philosophy-of-software-design/ch15.md
+          - books/a-philosophy-of-software-design/ch16.md
+          - books/a-philosophy-of-software-design/ch17.md
+          - books/a-philosophy-of-software-design/ch18.md
+          - books/a-philosophy-of-software-design/ch19.md
+          - books/a-philosophy-of-software-design/ch20.md
+          - books/a-philosophy-of-software-design/ch21.md
+          - books/a-philosophy-of-software-design/ch22.md
+          - books/a-philosophy-of-software-design/summary.md
+      - The Mom Test:
+          - books/the-mom-test/index.md
+          - books/the-mom-test/introduction.md
+          - books/the-mom-test/chapter-01.md
+          - books/the-mom-test/chapter-02.md
+          - books/the-mom-test/chapter-03.md
+          - books/the-mom-test/chapter-04.md
+          - books/the-mom-test/chapter-05.md
+          - books/the-mom-test/chapter-06.md
+          - books/the-mom-test/chapter-07.md
+          - books/the-mom-test/chapter-08.md
+          - books/the-mom-test/conclusion.md
   - Tra cứu Tags: tags.md

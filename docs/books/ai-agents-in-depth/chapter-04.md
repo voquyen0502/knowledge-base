@@ -1,4 +1,4 @@
-# Tools
+# Chương 4: Tools
 
 Trong bộ phim khoa học viễn tưởng *Her*, AI assistant Samantha có thể chủ động sắp xếp email, nhận diện các thông điệp phức tạp về mặt cảm xúc và đề xuất phản hồi tinh tế, đại diện cho nhân vật chính xử lý các vấn đề xuất bản, đồng thời chuyển đổi liền mạch giữa các communication channel khác nhau. Trí tuệ của cô ấy thuyết phục đến vậy là nhờ sở hữu các **tools** mạnh mẽ — đóng vai trò như “tay, chân và giác quan” kết nối “bộ não” ngôn ngữ với thế giới số thực tế. Ngày nay, các general-purpose Agent như Manus và OpenClaw đã hiện thực hóa hầu hết các capability mà Samantha cần trong *Her*.
 
@@ -109,7 +109,7 @@ MCP sử dụng kiến trúc client-server: các **MCP server** cung cấp một
 
 **Phân tách rạch ròi giữa resources và tools**. Bên cạnh các tool có khả năng thực thi, MCP còn định nghĩa các tài nguyên chỉ đọc (read-only resources, ví dụ: nội dung file, bản ghi cơ sở dữ liệu) mà client có thể duyệt và đọc trực tiếp mà không cần invoke tool. Sự phân tách này cho phép các Agent phân biệt rõ ràng giữa hành vi "lấy thông tin" (getting information) và "thực thi hành động" (performing actions). Ngoài ra còn có primitive thứ ba—prompts: các prompt template có thể tái sử dụng do server cung cấp để client và người dùng invoke theo nhu cầu. Tools, resources, và prompts tương ứng lần lượt với "các thao tác mà model có thể thực thi", "dữ liệu mà ứng dụng có thể đọc", và "các template mà người dùng có thể lựa chọn".
 
-![Figure 4-1: MCP Protocol Interaction Sequence](images/fig4-1.svg)
+![Figure 4-1: MCP Protocol Interaction Sequence](./figures/fig4-1.svg)
 
 Giá trị hệ sinh thái của MCP nằm ở nguyên lý **develop once, use everywhere** (phát triển một lần, sử dụng mọi nơi). Một MCP server có thể được sử dụng đồng thời bởi bất kỳ client tương thích nào như Cursor, Claude Desktop, hay OpenClaw, giúp các nhà phát triển tool không cần phải bận tâm về sự khác biệt giữa các Agent framework ở phía upstream. MCP đã được áp dụng rộng rãi bởi nhiều Agent framework và IDE lớn, từng bước trở thành tiêu chuẩn quan trọng cho khả năng tương tác giữa các công cụ (tool interoperability). Toàn bộ các thử nghiệm trong chương này đều xây dựng tools dựa trên giao thức MCP.
 
@@ -164,19 +164,19 @@ Cách triển khai kỹ thuật tương đương phổ biến hơn là chỉ gi�
 
 [^mcp-zero-2025]: Fei, X., et al. *MCP-Zero: Active Tool Discovery for Autonomous LLM Agents.* arXiv:2506.01056, 2025.
 
-![Figure 4-2: Hierarchical Tool Matching (Two-Level Semantic Search: Server-Level → Tool-Level)](images/fig4-2.svg)
+![Figure 4-2: Hierarchical Tool Matching (Two-Level Semantic Search: Server-Level → Tool-Level)](./figures/fig4-2.svg)
 
 **Hierarchical Matching và Fallback.** Cơ chế matching hiệu quả tận dụng chính cấu trúc phân cấp (hierarchy) sẵn có trong cách tổ chức tool. Trong các protocol như MCP, các tool được gom nhóm theo **server** (tương tự như các ứng dụng trên điện thoại, mỗi ứng dụng đóng gói một tập hợp các hàm liên quan), do đó quá trình matching có thể chạy qua hai layer: định vị các server liên quan dựa trên capability description, sau đó match các tool cụ thể bên trong các server đó. Cách này thu hẹp search space từ "hàng nghìn tool" xuống còn "vài chục server × vài chục tool mỗi server", giúp tiết kiệm compute và giảm thiểu semantic confusion xuyên domain (cross-domain). Xét về mặt engineering, cơ chế này dựa trên một embedding index được build offline và cập nhật theo dạng incremental. Và khi candidate ở cả hai layer đều có score dưới threshold, hệ thống cần trả về kết quả "not found" rõ ràng, kích hoạt Agent rephrase và retry, tự ứng biến (improvise) bằng các basic tool, hoặc tạo mới hoàn toàn một tool (chủ đề của Chương 9).
 
 Sau lần load đầu tiên, schema sẽ được ghim cố định (pinned) tại vị trí ban đầu trong trajectory, nhờ đó static prefix vẫn có thể tái sử dụng (reusable).
 
-![Figure 4-3: KV Cache Optimization for Dynamic Tool Loading](images/fig4-3.svg)
+![Figure 4-3: KV Cache Optimization for Dynamic Tool Loading](./figures/fig4-3.svg)
 
 **Dynamic Loading và KV Cache.** Proactive discovery đi kèm một chi phí kỹ thuật (engineering cost) không hề nhỏ: việc dynamically load các tool sẽ **invalidate KV Cache**—nếu đặt toàn bộ tool definition vào static prefix, thì mỗi tool mới được load vào sẽ làm vô hiệu hóa (invalidate) toàn bộ cache. Giải pháp cho vấn đề này tương tự như nội dung thảo luận ở Chương 2 về vị trí injection của Skill: append phần biến động (complete schema của tool mới) vào cuối context, giữ cho static prefix luôn ổn định và KV Cache hoàn toàn reusable, đồng thời chỉ duy trì một danh sách ngắn gọn các tool name trong status bar của Agent. Pattern này hiện đã được hỗ trợ native bởi các API lớn và trở thành kiến trúc mặc định của các mainstream framework: OpenAI Responses API cung cấp tool `tool_search` cùng flag `defer_loading: true`, trong đó các schema đã load sẽ được append vào cuối context dưới dạng các item `tool_search_output` để prefix cache tiếp tục hit; Claude Code mặc định defer các MCP tool (được inject on demand qua các block `tool_reference`, chỉ giữ lại tool name và server instruction khi bắt đầu session); và tính năng `tool_search` (dựa trên BM25 retrieval) của Codex CLI là một kiến trúc luôn bật (always-on architecture) chứ không còn là một optional feature.
 
 Một điểm rất dễ gây hiểu nhầm cần được làm rõ: việc "appended at the end" (nối vào cuối) chỉ diễn ra duy nhất ở turn mà tool được phát hiện (discovered). Kể từ thời điểm đó, schema block sẽ nằm cố định tại vị trí ban đầu của nó trong trajectory—các message mới ở các turn sau sẽ được nối tiếp vào **sau** nó, và nó trở thành history thông thường, thay vì bị di chuyển liên tục về điểm cuối mới nhất ở mỗi turn (nếu bị re-inject ở mỗi turn, hệ thống sẽ thực sự phải re-prefill lại mỗi lần, khiến cache trở nên vô nghĩa). Cả hai API đều bảo đảm cơ chế này: OpenAI yêu cầu các request tiếp theo phải giữ nguyên vị trí của item `tool_search_output`, và cùng một tool sẽ không bao giờ cần load lại qua các turn; Anthropic thực hiện expand block `tool_reference` inline ngay tại vị trí gốc của nó trong conversation history, và tài liệu chính thức chỉ rõ rằng cache sẽ tiếp tục hit ở mọi turn tiếp theo. Chỉ có đúng hai trường hợp thực sự gây ra recomputation: TTL của Prompt Cache hết hạn (khiến toàn bộ prefix bị tính toán lại cùng lúc—đây không phải chi phí riêng của tool definitions), và việc chỉnh sửa, xóa bỏ hoặc thay đổi thứ tự của loaded tool set (điều này sẽ invalidate cache kể từ vị trí đó trở đi).
 
-![Figure 4-4: Context Structure After Dynamic Discovery—Tool Schemas Scattered Across the Trajectory](images/fig4-4.svg)
+![Figure 4-4: Context Structure After Dynamic Discovery—Tool Schemas Scattered Across the Trajectory](./figures/fig4-4.svg)
 
 Hình 4-4 minh họa bức tranh toàn cảnh sau nhiều vòng dynamic discovery: static prefix chỉ giữ lại system prompt, các core tools và meta-tool tool-search; trong khi các schemas được phát hiện xuyên suốt quá trình thực thi sẽ nằm rải rác trên trajectory, được ghim cố định tại vị trí chúng được inject lần đầu và được phục vụ trực tiếp từ cache dưới dạng history thông thường ở các turn sau. Điều này cũng đồng nghĩa quy tắc "tool definitions bắt buộc phải nằm ở vị trí đầu tiên của context" không còn là nguyên tắc bất biến—prefix vẫn là static và append-only; tool definitions chỉ đơn giản là có thêm khả năng đi vào trajectory theo nhu cầu (on demand). Cái giá phải trả là model phải được post-train để có thể hiểu được các tool definitions nằm rải rác trong toàn bộ context.
 

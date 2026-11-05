@@ -1,4 +1,4 @@
-# Bắt đầu với AI Agents
+# Chương 1: Khởi đầu với AI Agents
 
 Nếu từng sử dụng Cursor để viết code và chứng kiến công cụ này tự tìm kiếm trong codebase, chỉnh sửa nhiều file rồi chạy lại test cho đến khi pass toàn bộ, thì bạn đã thực sự sử dụng một AI Agent. Điều tương tự cũng diễn ra khi bạn dùng Deep Research để đào sâu một chủ đề thông qua chuỗi tìm kiếm và đọc tài liệu lặp đi lặp lại, để Manus điều khiển trình duyệt hoàn thành các tác vụ trực tuyến, nhờ trợ lý điện thoại Doubao đặt vé hay gửi tin nhắn, hoặc giao cho Pine AI đàm phán giảm cước viễn thông.
 
@@ -20,7 +20,7 @@ Nói một cách trực quan hơn: **Agent = Reasoning Engine + Working Context 
 
 Dưới góc nhìn cổ điển của Reinforcement Learning và lý thuyết điều khiển, Agent và Environment là hai thực thể trong một vòng tương tác khép kín (closed-loop interaction), chứ không phải là thành phần cấu tạo của nhau. Environment trả về một observation, Agent dựa vào Context của mình để chọn action tiếp theo, và action đó sẽ làm thay đổi State của Environment, từ đó sinh ra observation kế tiếp.
 
-![Figure 1-1: The Agent–Environment interaction loop and the Model–Harness structure inside the Agent](images/fig1-1.svg)
+![Figure 1-1: The Agent–Environment interaction loop and the Model–Harness structure inside the Agent](./figures/fig1-1.svg)
 
 Figure 1-1 minh họa hai tầng trừu tượng (levels of abstraction). Tầng bên ngoài là sự tương tác giữa **Agent và Environment**: Environment bao gồm file system, database, trang web, người dùng, các Agent khác, cũng như các thế giới vật lý hoặc môi trường giả lập (simulated worlds). Tầng bên trong là **cấu trúc Model–Harness bên trong Agent**: Model đưa ra các quyết định về Policy; Harness là tầng Runtime và Governance nằm bên trong ranh giới của Agent, chịu trách nhiệm xây dựng Context, expose các tool interface, duy trì vòng lặp cùng State, đồng thời áp dụng cơ chế phân quyền, Verification và Correction. Một Harness có thể khởi tạo, cô lập (isolate) hoặc làm proxy cho một Environment mà không nhất thiết phải chứa State hay các quy tắc chuyển trạng thái (transition rules) của Environment đó.
 
@@ -128,7 +128,7 @@ Nhưng một câu hỏi sâu xa hơn được đặt ra: nếu các model ngày 
 
 Phần thảo luận trước đã chỉ ra rằng một model có thể nội hóa các tool-use policy thành native capability thông qua Reinforcement Learning. Tuy nhiên, những thay đổi trong hành vi của Agent không chỉ diễn ra trong quá trình training. Dựa trên vị trí diễn ra update và thời gian tồn tại (persistence) của nó, các thay đổi này có thể được hiểu theo ba hướng tiếp cận bổ trợ lẫn nhau (Figure 1-2): contextual adaptation trong phạm vi task (within-task), cập nhật external artifacts xuyên suốt các task (cross-task), và parameter updates trong các chu kỳ training.
 
-![Figure 1-2: Ba cấp độ cập nhật năng lực của Agent (Three Levels of Agent Capability Updates)](images/fig1-2.svg)
+![Figure 1-2: Ba cấp độ cập nhật năng lực của Agent (Three Levels of Agent Capability Updates)](./figures/fig1-2.svg)
 
 **Contextual adaptation** diễn ra ngay trong phạm vi task hiện tại. Khi các example, state, và kết quả retrieval được nạp vào context, model có thể điều chỉnh hành vi của nó ngay lập tức, nhưng điều này không làm thay đổi persistent state của session tiếp theo. Ưu điểm của phương thức này là tốc độ và chi phí thấp; các hạn chế bắt nguồn từ giới hạn của context window và cách thức tổ chức thông tin. Chương 2 sẽ giải thích chi tiết cơ chế hoạt động của dạng adaptation này.
 
@@ -154,7 +154,7 @@ Liệu từng thành phần có thực sự không thể thiếu? Phương pháp
 >
 > Chúng tôi đã thăm dò cách từng thành phần của context định hình hành vi của Agent thông qua một **ablation study** mang tính hệ thống. Trong năm thành phần kể trên, bốn thành phần đã được đưa vào thử nghiệm—ngoại trừ system prompt, vốn đóng vai trò định danh cơ bản của Agent: nếu thiếu nó, Agent sẽ hoàn toàn mất nhận thức vai trò (role awareness), và bài test sẽ trở nên vô nghĩa. Như Hình 1-3 thể hiện, thử nghiệm được triển khai trên năm nhóm đối chứng: một nhóm baseline hoàn chỉnh giữ lại toàn bộ các thành phần, cùng bốn nhóm còn lại mỗi nhóm khuyết đi một thành phần, nhằm quan sát tác động của từng thành phần lên performance của Agent.
 >
-> ![Figure 1-3: Experiment 1-1—Context ablation study design](images/fig1-3.svg)
+> ![Figure 1-3: Experiment 1-1—Context ablation study design](./figures/fig1-3.svg)
 >
 > Kết quả thực nghiệm đã làm sáng tỏ vai trò của từng thành phần context—và thực tế chúng không quan trọng ngang nhau. **Tool Definitions** (một phần của static prefix) là nền tảng cho năng lực hành động của Agent; thiếu chúng, Agent không thể gọi bất kỳ tool nào. Tuy nhiên, việc mất đi năng lực hành động không đồng nghĩa với việc model sẽ im lặng: nó vẫn trả về một câu trả lời được format chỉn chu, câu từ đầy tự tin với các số liệu lấy từ parametric memory thay vì từ observations, được trình bày y hệt như một câu trả lời thực sự sinh ra từ tool output. Việc model thẳng thừng từ chối hay thêu dệt ngay tại chỗ (fabricate) phụ thuộc chủ yếu vào tỷ lệ hallucination và tính trung thực (honesty) nội tại của model; một ràng buộc đặt trong prompt như “không được tự ý ước lượng tỷ lệ” chỉ làm giảm xác suất bịa đặt chứ không thể triệt tiêu hoàn toàn. **Tool Results** là chìa khóa của closed-loop control; thiếu chúng, Agent sẽ thực thi một cách “mù quáng” (blind), liên tục retry cho đến khi cạn kiệt iteration budget. Phần **reasoning process** (phần suy luận bên trong assistant messages) ghi lại *lý do tại sao* một bước được thực hiện, trong khi tool results ghi lại *điều gì đã diễn ra*; khi vế trước có thể được tái dựng lại từ vế sau, việc loại bỏ nó khỏi history gần như không gây tổn hại gì. **Message history** (gồm user messages, assistant messages và tool results từ các round trước) giúp ngăn chặn các thao tác dư thừa và tránh lặp lại cùng một sai lầm.
 >
@@ -168,7 +168,7 @@ Pattern cốt lõi để một Agent thực thi nhiệm vụ được gọi là 
 
 Hãy xét một ví dụ cụ thể—tổng hợp doanh thu trên nhiều loại tiền tệ—để hiểu rõ về **trajectory** của một Agent: đây là lịch sử message tích lũy dần trong quá trình Agent vận hành, bao gồm user messages, assistant messages (chứa phần reasoning và các tool calls), cùng với các tool results. Ở mỗi LLM call, context hoàn chỉnh mà model nhận được chính là **static prefix** (system prompt + tool definitions) kết hợp cùng **trajectory** (lịch sử message động) (Figure 1-4). Điều này thể hiện một nguyên lý quan trọng: **Agent context = static prefix + trajectory**. Cụ thể, static prefix bao gồm hai thành phần đầu tiên trong số năm thành phần kể trên (system prompt + tool definitions); trajectory là ba thành phần còn lại (user messages + assistant messages + tool results, liên tục mở rộng sau mỗi lượt tương tác). Từ context hoàn chỉnh này, LLM sẽ sinh ra response tiếp theo, và response đó lại được append vào trajectory cho lần call kế tiếp.
 
-![Figure 1-4: Agent trajectory—ReAct loop cho tác vụ tổng hợp đa tiền tệ](images/fig1-4.svg)
+![Figure 1-4: Agent trajectory—ReAct loop cho tác vụ tổng hợp đa tiền tệ](./figures/fig1-4.svg)
 
 Hãy bắt đầu với một bản implementation tối giản của loop này. Nó minh họa rõ **cách các thành phần phối hợp với nhau**: Model chỉ quyết định bước tiếp theo, Harness đảm nhiệm việc dựng context, validate và execute các tools, còn Environment sẽ tạo ra các thay đổi state thực tế và sinh ra observations. Phần còn lại của cuốn sách cũng sử dụng pseudocode theo phong cách Python; pseudocode này không thể chạy trực tiếp và không phụ thuộc vào bất kỳ SDK cụ thể nào. Mã nguồn thực thi hoàn chỉnh được lưu trữ tại companion repository đi kèm cuốn sách này.
 
@@ -260,7 +260,7 @@ Sau khi đã nắm vững operating loop của Agent, chúng ta sẽ đi vào ph
 >
 > Hình 1-5 minh họa kiến trúc hoàn chỉnh của Native Tool Calling theo mô hình "Model as Agent", cùng với quy trình thực thi ReAct của Kimi K3 và GPT-5.6 trong các tác vụ thực tế. Lưu ý rằng ghi chú "không cần tự viết ReAct loop phía client" trong hình chỉ áp dụng cho nhánh Responses API: trên cả hai nhánh, model đều tự quyết định thời điểm gọi tool nào và các tool đều thực thi phía server-side; điểm khác biệt là với nhánh Kimi, vòng lặp vẫn do client điều hướng.
 >
-> ![Figure 1-5: "Model as Agent" Architecture—Native Tool Calling](images/fig1-5.svg)
+> ![Figure 1-5: "Model as Agent" Architecture—Native Tool Calling](./figures/fig1-5.svg)
 
 ## Harness Engineering: Xây dựng hệ thống tin cậy xoay quanh Model
 
@@ -428,7 +428,7 @@ Do đó, một autonomous Agent phải tự lập kế hoạch (planning)—tự
 
 Xét về mặt triển khai kỹ thuật, một autonomous Agent về bản chất là một LLM sử dụng tool theo vòng lặp, liên tục nhận environmental feedback để thúc đẩy tiến độ hoàn thành task—đây chính là vòng lặp ReAct đã đề cập trước đó. Các exit conditions phổ biến bao gồm: gọi một final output tool, model trả về phản hồi mà không kích hoạt thêm bất kỳ tool call nào, hệ thống gặp lỗi, hoặc đạt số round tối đa.
 
-![Figure 1-6: Execution loop của một autonomous Agent](images/fig1-6.svg)
+![Figure 1-6: Execution loop của một autonomous Agent](./figures/fig1-6.svg)
 
 Autonomous Agent đặc biệt phù hợp với các bài toán mở (open-ended problems)—những bài toán rất khó dự đoán trước số bước cần thực hiện. Các use case điển hình gồm có: Coding Agent giải quyết các task trên SWE-bench (Software Engineering Benchmark, một benchmark dùng để đánh giá năng lực tự động fix các GitHub issue thực tế của Agent), "Computer Use" Agent thao tác trên giao diện máy tính như người thật, và các tác vụ nghiên cứu đòi hỏi tìm kiếm và phân tích lặp (iterative search and analysis).
 
@@ -438,7 +438,7 @@ Mức độ tự trị cao hơn cũng đồng nghĩa với chi phí tính toán 
 
 Trong thực tế, workflow và autonomous Agent không hề loại trừ lẫn nhau—rất nhiều hệ thống kết hợp linh hoạt cả hai: các quy trình cốt lõi có yêu cầu tuân thủ nghiêm ngặt sẽ chạy dưới dạng workflow để đảm bảo độ tin cậy (reliability), trong khi những phần cần ra quyết định linh hoạt sẽ chuyển sang chế độ autonomous. Điển hình như n8n, một open-source workflow automation framework hoàn thiện, nơi developer xây dựng Agent bằng cách bố trí các thành phần chức năng trên một visual canvas—tại đây, các workflow node và autonomous Agent node hoàn toàn có thể cùng tồn tại trong một hệ thống.
 
-![Figure 1-7: Giao diện n8n workflow editor](images/n8n-workflow.png)
+![Figure 1-7: Giao diện n8n workflow editor](./figures/n8n-workflow.png)
 
 Một cách kết hợp khác là **để autonomous Agent xây dựng workflow trước, sau đó để workflow đảm nhận phần thực thi**. Sau khi tiếp nhận task, Agent sẽ tự xác định topology và sinh ra một đoạn mã orchestration; khi đoạn mã này đã sẵn sàng, giai đoạn thực thi sẽ quay về tính deterministic của một workflow. Cách tiếp cận này vừa bảo toàn tính linh hoạt của autonomous Agent trước các task mới lạ, vừa giải phóng model khỏi việc phải đưa ra quyết định ở từng lượt điều phối (dispatch). Chương 10 sẽ đi sâu phân tích chi tiết mô hình này.
 

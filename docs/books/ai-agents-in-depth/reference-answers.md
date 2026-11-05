@@ -1,4 +1,4 @@
-# Đáp án Tham khảo cho các Thought Questions {.unnumbered}
+# Đáp án Tham khảo cho Thought Questions {.unnumbered}
 
 Tài liệu này tổng hợp dàn ý đáp án tham khảo cho các Thought Questions xuyên suốt 10 chương của cuốn sách. Hầu hết các Thought Questions đều mang tính chất open-ended và không có một đáp án chính xác duy nhất. Các đáp án tham khảo được tạo bởi AI kết hợp với sự rà soát nhẹ từ con người, và chỉ nhằm mục đích đối chiếu cũng như gợi mở tư duy cho độc giả. Độc giả được khuyến khích sử dụng một LLM cùng với nội dung cuốn sách để thảo luận sâu hơn về các vấn đề này.
 

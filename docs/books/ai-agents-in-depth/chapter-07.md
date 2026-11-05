@@ -1,4 +1,4 @@
-# Evaluating Agents
+# Chương 7: Evaluating Agents
 
 Sáu chương đầu tiên đã trình bày cách xây dựng một Agent đơn lẻ: context, knowledge, tools, coding capabilities, cùng observation và action spaces của nó. Tuy nhiên, việc build được một Agent không đồng nghĩa với việc nó hoạt động chính xác. Khả năng đo lường đáng tin cậy (reliable measurement) là yếu tố cốt lõi để định hướng cho việc tiếp tục train model và cải tiến system.
 
@@ -22,7 +22,7 @@ Một evaluation system thậm chí còn có giá trị cao hơn trong kỷ nguy
 
 Một evaluation system hoàn chỉnh được phân rã thành bốn giai đoạn: tiêu chí nào được tính là thành công (what counts as success), các tasks đến từ đâu (where the tasks come from), ai là người verify (who verifies), và một score được chuyển hóa thành quyết định như thế nào (how a score turns into a decision), như được thể hiện trong Figure 7-1.
 
-![Figure 7-1: The Four Stages of an Agent Evaluation System](images/fig7-1.svg)
+![Figure 7-1: The Four Stages of an Agent Evaluation System](./figures/fig7-1.svg)
 
 ## Giải phẫu một Evaluation Task: Telecom Domain của τ²-bench
 
@@ -102,7 +102,7 @@ Bây giờ, chúng tôi đề nghị người đọc chạy các evaluation task
 >
 > Thí nghiệm này tiến hành run evaluation framework τ²-bench nhằm nắm vững các design point của một môi trường evaluation cho human-computer interaction. Trước tiên, hãy đọc file task definition theo đường dẫn được đề cập trong phần này: mỗi task bao gồm bốn phần — known information, task instructions, initial state, và success conditions. Sau đó, run toàn bộ evaluation flow, quan sát multi-turn dialogue giữa user simulator và Agent, đồng thời phân tích các failure mode điển hình (policy violations, omitted information, escalation quá mức tới human agent, v.v.).
 >
-> ![Figure 7-3: Dual-Control Environment and Layered Verification in τ²-bench](images/fig7-3.svg)
+> ![Figure 7-3: Dual-Control Environment and Layered Verification in τ²-bench](./figures/fig7-3.svg)
 
 Repository đi kèm lưu trữ một run record (`chapter7/tau2-bench-eval`). Dưới đây, chúng ta sẽ phân tích một successful run từ bản ghi đó.
 
@@ -200,7 +200,7 @@ Framework này hỗ trợ parallel sampling và trajectory caching; toàn bộ t
 
 Tool-calling evaluation kiểm tra tính chính xác của các thay đổi trạng thái quan sát được (observable state changes), trong khi Human-Computer Interaction evaluation kiểm tra mức độ hợp lý của communication strategy — vế trước verify action, vế sau verify guidance. Hình 7-2 đối chiếu cấu trúc của hai loại environment này.
 
-![Figure 7-2: Tool-Calling and Human-Computer Interaction Evaluation Environments](images/fig7-2.svg)
+![Figure 7-2: Tool-Calling and Human-Computer Interaction Evaluation Environments](./figures/fig7-2.svg)
 
 ## Thiết kế Evaluation Dataset
 
@@ -297,7 +297,7 @@ Các kịch bản trên production phải đối mặt với một khó khăn th
 
 Do đó, việc chuyển dịch từ public benchmark sang evaluation trên production đòi hỏi mode of verification phải dịch chuyển sang bên phải của một spectrum với trục hoành là **degree to which a task is mechanically verifiable**, như minh họa trong Hình 7-4.
 
-![Figure 7-4: Spectrum của các Verification Mode, từ Deterministic Verification đến Model Judgment](images/fig7-4.svg)
+![Figure 7-4: Spectrum của các Verification Mode, từ Deterministic Verification đến Model Judgment](./figures/fig7-4.svg)
 
 Hai công cụ nằm ở phía bên phải của spectrum do đó trở thành trụ cột của evaluation trên production: một **Rubric** giúp bẻ nhỏ câu hỏi mơ hồ "chất lượng tốt đến mức nào" thành nhiều dimension có thể chấm điểm độc lập, và **LLM-as-a-Judge** đảm nhiệm việc đưa ra điểm số tại những vị trí không tồn tại deterministic criterion. Chỉ khi song hành, chúng mới có thể chuyển đổi một tỷ lệ thất bại chung chung thành những vấn đề cụ thể, có thể khắc phục được; kết hợp cùng **failure attribution** ở nửa sau của phần này, chúng tạo nên một evaluation loop hoàn chỉnh cho một production Agent.
 
@@ -305,7 +305,7 @@ Cần nhấn mạnh rằng việc dịch chuyển sang bên phải không đồn
 
 ### LLM-as-a-Judge: Trọng tâm của Automated Evaluation
 
-![Figure 7-5: LLM-as-a-Judge Pipeline](images/fig7-5.svg)
+![Figure 7-5: LLM-as-a-Judge Pipeline](./figures/fig7-5.svg)
 
 Tại sao chúng ta cần LLM-as-a-Judge? Đối với các open-ended tasks (ví dụ: generate báo cáo, xử lý khiếu nại của khách hàng, sáng tạo nội dung), không có standard answers chuẩn để so sánh tự động, trong khi human evaluation lại tốn kém và rất khó scale. LLM-as-a-Judge cân bằng giữa khả năng mở rộng (scalability) của tự động hóa với năng lực phán đoán của chuyên gia con người, bằng cách sử dụng một language model để evaluate các output dựa trên bộ tiêu chí chấm điểm do chuyên gia xác định (Rubric).
 
@@ -540,7 +540,7 @@ Trong thực tế lựa chọn model (model selection), chúng ta thường đ�
 
 ### Pairwise Comparison và Model Ranking
 
-![Figure 7-6: Elo Rating and Pairwise Comparison Ranking](images/fig7-6.svg)
+![Figure 7-6: Elo Rating and Pairwise Comparison Ranking](./figures/fig7-6.svg)
 
 **Elo Rating** (hệ thống xếp hạng ban đầu được thiết kế cho cờ vua) định lượng năng lực tương đối của các model thông qua một lượng lớn các lượt đối đầu pairwise matchup: chênh lệch rating càng lớn, expected win rate dành cho model mạnh hơn càng cao. Ví dụ, nếu Model A có rating là 1200 và Model B có rating là 1000, hệ thống Elo sẽ dự đoán win rate của A rơi vào khoảng 76%. Nếu B bất ngờ giành chiến thắng, B sẽ nhận được nhiều điểm hơn và A sẽ bị trừ nhiều điểm hơn—một kết quả upset sẽ kích hoạt mức điều chỉnh điểm lớn hơn, giúp bảng xếp hạng nhanh chóng hội tụ về đúng năng lực thực tế. Nền tảng thống kê của cơ chế này là **Bradley-Terry model**: mỗi model được trừu tượng hóa thành một "strength score" tiềm ẩn (latent), và xác suất để một model đánh bại model còn lại trong một matchup được quyết định bởi độ chênh lệch giữa các điểm số này. Elo chính là phiên bản triển khai kỹ thuật (engineering implementation) của model này dưới dạng online-update.
 
@@ -704,7 +704,7 @@ Khi validate nhiều hypothesis song song, bạn cũng cần tính đến bài t
 
 Các quyết định dựa trên evaluation (dù là để lựa chọn model hay phục vụ continuous iteration) đều phụ thuộc vào dữ liệu vận hành (operational data) chất lượng cao. Dưới đây, trước tiên chúng ta sẽ tìm hiểu cách thu thập dữ liệu này một cách có hệ thống (observability), sau đó thảo luận về cách chuyển hóa các kết quả evaluation thành những cải tiến cụ thể cho hệ thống.
 
-![Figure 7-7: Observability Technology Stack](images/fig7-7.svg)
+![Figure 7-7: Observability Technology Stack](./figures/fig7-7.svg)
 
 Observability là một khái niệm được vay mượn từ distributed systems: bạn không thể mở tung hệ thống ra để trực tiếp quan sát cách nó hoạt động; thay vào đó, bạn suy luận những gì đang diễn ra từ logs, metrics và traces mà nó phát ra — tương tự như cách một bác sĩ, khi không thể nhìn thấy bên trong cơ thể bệnh nhân, sẽ chẩn đoán bệnh dựa trên nhiệt độ, huyết áp và hình ảnh y khoa. Các Agent systems thậm chí còn khiến điều này trở nên khó khăn hơn: cùng một input có thể tạo ra các output khác nhau, quá trình multi-round reasoning và các tool calls khiến các execution paths trở nên cực kỳ phức tạp, trong khi quá trình "suy nghĩ" của model lại hoàn toàn là một hộp đen (opaque) nhìn từ bên ngoài.
 
@@ -724,7 +724,7 @@ Khi đã có trong tay một hệ thống evaluation toàn diện cùng dataset 
 
 Case study dưới đây được lấy từ một iteration thực tế và được thu hẹp phạm vi có chủ đích trên AndroidWorld trong repository đi kèm. Thử nghiệm này bao gồm bốn task cấu hình Wi-Fi trên một emulator API 35, với một matched run cho mỗi task. Đây không phải là benchmark đầy đủ gồm 116 task và không thể thay thế cho một lượt rerun trên môi trường reference API 33. Giá trị của nó không nằm ở overall score, mà nằm ở chuỗi quyết định logic dẫn dắt từ kết quả này sang kết quả tiếp theo.
 
-![Figure 7-8: Benchmark to Improvement Loop](images/fig7-8.svg)
+![Figure 7-8: Benchmark to Improvement Loop](./figures/fig7-8.svg)
 
 Dưới góc độ Harness engineering, phần này về bản chất trình bày phương pháp luận để tối ưu hóa Harness theo chu trình lặp (iterative Harness optimization)—sử dụng evaluation data để xác định các điểm yếu trong Harness (thiếu context? thiếu constraints? validation chưa thỏa đáng? hay feedback không kịp thời?), thực hiện các cải tiến có mục tiêu, sau đó tiến hành re-evaluate, tạo thành một closed loop cho quá trình tiến hóa liên tục của Harness.
 
@@ -833,7 +833,7 @@ Thông điệp cốt lõi của phần này là: **Các phần trước đã ch�
 
 Đây chính là điểm giao thoa giữa hai đầu cầu nối. Các asset tích lũy từ phía evaluation có thể chuyển đổi gần như liền mạch thành training signals: một Rubric hay validator được định nghĩa chuẩn xác bản chất chính là một reward function cho **Reinforcement Learning with Verifiable Rewards (RLVR)**—scoring script trở thành reward script; việc một test có pass hay một state có đạt chuẩn hay không vừa đóng vai trò là tiêu chí evaluation, vừa là reinforcement learning reward. Tuy nhiên, training đặt ra những đòi hỏi mà evaluation chưa bao giờ phải bận tâm. Thứ nhất là **reliable reset semantics**: quá trình training chạy hàng triệu episodes (một episode là một vòng tương tác hoàn chỉnh từ initial state đến khi task completion), và mỗi episode phải có khả năng reset environment về một initial state sạch sẽ và mang tính deterministic; nếu không, gradient signal sẽ bị nhiễm bẩn bởi các residual states còn sót lại từ episode trước. Thứ hai là **throughput vượt xa mức của evaluation**: chỉ cần vài nghìn lần evaluation là đủ để rút ra kết luận, nhưng training đòi hỏi phải nạp cho model hàng triệu lượt tương tác trong một khoảng wall-clock time chấp nhận được; mức độ environment parallelism và per-instance overhead sẽ quyết định trực tiếp việc training có khả thi hay không. Hai điểm cốt lõi này—validators biến thành reward functions, cùng với reset và throughput đạt chuẩn training-grade—sẽ được phân tích chi tiết trong Chương 8.
 
-![Figure 7-9: Simulation Fidelity Spectrum](images/fig7-9.svg)
+![Figure 7-9: Simulation Fidelity Spectrum](./figures/fig7-9.svg)
 
 Về phía **digital environment**, framework AWorld xây dựng một MCP server sandbox có thể kiểm soát cho các GAIA tasks, cung cấp 26 MCP servers bao phủ 126 tool functions, tránh được tình trạng bị ban tài khoản và các side effects mất kiểm soát khi truy cập trực tiếp vào real APIs. Toàn bộ tool calls đều mang tính replayable và auditable. Kiến trúc phân tán (distributed architecture) của AWorld giúp giảm thời gian serial execution truyền thống từ 7695 giây xuống còn 525 giây (tăng tốc 14.6x), đồng thời thiết kế stateless của environment giúp mỗi instance hoàn toàn độc lập, hỗ trợ parallelism hiệu quả cao.
 
@@ -844,7 +844,7 @@ Về phía **embodied environment**, RoboTwin2 xây dựng các dual-arm manipul
 > Thiết lập một simulation environment cho robot manipulation. Đọc `ch7/SimpleVLA-RL` và tài liệu kỹ thuật của OpenVLA để hiểu kiến trúc của Vision-Language-Action model (tích hợp end-to-end vision encoder, language model, và action decoder, ánh xạ images và text vào một semantic space chung). Cấu hình môi trường RoboTwin2, nắm vững observation space (three-view RGB + 14-dimensional joint state) và action space (14-dimensional control vector). Nghiên cứu cơ chế environment randomization và spatial constraint logic trong `move_can_pot`. Đánh giá pretrained model, ghi nhận success rate, completion time, và các failure modes, tập trung phân tích tác động của cơ chế action chunking.
 >
 >
-> ![Figure 7-10: OpenVLA and RoboTwin2 Embodied Intelligence Environment](images/fig7-10.svg)
+> ![Figure 7-10: OpenVLA and RoboTwin2 Embodied Intelligence Environment](./figures/fig7-10.svg)
 >
 >
 

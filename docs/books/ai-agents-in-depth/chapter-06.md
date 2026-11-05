@@ -1,4 +1,4 @@
-# Interaction: Mở rộng Observation Space và Action Space
+# Chương 6: Interaction—Mở rộng Observation Space và Action Space
 
 Chương 1 đã đưa ra một nhận định: khi underlying model được giữ cố định, đòn bẩy kỹ thuật hệ thống (system-engineering lever) hiệu quả nhất để cải thiện task performance của một Agent thường là tái định nghĩa hoặc mở rộng **observation space** và **action space** của nó. Từ Chương 2 đến Chương 5, chúng ta đã đi sâu vào ý tưởng này trong thực tế—context engineering quyết định dữ liệu nào được đưa vào observation, memory và knowledge bases mở rộng observation xuyên suốt các session, tools định nghĩa những gì Agent có thể làm, và code generation cho phép nó tự tạo ra các action mới.
 
@@ -48,7 +48,7 @@ Khi áp dụng mô hình asynchronous cho một LLM, trước hết cần xác �
 
 Để giải quyết bài toán này, chúng ta cần một **kiến trúc event-driven asynchronous Agent**. Về mặt kỹ thuật, điều này có nghĩa là hệ thống không còn phải chủ động thăm dò liên tục để tìm "message mới" (đây là cơ chế polling, vốn cực kỳ lãng phí tài nguyên), mà thay vào đó sẽ tự động trigger logic xử lý ngay khi có message mới xuất hiện. Toàn bộ input, output, thought process và tương tác ngoại vi đều được mô hình hóa đồng nhất thành một event stream—một chuỗi các event records được sắp xếp tuần tự trên một timeline. Figure 6-1 minh họa kiến trúc tổng thể của một event-driven asynchronous Agent, thể hiện rõ mối quan hệ giữa event sources, event queue và Agent processing flow.
 
-![Figure 6-1: Event-Driven Asynchronous Agent Architecture](images/fig6-1.svg)
+![Figure 6-1: Event-Driven Asynchronous Agent Architecture](./figures/fig6-1.svg)
 
 ### Triển khai Event-Driven Mechanism trong OpenClaw
 
@@ -152,7 +152,7 @@ Hệ sinh thái trigger của các workflow platforms như n8n là một minh ch
 
 Con người khi phải xử lý cùng lúc nhiều tác vụ thường điều chỉnh chiến lược theo mức độ khẩn cấp: một tình huống khẩn cấp sẽ khiến họ lập tức gác lại việc đang làm; một việc cần làm định kỳ sẽ được đưa vào danh sách để xử lý sau. Cơ chế event handling của một Agent cũng cần thể hiện sự thông minh tương tự.
 
-![Figure 6-2: Three Strategies for Asynchronous Event Processing](images/fig6-2.svg)
+![Figure 6-2: Three Strategies for Asynchronous Event Processing](./figures/fig6-2.svg)
 
 **Cancellation-Based Processing** được sử dụng cho các urgent events; bản chất của cơ chế này là **forcing a safe point early** cho urgent event: chủ động ngắt (interrupt) bước hiện tại để biến thời điểm này thành một boundary mà tại đó event mới có thể được consume. Khi một urgent event xuất hiện (ví dụ: user bấm "stop" hoặc một supervisory system gửi một chỉ thị high-priority): (1) Dừng thao tác hiện tại—nếu LLM đang reasoning, lập tức cancel streaming response; nếu một synchronous tool đang thực thi, gửi một cancel signal; (2) Drain pending queue bằng cách dọn sạch toàn bộ pending events; (3) Append các events đó cùng với urgent event vào cuối trajectory; (4) Ngay lập tức re-invoke LLM với toàn bộ trajectory hoàn chỉnh vừa được cập nhật làm input để đánh giá lại tình hình. Ví dụ: nếu user nhập "Dừng lại! Tôi nói nhầm rồi" trong khi Agent chuẩn bị thực hiện một thao tác có nguy cơ sai sót, Agent sẽ ngay lập tức nhìn thấy input mới này, đánh giá lại ý định của user, qua đó tránh việc thực thi sai hành động.
 
@@ -175,7 +175,7 @@ Thực nghiệm dưới đây—một event-driven email processing Agent—sẽ
 > **Experiment 6-1 ★★★: Event-Driven Email Processing Agent**
 >
 >
-> ![Figure 6-3: Experiment 6-1 Event-Driven Agent Architecture](images/fig6-3.svg)
+> ![Figure 6-3: Experiment 6-1 Event-Driven Agent Architecture](./figures/fig6-3.svg)
 >
 >
 > Thực nghiệm này xây dựng một event-driven Agent ở dạng đơn giản nhất: **Automated Email Processing Assistant**. Agent sẽ giám sát email inbox, và mỗi khi có email mới gửi đến, nó sẽ tự động kích hoạt một workflow xử lý—bao gồm classification, summarization, draft reply, và notify cho user nếu cần. Đây là kịch bản nhập môn trực quan nhất cho một event-driven Agent: một external event (email mới đến) kích hoạt một Agent thinking cycle hoàn chỉnh.
@@ -262,7 +262,7 @@ Thêm một phần summary ở cuối: "Phía trên có 4 unprocessed event, bao
 > **Experiment 6-2 ★★★: Asynchronous Agent với khả năng Parallel Execution và Interruption**
 >
 >
-> ![Figure 6-4: Experiment 6-2 Asynchronous Agent Interruption and Recovery](images/fig6-4.svg)
+> ![Figure 6-4: Experiment 6-2 Asynchronous Agent Interruption and Recovery](./figures/fig6-4.svg)
 >
 >
 > Kế thừa `event queue` đơn giản trong Experiment 6-1, thực nghiệm này sử dụng một `runtime` tương thích với các `synchronous interfaces` để triển khai **parallel tool execution, execution cancellation, và state management**. Agent phải quản lý nhiều `concurrent tasks`, xử lý các `interruptions` và `recovery`, đồng thời đưa ra các quyết định động (dynamic decisions) dựa trên `current state`. Xem Experiment 6-3 để so sánh với Astra native.
@@ -280,7 +280,7 @@ Thêm một phần summary ở cuối: "Phía trên có 4 unprocessed event, bao
 
 Trong cách tiếp cận tương thích (compatibility approach) ở trên, runtime sẽ điều phối thứ tự các incoming event để một model có synchronous interface vẫn có thể tham gia vào các asynchronous task. Một cách tiếp cận khác cho phép model thấu hiểu nhịp độ tương tác này một cách native: nó có thể xử lý các công việc khác trong khi một tool đang chạy và điều chỉnh các bước tiếp theo khi user bổ sung yêu cầu giữa chừng. GPT-6 Astra đã hỗ trợ Async tool calling và Mid-turn steering, minh họa rõ nét cho sự chuyển dịch này (Figure 6-5).[^ch6-22][^ch6-23]
 
-![Figure 6-5: Synchronous-Interface Compatibility and Model-Native Asynchrony](images/fig6-5.svg)
+![Figure 6-5: Synchronous-Interface Compatibility and Model-Native Asynchrony](./figures/fig6-5.svg)
 
 **Asynchronous tool calling tách biệt việc “bắt đầu một action” khỏi việc “nhận kết quả của nó”.** Sau khi kích hoạt một query chạy chậm, Agent có thể tiếp tục reasoning, gọi các tool khác, hoặc xử lý các phần việc không phụ thuộc vào kết quả của query đó. Ví dụ: trong khi tra cứu địa điểm họp, nó có thể chuẩn bị sẵn agenda và checklist, sau đó so sánh các phương án ngay khi nhận được thông tin địa điểm. Mấu chốt nằm ở việc phân biệt các dependency: tiếp tục thúc đẩy các công việc độc lập, đồng thời trì hoãn các quyết định đòi hỏi kết quả cho đến khi kết quả đó được trả về.
 
@@ -332,7 +332,7 @@ Sợi chỉ đỏ xuyên suốt ở đây là phá vỡ giả định rằng con
 
 Hầu hết các voice assistant thương mại hiện nay vẫn sử dụng một serial pipeline (Figure 6-6): VAD xác định thời điểm người dùng dứt lời, ASR chuyển đổi audio sang text, LLM hiểu và sinh phản hồi, sau đó TTS chuyển câu trả lời thành giọng nói. Tính modular cho phép từng component được tối ưu hóa độc lập, nhưng mỗi boundary chuyển giao đều có thể làm tăng thêm waiting time.
 
-![Figure 6-6: Serial voice Agent pipeline](images/fig6-6.svg)
+![Figure 6-6: Serial voice Agent pipeline](./figures/fig6-6.svg)
 
 | Module | Vai trò | Bottleneck điển hình |
 | --- | --- | --- |
@@ -343,11 +343,11 @@ Hầu hết các voice assistant thương mại hiện nay vẫn sử dụng m�
 
 Đối với một phản hồi ngắn không cần reasoning, waiting time của VAD, ASR, LLM và TTS sẽ tích tụ tuần tự nối tiếp nhau (Figure 6-7). Con số thực tế phụ thuộc vào độ dài input, model, hardware, network và load của hệ thống.
 
-![Figure 6-7: Latency waterfall của một serial response](images/fig6-7.svg)
+![Figure 6-7: Latency waterfall của một serial response](./figures/fig6-7.svg)
 
 Hiện tượng queueing trên môi trường production còn khuếch đại idle latency lên nhiều hơn nữa (Figure 6-8), tuy nhiên bài toán capacity planning nằm ngoài phạm vi của chương này.
 
-![Figure 6-8: Queueing latency curve](images/fig6-8.svg)
+![Figure 6-8: Queueing latency curve](./figures/fig6-8.svg)
 
 > **Experiment 6-4 ★: Xây dựng một voice Agent truyền thống**
 >
@@ -392,7 +392,7 @@ Ngay cả khi có streaming perception, một kiến trúc cascade vẫn phải 
 
 Các Omni model vẫn vận hành dựa trên giả định turn-taking và thường dùng VAD để xác định quyền phát biểu (assign the floor). Do đó, một mid-utterance pause khi người dùng đang đọc một chuỗi chữ số vẫn có thể bị nhận nhầm là thời điểm kết thúc lượt thoại (end of turn).
 
-![Figure 6-9: End-to-end omnimodal speech-model comparison](images/fig6-9.svg)
+![Figure 6-9: End-to-end omnimodal speech-model comparison](./figures/fig6-9.svg)
 
 > **Experiment 6-6 ★★: Run MiniCPM-o 4.5 locally—end-to-end versus self-cascade**
 >
@@ -418,7 +418,7 @@ Interaction quality và intelligence ceiling là hai chiều kích thước (dim
 
 Fast thinking có thể đưa ra một holding response (phản hồi giữ nhịp) trong vòng vài trăm millisecond, trong khi slow thinking thực hiện quá trình suy luận sâu hơn (deeper derivation) ở background. Các câu hỏi đơn giản có thể bị xử lý hai lần không cần thiết, trong khi các câu hỏi khó lại có thể tạo ra mâu thuẫn: fast model gợi ý người dùng chốt mua, sau đó slow model lại phát hiện ra một tính năng then chốt bị thiếu. Nguyên nhân cốt lõi (root cause) là do hai instance hoạt động độc lập và tư duy tách biệt nhau.
 
-![Figure 6-10: Fast/slow thinking architecture and design alternatives](images/fig6-10.svg)
+![Figure 6-10: Fast/slow thinking architecture and design alternatives](./figures/fig6-10.svg)
 
 #### Solution 2: Fast thinking cho interaction, slow thinking cho advice
 
@@ -465,7 +465,7 @@ Computer Use, hay còn gọi là GUI automation, cho phép AI sử dụng phần
 
 Việc phân biệt rõ giữa **thấu hiểu giao diện (understanding the interface)** và **hoàn thành tác vụ (completing the task)** là đặc biệt quan trọng. Vấn đề đầu tiên thiên về multimodal understanding thuần túy và có thể đo lường thông qua bài toán one-shot screenshot question answering. Vấn đề thứ hai đòi hỏi model phải đưa khả năng thấu hiểu và việc sinh action vào một closed loop để xử lý độ trễ tải trang, các state changes, lỗi phát sinh, và cả những tác động không thể đảo ngược. Do đó, thách thức cốt lõi của Computer Use không chỉ dừng lại ở việc phản hồi chính xác về một screenshot, mà nằm ở việc tái xác nhận sau mỗi bước xem thực tế có còn khớp với kế hoạch đã định hay không.
 
-![Figure 6-11: Computer Use Agent's Perceive-Think-Act Loop](images/fig6-11.svg)
+![Figure 6-11: Computer Use Agent's Perceive-Think-Act Loop](./figures/fig6-11.svg)
 
 Có ba chiều thiết kế then chốt trong vòng lặp này: **Action Space** (Agent có thể thực hiện những thao tác nào), **Visual Grounding** (cách xác định target element trên screenshot), và **Model Architecture** (cách sinh ra action chuẩn xác từ screenshot).
 
@@ -473,7 +473,7 @@ Có ba chiều thiết kế then chốt trong vòng lặp này: **Action Space**
 
 Bản reference implementation của Anthropic chia một năng lực tương tác hoàn chỉnh thành 3 loại tool (Figure 6-12). Đây là một thiết kế action-space rõ ràng, nhưng không phải là một private protocol bắt buộc các model provider khác phải tuân theo: miễn là Harness có thể chuyển đổi (translate) cùng các screenshot, action constraint và execution result thành message cùng structured output được target model hỗ trợ, thì Claude, các open-weight vision model và self-hosted endpoint đều có thể vận hành chung một vòng lặp Perceive-Think-Act (Perceive-Think-Act loop).
 
-![Figure 6-12: Computer Use Action Space](images/fig6-12.svg)
+![Figure 6-12: Computer Use Action Space](./figures/fig6-12.svg)
 
 **GUI Operation Tool** (`computer` tool): Các thao tác chuột (mouse operation) bao gồm di chuyển (`mouse_move`), click chuột trái/phải/giữa, double-click hoặc triple-click, kéo thả (`left_click_drag`), cùng các thao tác nhấn/nhả chính xác hơn (`left_mouse_down` và `left_mouse_up`). Thao tác cuộn (`scroll`) hỗ trợ 4 hướng và có thể kết hợp với các modifier key. Các thao tác bàn phím (keyboard operation) bao gồm gõ từng ký tự (`type`, với khoảng nghỉ 12ms giữa các ký tự để mô phỏng thao tác gõ thực tế), tổ hợp phím (`key`, ví dụ: `Ctrl+C`), và giữ phím (`hold_key`). Các perception action bao gồm chụp screenshot, lấy vị trí con trỏ chuột (`cursor_position`), và chờ (`wait`).
 
@@ -517,7 +517,7 @@ Elements:
 Model chỉ cần output một ID, và system sẽ tự động click vào tâm của element tương ứng. Cách tiếp cận này không giúp tiết kiệm token vì toàn bộ annotation data vẫn phải gửi tới model, nhưng nó mang lại khả năng localization chính xác, ổn định, đồng thời tránh được tình trạng missed detection và false positive mà các segmentation model có thể tạo ra.
 
 
-![Figure 6-13: Set-of-Mark vs. Structured Element Indexing (browser-use implementation)](images/fig6-13.svg)
+![Figure 6-13: Set-of-Mark vs. Structured Element Indexing (browser-use implementation)](./figures/fig6-13.svg)
 
 **Pure Coordinate Prediction.**
 
@@ -526,7 +526,7 @@ Hướng tiếp cận thứ ba bỏ qua bước annotation và yêu cầu model 
 Trong các cơ chế coordinate prediction, khả năng hiểu tọa độ của model phụ thuộc rất lớn vào resolution được sử dụng trong quá trình training (Figure 6-14). Claude được train bằng các resolution XGA (1024×768), WXGA (1280×800), và FWXGA (1366×768). Nếu resolution của screenshot đầu vào không khớp, tọa độ do model predict sẽ bị lệch có hệ thống (systematically shift)—tương tự như việc đo khoảng cách trên một tấm bản đồ nhỏ rồi áp trực tiếp lên một bản đồ lớn. Do đó, cần phải triển khai một cơ chế bidirectional coordinate scaling ở tool layer, và target resolution phải được **lựa chọn dựa trên aspect ratio** để tránh hiện tượng co giãn không đồng đều (non-uniform stretching) làm biến dạng ảnh, dẫn đến việc phán đoán tọa độ bị sai lệch. Ví dụ, nếu screen resolution thực tế là 2560×1440 (16:9), target phù hợp nhất trong số ba tùy chọn được Claude hỗ trợ là FWXGA (1366×768), do có aspect ratio gần với 16:9 nhất. Screenshot sẽ được scale theo đúng tỷ lệ về 1366×768 rồi đưa vào model; sau khi model output ra click coordinates (683, 384), chúng sẽ được inverse mapping về tọa độ thực tế: $(683 \times 2560 / 1366, 384 \times 1440 / 768) \approx (1280, 720)$. Ngược lại, nếu một ảnh 16:9 bị ép giãn về tỷ lệ 4:3 là 1024×768, ảnh sẽ bị nén theo chiều ngang, khiến tọa độ do model predict bị lệch có hệ thống.
 
 
-![Figure 6-14: Resolution Matching and Bidirectional Coordinate Scaling](images/fig6-14.svg)
+![Figure 6-14: Resolution Matching and Bidirectional Coordinate Scaling](./figures/fig6-14.svg)
 
 
 Việc lựa chọn giữa ba hướng tiếp cận có thể được đúc kết như sau: **khi có sẵn structured information, hãy ưu tiên DOM/accessibility-tree indexing** để đạt được localization chính xác và ổn định nhất. **Khi không có thông tin này**—chẳng hạn như trong native desktop software như Photoshop, các giao diện render bằng canvas/WebGL, hoặc game—**hãy sử dụng visual annotation (hướng tiếp cận SoM nguyên bản) hoặc coordinate prediction**. Visual annotation biến bài toán localization thành một bài toán trắc nghiệm (multiple-choice problem), giúp nó thân thiện hơn với các general-purpose model chưa qua specialized training. Coordinate prediction loại bỏ hoàn toàn bước annotation và trực diện hơn đối với các model được train chuyên biệt cho GUI localization. Cả hai cách tiếp cận này vẫn gặp khó khăn đối với các element kích thước nhỏ và giao diện có mật độ dày đặc (dense interfaces).
