@@ -1,6 +1,8 @@
 {# Override partials/content.html — thêm id + tabindex để skip-link nhảy được tới nội dung (WCAG 2.4.1). #}
 {# Cấu trúc bám sát theme gốc; chỉ thêm 2 attribute id + tabindex. #}
-<article id="main-content" tabindex="-1" class="md-content__inner md-typeset">
+{# Wrapper .md-content__inner của Material đã lo margin/padding ngang — không lặp lại class
+   ở đây để tránh cộng dồn 2 lớp lề trên mobile (book-theme.css section 11). #}
+<article id="main-content" tabindex="-1" class="md-typeset">
   {% block content %}
     {% if page.content %}
       {{ page.content }}
