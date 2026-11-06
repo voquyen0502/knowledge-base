@@ -277,7 +277,7 @@ body {
   }
 }
 
-.sidebar-toggle[hidden] { display: none; }
+.sidebar-toggle { display: none; }
 
 @media screen and (min-width: 76.25em) {
   .sidebar-toggle:not([hidden]) { display: inline-flex; }
