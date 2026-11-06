@@ -5,19 +5,13 @@
   {% set class = class ~ " md-header--shadow" %}
 {% endif %}
 <header class="{{ class }}" data-md-component="header">
-  <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
   <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
     <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}" class="md-header__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
       {% include "partials/logo.html" %}
     </a>
-    <label class="md-header__button md-icon" for="__drawer"
-           role="button" tabindex="0"
-           aria-controls="__drawer"
-           aria-label="Mở menu điều hướng">
+    <label class="md-header__button md-icon" for="__drawer">
       {% set icon = config.theme.icon.menu or "material/menu" %}
-      <span class="md-header__icon" aria-hidden="true">
-        {% include ".icons/" ~ icon ~ ".svg" %}
-      </span>
+      {% include ".icons/" ~ icon ~ ".svg" %}
     </label>
 
     {# Nút ẩn/hiện sidebar trên giao diện Desktop #}
@@ -25,12 +19,11 @@
             class="md-header__button md-icon sidebar-toggle"
             data-sidebar-toggle
             aria-controls="primary-navigation"
+            aria-expanded="true"
             aria-label="Ẩn thanh bên"
             title="Ẩn thanh bên"
             hidden>
-      <span class="md-header__icon" aria-hidden="true">
-        {% include ".icons/material/menu-open.svg" %}
-      </span>
+      {% include ".icons/material/menu-open.svg" %}
     </button>
 
     <div class="md-header__title" data-md-component="header-title">
@@ -40,7 +33,7 @@
             {{ config.site_name }}
           </span>
         </div>
-        <h1 class="md-header__topic" data-md-component="header-topic">
+        <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             {% if page.meta and page.meta.title %}
               {{ page.meta.title }}
@@ -48,7 +41,7 @@
               {{ page.title }}
             {% endif %}
           </span>
-        </h1>
+        </div>
       </div>
     </div>
 
@@ -63,14 +56,9 @@
     {% if "material/search" in config.plugins %}
       {% set search = config.plugins["material/search"] | attr("config") %}
       {% if search.enabled %}
-        <label class="md-header__button md-icon" for="__search"
-               role="button" tabindex="0"
-               aria-controls="__search"
-               aria-label="Tìm kiếm">
+        <label class="md-header__button md-icon" for="__search">
           {% set icon = config.theme.icon.search or "material/magnify" %}
-          <span class="md-header__icon" aria-hidden="true">
-            {% include ".icons/" ~ icon ~ ".svg" %}
-          </span>
+          {% include ".icons/" ~ icon ~ ".svg" %}
         </label>
         {% include "partials/search.html" %}
       {% endif %}
@@ -82,7 +70,5 @@
         {% include "partials/source.html" %}
       </div>
     {% endif %}
-
-    <span id="sidebar-state-announcer" class="sr-only" role="status" aria-live="polite"></span>
   </nav>
 </header>

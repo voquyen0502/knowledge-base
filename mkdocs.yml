@@ -53,9 +53,7 @@ theme:
     - search.share
 
 plugins:
-  - search:
-      lang: [vi, en]
-      separator: '[\s\-\.]+'
+  - search
   - tags
   - git-revision-date-localized:
       enable_creation_date: true
