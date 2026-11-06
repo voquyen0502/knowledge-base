@@ -113,7 +113,7 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
 }
-.skip-link:focus {
+.skip-link:focus-visible {
   position: fixed;
   top: var(--space-4);
   left: var(--space-4);
