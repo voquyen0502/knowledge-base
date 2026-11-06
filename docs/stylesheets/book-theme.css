@@ -957,6 +957,19 @@ html,
   }
 }
 
+/* Fix 3: Mobile drawer back-button — Material mobile gán
+   background-color: var(--md-primary-fg-color) = --astro-ink (#1f1f1f) cho
+   .md-nav__title lồng trong .md-nav__item--nested → thanh đen trên nền sáng.
+   Đồng bộ về astro-bg + chữ astro-ink để pass WCAG. Loại trừ title gốc
+   (.md-nav--primary > .md-nav__title) vì đã có ::after "MỤC LỤC" riêng. */
+@media screen and (max-width: 76.1875em) {
+  .md-sidebar--primary .md-nav__item--nested .md-nav__title {
+    background-color: var(--astro-bg);
+    color: var(--astro-ink);
+    box-shadow: none;
+  }
+}
+
 /* ── 14. Fix Mobile: nới padding lề trái cho drawer nav & TOC ──────────── */
 /* Trước đó MỤC LỤC = 8px, nav items = 12px, TRONG CHƯƠNG NÀY = 0px
    → đều sát lề trái + lệch mốc nhau. Đồng bộ về var(--space-4) = 16px
