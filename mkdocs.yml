@@ -16,14 +16,14 @@ theme:
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: white
-      accent: indigo
+      accent: "#5c7526"
       toggle:
         icon: material/weather-night
         name: Chuyển sang Dark Mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: slate
-      accent: indigo
+      accent: "#5c7526"
       toggle:
         icon: material/weather-sunny
         name: Chuyển sang Light Mode
@@ -53,7 +53,9 @@ theme:
     - search.share
 
 plugins:
-  - search
+  - search:
+      lang: [vi, en]
+      separator: '[\s\-\.]+'
   - tags
   - git-revision-date-localized:
       enable_creation_date: true

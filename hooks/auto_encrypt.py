@@ -47,4 +47,4 @@ def on_page_read_source(page, config):
         return f"---\n{block}\n{m.group(1)}\n---\n{content[m.end():]}"
     # Chưa có frontmatter — tạo mới
     return f"---\n{block}\n---\n\n{content}"
-        return f"---\npassword: '{WIKI_PASSWORD}'\n---\n\n{content}"
+

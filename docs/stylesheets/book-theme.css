@@ -68,6 +68,7 @@
   --layout-content-max:        44rem;
   --layout-sidebar-primary:    13.5rem;
   --layout-sidebar-secondary:  13rem;
+  --layout-header-height:      57px;
 }
 
 /* ── 2. Dark Mode Tokens (Chuẩn data-theme='dark' của Astro) ─────────────── */
@@ -164,7 +165,7 @@ body {
   background-color: var(--astro-bg);
   border-bottom: 1px solid var(--astro-line);
   color: var(--astro-ink);
-  height: 57px;
+  height: var(--layout-header-height);
   box-shadow: none;
 }
 
