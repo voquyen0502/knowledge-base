@@ -95,21 +95,15 @@
   
 
 <header class="md-header md-header--shadow" data-md-component="header">
-  <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
   <nav class="md-header__inner md-grid" aria-label="Đầu trang">
     <a href="/" title="Engineering Wiki" class="md-header__button md-logo" aria-label="Engineering Wiki" data-md-component="logo">
       
   <img src="../assets/logo.svg" alt="logo">
 
     </a>
-    <label class="md-header__button md-icon" for="__drawer"
-           role="button" tabindex="0"
-           aria-controls="__drawer"
-           aria-label="Mở menu điều hướng">
+    <label class="md-header__button md-icon" for="__drawer">
       
-      <span class="md-header__icon" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
 
     
@@ -117,12 +111,11 @@
             class="md-header__button md-icon sidebar-toggle"
             data-sidebar-toggle
             aria-controls="primary-navigation"
+            aria-expanded="true"
             aria-label="Ẩn thanh bên"
             title="Ẩn thanh bên"
             hidden>
-      <span class="md-header__icon" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 15.61 19.59 17l-5.01-5 5.01-5L21 8.39 17.44 12zM3 6h13v2H3zm0 7v-2h10v2zm0 5v-2h13v2z"/></svg>
-      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 15.61 19.59 17l-5.01-5 5.01-5L21 8.39 17.44 12zM3 6h13v2H3zm0 7v-2h10v2zm0 5v-2h13v2z"/></svg>
     </button>
 
     <div class="md-header__title" data-md-component="header-title">
@@ -132,13 +125,13 @@
             Engineering Wiki
           </span>
         </div>
-        <h1 class="md-header__topic" data-md-component="header-topic">
+        <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
               Tủ Sách Kỹ Thuật
             
           </span>
-        </h1>
+        </div>
       </div>
     </div>
 
@@ -173,63 +166,9 @@
 
     
     
-      
-      
-        <label class="md-header__button md-icon" for="__search"
-               role="button" tabindex="0"
-               aria-controls="__search"
-               aria-label="Tìm kiếm">
-          
-          <span class="md-header__icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-          </span>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Tìm kiếm" placeholder="Tìm kiếm" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Tìm kiếm">
-        
-          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Chia sẻ" aria-label="Chia sẻ" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
-          </a>
-        
-        <button type="reset" class="md-search__icon md-icon" title="Xoá" aria-label="Xoá" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-      
-    
 
     
     
-
-    <span id="sidebar-state-announcer" class="sr-only" role="status" aria-live="polite"></span>
   </nav>
 </header>
     
@@ -2454,10 +2393,8 @@
                   
 
 
-<article id="main-content" tabindex="-1" class="md-typeset">
-  
-    
-      <div id="mkdocs-encrypted-content" style="display:none">xPsHis4uHHVR2JKvfph2QQ==;mnAuVRUXv0vzaXRJ+XtxYEkz51xYJumTNkgREhepaGsYiPSJgn92kVAtlOBJ1PAVNdsuJc3mcpGX+PP/nStIbvsaLycxORBfmY05bnY82xd4rX2Ew5BkT/tMwE81oG0Fr4TXmMdUQZCQtxyGiP9oyt1Ij4YLXSFLbBbluVOZSZfci1hTmjugZP/fON4j6sM0Jcvbv1udvY/MdCkZwOKIKYWN9l/hUW6vVRmJ3mpMvRMDBKnQIxXIHsxRA/N2IztAZLrmnhgiatYZSAevduilbVViu+Sub4cKWAP3rIoNFAdBAsHerVLUCIRQ0AM+gHr2zl0XsqJ77nBHm7ifj2hq5i6hDjiCO2IkATzZ2WS3iQHUMlzgzMwdSfkiHdsVM94X0kFk+JxR3dS8svAiVIfvBk54yMboufW7l3sRsB8bMet6/zmolUUZEA6kKXUlwDcU8Qy0/gAYQzQntGchFqVEawqUspTzmnL02MdBkJUtTM1X2aBnY+6wjArOLNoNTMieA1nYyFbuLUKmjgz53cEGFhQQrq0iz2/MwTMFejnmJPy4ztPXwNFpGvvtW0qqMg052ImPgSOPmOuaPgLZD9KWEp/kcL8vOHa+Nu4ZzDBsU+YH8nMF9/L1oG16mSUO2JYVpYcPFyfQgGJdYloEW/5sW4Ca+FZVeiZafd9M3zkr0qoHIHcyCAFrSqjN/l10pbBMHxMWiEl6BGX1vf76IZ0Tv+aH8wRVm1uA1kypzlr3TL+9WIkeAjeposCcIAJkZ+R4Aj6iThn2hpapXASYu3pQs5aIh9veXWkVvXAunVSjp5nMXhvmY2WzXu6vU90mdihkxKW1ew6qv1u1pCbyh3TjaE6T2dUkavdZM/QdpMLryj49zguxKX1VM52FTIXzFqgjnGIev0Xdt1cyaHF1osaPupJv621slW0ORm/SqCB8XcUWUSGAnEFmYKLK98Khe+Teui2V1vySiC4NfDEZBCI2PwGWRxd4kuwKzfumL80BLNK/MhDxtYPHu/FvxhMqUaKddIOSWhDjRAB8tYeYhIV4uFwBa75XRh0Ht24yc6zx/1Y0fW2oxiWwYwjF7uNFD3q5s4Q6ee8+S2v9O5FUt8pfffAhGBP8jWAKbXuA5+3QUK2+K3ZqdHPlzFqRUZuR6J1eNlkrlQHblyMUUZnX/wlCtvHwXygqq1ptmOoSb7Y/dUcB0otbfTn1i1mjfPqDmoinw2sH4zn3lo7hLVqLFt7ExczQwYHjhlx6irAmqBeyFSrdx6enBaJuw4FeL2pqdAqZaiLzbsEl4Y3JkiY14peoJUag9fC6ije7SrrK87J0Mu2iwmduKdeExl6bbamvVHB1Ij5PzacsbU2rfUoJaSnm+Uby79deknj/kSZQBbA8juMKT7QC4/wfbiP407FEVm3EnELaNJw0vbXXVRSSTm3hljhKLu4mONfZelInUNjgwsYFZf197PjCUjXChCA0/5OcQ1nSlMoNFAx5CDSf5tHF3mLE3oOxa5jGBX8j+Hi1wVJVUl5PntyXFGiCtMI6Q0sIA8bDTsGb/mPVbKpSyrY1b7uIxZYTWwqMrcbHRzE+L9OKVPO+CWNY2b9R8wqbcszan1cBjNnmsHY9uXfZxOaqyMLfT9Axusm+QC3OR7tIRoggMWWxJCzNsdrjDa5P2On9p+IbmEZ7xR9j+IDdpzzkQyCJFvlEw/4o3YF5S/aLnViDr321gQlctSQzkolL60c18f7qDyxNuS+8OQub9VGu6b1zPB5Zf7/UT2MC01wOkm4Cg5Gj8axDbKdOAKFEBW+OZt6s8XjntY8Gmf96IW8Iin1KwhtMusAfzzA+VG4jVGZhTETRHmM4LenzK4W53BkBk8hMjkx+F19mrjLtDW2sqqGD0w//T88G39M+fdsw7E8=</div>
+
+<div id="mkdocs-encrypted-content" style="display:none">wa1GwoB3TGLwHnNIucsT6w==;DygxushnDx5wSohC6BIZsmiOr5YZUA8ZWHkVvBE5a88Sxbvbvu/mz/bXnEVDQis7FN4xSFpTUA3bG2uuJzVdHHDxq8/Z1kUuJqgn1kQeBEMIIGool/KTyhQay+aKvwDO6k/oVQbXRy3903IkrMnBD4LG+TysmFuiLT13NOGY4ZcgegTp0qCuG3D4zvohtDUTwiRutCQuJPAxSvEFCFGmJL2+T5rw7oeTFMTCwEmktnNo+CdMrpy9SqHLAMuemPdUm2OQAX5yRpe8GjW1d59rdBXYvDqFIU0zO/mPtd+U8+fDfTyAZQTwx7t9NY+bP6lLcxU4PGjufkM+IhWX1OQWVRSRMCZLxMidWc9SfkWPENNEF/cfdBEmek+8zGuPhGID+XCsYz/EOXYiStnIbw0RC+5Uda2lfeQm3ZHQQBehIiCnRIYVElqVC5bCc6+tU081TB2XxUQBDcDymL3f8LrrY55MC9Fdu9Ov0XTSqV2ZEPdx+sVb2H2/6oNeUnbAw1FobCCdOaQRe41XcBafZ16axqlT/QQOCVYzc+G1kFrrRtRfaFU5h4xHpRWbqEC8lcLK3nf0NikyR20k4kkGjrBJGnqT10qKqMXkEd6RrYVCPudvWd8D5ZF6hLkmyi+SgPFjiFwbeHhg+3PIAz87Hb8AjDACmeEuA4tmDzg5KA8URA+MjwKlr5BvVBUnTduGsvgEsMopsPO68nUcbfaeuWBe5Qx5A2I2mY9HrToRPdChZx/3mlaBg4DAHyxfWu64C5UvUP6Z/ht0/HARBKu5E830vCobxI88jldhDXLJLBpX+0AU+NnygTpvLLSiGfG5HNCxigwvRpommsUmsZEjL6JhmmENtfoGxHSCBhXXRkn3jJTjwvzQY2v7Nd8wzf4nfXwifzLfo0Kz8zOK1Fw/4LKpuiSKpkLREZxYfTSDPEAS7/qvxvJcFJIRcIfvdBDO4STfCtEksM90UPLL1Z7OvgRhQdon4o9RBGIZ/fZUQotgssmLLyNLJ/0KXQEtIk3390o7wok8UZIOWv1jONGO9yffmehwrTbbZtIcOarVcKmPsJPkx+GhQaWG1zjk7sxQtaczgiIci8LShIwopdv8yGhhgSYvy6hpTTnySH9Jg88mn2/4gjHUBKZB+40uJ+T9fTgh0vvFnildBuiCY3Dn77NsBKSLsiZ1xyl32IVyQb7vZk2FlRd3C0sP5P63wLBQGoB13hyP5BMkS9iWj3W7+wxqZfU7TJoIhHik6tjUjqKXfNMdP9JGbCOCnAoLnhfHj60dD8+DYlZpu4ZkDirHl3sZ3g10K62E1K5WlSgiq8P9RkqLg6GbvZh26LFB5cEcfCuifjlh2ulMP/11EEuVU0MqC2lEY3eT8IhmUnqb2penuX29wLL/uPWM/jFD0jUrU9z2WnJn5tj/Fv9Tkxugpl0nphQeMlzTLVBZfYsxSxTiWebymH8tGU5vooPM4hIv5+IbY+KUCYimkbsKoU+sg50PUNkIKh6K5apPxbKJjRIgG8u0zlePFMEq8zt3GLVBs7h98L2CKo4P3Y6eLc6fxWItNa2qZw5DizL9+T3p5iYVO8NbZNJRS99t31ZmNlPqEVJVOlgS2duU1Ro5C7i0Y07Wo0Beis40jwedoTfKJ525cYWx/pxQKPru/VP2twzbSvFX7LWrUNAnZnBiAN64ECSxmdTTHTiWrQvntMMW7YGFFgr3BmVL4/bf90g1v6om3Q6hCBzosRlgOYTMrPc2rqVcupYb+5apPBACWQuiSn0XMpNOSe+jMeO0g5IJ0tipODxa8U/1/KNcxFtEld0O2Xjetw/zYcF0YdlmKwYRgsE6cVZv+CWmHLb35yyxwL0zz1fjum6i7M+wcT5dlQrFUcquG6q52AaQjqtDGl+MVNulfZE=</div>
 <div id="mkdocs-decrypted-content" style="display:none">
     <form id="mkdocs-decrypt-form" class="md-content__inner md-typeset">
         <h1>Kho tri thức này được bảo vệ. Vui lòng nhập mật khẩu để mở khóa.</h1>
@@ -2472,7 +2409,7 @@
 var encryptcontent_id = "encryptcontent_1";
 var encryptcontent_path = "knowledge-base/books/";
 var decryption_failure_message = "Invalid password.";
-var encryptcontent_keystore = ["oj8Hljc/2nQ9aItsHTu9ow==;HAE4WPALMCI0sf3X8UIEWt19QSSFD1TmgPLOXitmgyV3aT6W42LSfxPIe5SM/+D/Dkdl/Tuo6ToTbNjbV0QTey8hZLR4bUgTae1ShnUmLsgkzvRGqt4DU+JhYKm8UdTk;zoh7JrXHGTOnQH9Y2n6Dkg=="];
+var encryptcontent_keystore = ["dGIa/xkgpssARInS/G55mQ==;ltv/QDR4IFG81nE12Lon9GQUjO6u5484QMaIsmnH9kk9bW5x4yp7cF5hV8mlEkzYH2VckeroUfJT5T3fGVTlfo2Odizdfo8sCcyHdMJwrarIU1Pl7ps546pqyDObIzjk;08gc8jZbNtDflYNSCtJA2g=="];
 var encryptcontent_obfuscate = 0;
 
 const encryptcontent_event = new Event("encryptcontent_event");
@@ -2485,9 +2422,50 @@ if (!window.hasOwnProperty("init_decryptor")) {
     init_decryptor();
 }
 </script>
+
+
+
+
+
+
+
+  
     
   
-</article>
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Cập nhật lần cuối">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="5 tháng 11, 2026 20:28:14 UTC">5 tháng 11, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Tạo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="5 tháng 11, 2026 20:28:14 UTC">5 tháng 11, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
                 
               </article>
             </div>
@@ -2575,7 +2553,7 @@ if (!window.hasOwnProperty("init_decryptor")) {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tooltips", "content.tabs.link", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u0110\u00e3 sao ch\u00e9p", "clipboard.copy": "Sao ch\u00e9p v\u00e0o b\u1ed9 nh\u1edb t\u1ea1m", "search.result.more.one": "1 t\u1eeb kh\u00e1c trong trang", "search.result.more.other": "# t\u1eeb kh\u00e1c trong trang", "search.result.none": "Kh\u00f4ng t\u00ecm th\u1ea5y t\u00e0i li\u1ec7u li\u00ean quan", "search.result.one": "1 t\u00e0i li\u1ec7u li\u00ean quan", "search.result.other": "# t\u00e0i li\u1ec7u li\u00ean quan", "search.result.placeholder": "Nh\u1eadp \u0111\u1ec3 b\u1eaft \u0111\u1ea7u t\u00ecm ki\u1ebfm", "search.result.term.missing": "Kh\u00f4ng", "select.version": "Ch\u1ecdn phi\u00ean b\u1ea3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tooltips", "content.tabs.link"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u0110\u00e3 sao ch\u00e9p", "clipboard.copy": "Sao ch\u00e9p v\u00e0o b\u1ed9 nh\u1edb t\u1ea1m", "search.result.more.one": "1 t\u1eeb kh\u00e1c trong trang", "search.result.more.other": "# t\u1eeb kh\u00e1c trong trang", "search.result.none": "Kh\u00f4ng t\u00ecm th\u1ea5y t\u00e0i li\u1ec7u li\u00ean quan", "search.result.one": "1 t\u00e0i li\u1ec7u li\u00ean quan", "search.result.other": "# t\u00e0i li\u1ec7u li\u00ean quan", "search.result.placeholder": "Nh\u1eadp \u0111\u1ec3 b\u1eaft \u0111\u1ea7u t\u00ecm ki\u1ebfm", "search.result.term.missing": "Kh\u00f4ng", "select.version": "Ch\u1ecdn phi\u00ean b\u1ea3n"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.c21346df.min.js"></script>

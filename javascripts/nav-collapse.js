@@ -1,197 +1,106 @@
 (function () {
   "use strict";
 
-  // ─── CONSTANTS ──────────────────────────────────────────────────────────
-  const STORAGE_KEY = "wiki.primary-sidebar-collapsed";
+  var SIDEBAR_STORAGE_KEY = "wiki.primary-sidebar-collapsed";
 
-  const CLASSES = { collapsed: "sidebar-nav-collapsed" };
+  function ensureStyle() {
+    if (document.getElementById("nav-collapse-style")) return;
+    var s = document.createElement("style");
+    s.id = "nav-collapse-style";
+    s.textContent = [
+      "@media screen and (min-width: 76.25em) {",
+      "  .md-sidebar--primary .md-nav__item--nested > .md-toggle:not(:checked) ~ .md-nav {",
+      "    display: none !important;",
+      "  }",
+      "  .md-sidebar--primary .md-nav__item--nested > .md-nav__container > label.md-nav__link {",
+      "    display: flex;",
+      "    align-items: center;",
+      "    cursor: pointer;",
+      "    pointer-events: auto !important;",
+      "    margin: 0;",
+      "    padding: 4px 0.2rem 0 0.4rem;",
+      "  }",
+      "  .md-sidebar--primary .md-nav__item--nested > .md-nav__container > label.md-nav__link .md-nav__icon {",
+      "    display: block;",
+      "  }",
+      "}",
+    ].join("\n");
+    document.head.appendChild(s);
+  }
 
-  const SELECTORS = {
-    toggle:       "[data-sidebar-toggle]",
-    sidebar:      ".md-sidebar--primary",
-    announcer:    "#sidebar-state-announcer",
-    nested:       ".md-nav__item--nested",
-    nestedToggle: ":scope > .md-toggle",
-    nestedLabelScoped: ":scope > .md-nav__container > label.md-nav__link",
-    nestedLabelAny:    ".md-sidebar .md-nav__item--nested > .md-nav__container > label.md-nav__link",
-    activeLink:   ".md-nav__link--active",
-    drawerLabel:  'label[for="__drawer"]',
-    searchLabel:  'label[for="__search"]',
-  };
+  function applyDefaultState() {
+    var sidebar = document.querySelector(".md-sidebar--primary");
+    if (!sidebar) return;
+    if (sidebar.querySelector(".md-nav__item--nested > .md-toggle:checked")) return;
 
-  const SR_TEXT = {
-    collapsed: "Đã ẩn thanh bên",
-    expanded:  "Đã hiện thanh bên",
-  };
+    var sections = sidebar.querySelectorAll(".md-nav__item--nested");
+    if (sections.length > 0) {
+      var firstToggle = sections[0].querySelector(":scope > .md-toggle");
+      if (firstToggle) firstToggle.checked = true;
+    }
+  }
 
-  // ─── state (thuần, chỉ localStorage) ────────────────────────────────────
-  const readUserPref = () => {
+  function readSidebarPreference() {
     try {
-      const v = window.localStorage.getItem(STORAGE_KEY);
-      return v === null ? null : v === "true";
-    } catch (err) {
-      console.warn("[WikiNav] Không đọc được localStorage", err);
+      var value = window.localStorage.getItem(SIDEBAR_STORAGE_KEY);
+      return value === null ? null : value === "true";
+    } catch (_) {
       return null;
     }
-  };
-
-  const writeUserPref = (collapsed) => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, String(collapsed));
-    } catch (err) {
-      console.warn("[WikiNav] Không ghi được localStorage", err);
-    }
-  };
-
-  // ─── dom ────────────────────────────────────────────────────────────────
-  const applySidebarState = (collapsed, { remember = false } = {}) => {
-    const sidebar = document.querySelector(SELECTORS.sidebar);
-    const toggle  = document.querySelector(SELECTORS.toggle);
-    const hadFocusInside = collapsed && sidebar && sidebar.contains(document.activeElement);
-
-    document.documentElement.classList.toggle(CLASSES.collapsed, collapsed);
-
-    if (toggle) {
-      const label = collapsed ? "Hiện thanh bên" : "Ẩn thanh bên";
-      toggle.setAttribute("aria-expanded", String(!collapsed));
-      toggle.setAttribute("aria-label", label);
-      toggle.setAttribute("title", label);
-    }
-
-    if (hadFocusInside) {
-      const fallback = document.querySelector(SELECTORS.drawerLabel);
-      (toggle && !toggle.hidden ? toggle : fallback)?.focus();
-    }
-
-    if (remember) writeUserPref(collapsed);
-  };
-
-  const applySectionAria = () => {
-    const sidebar = document.querySelector(SELECTORS.sidebar);
-    if (!sidebar) return;
-    sidebar.querySelectorAll(SELECTORS.nested).forEach((item) => {
-      const toggle = item.querySelector(SELECTORS.nestedToggle);
-      const label  = item.querySelector(SELECTORS.nestedLabelScoped);
-      if (!toggle || !label) return;
-      label.setAttribute("aria-expanded", String(toggle.checked));
-      if (!label.hasAttribute("role")) label.setAttribute("role", "button");
-      if (!label.hasAttribute("tabindex")) label.setAttribute("tabindex", "0");
-    });
-  };
-
-  // Chỉ mở section chứa link active — không auto-open section đầu (Nielsen #3).
-  const expandActiveSection = () => {
-    const sidebar = document.querySelector(SELECTORS.sidebar);
-    if (!sidebar) return;
-    const active = sidebar.querySelector(SELECTORS.activeLink);
-    if (!active) return;
-    let node = active;
-    while ((node = node.parentElement) && node !== sidebar) {
-      if (node.classList.contains("md-nav__item--nested")) {
-        const t = node.querySelector(SELECTORS.nestedToggle);
-        if (t) t.checked = true;
-      }
-    }
-  };
-
-  const announce = (text) => {
-    const el = document.getElementById("sidebar-state-announcer");
-    if (!el) return;
-    el.textContent = "";
-    requestAnimationFrame(() => { el.textContent = text; });
-  };
-
-  // ─── handlers ───────────────────────────────────────────────────────────
-  const onClick = (event) => {
-    // 1. Nút toggle sidebar
-    if (event.target.closest(SELECTORS.toggle)) {
-      const next = !document.documentElement.classList.contains(CLASSES.collapsed);
-      applySidebarState(next, { remember: true });
-      announce(next ? SR_TEXT.collapsed : SR_TEXT.expanded);
-      return;
-    }
-    // 2. Label section nested: đồng bộ aria-expanded sau khi checkbox đổi state
-    if (event.target.closest(SELECTORS.nestedLabelAny)) {
-      requestAnimationFrame(applySectionAria);
-    }
-  };
-
-  const onKeydown = (event) => {
-    const { key, target } = event;
-
-    // Escape: đóng sidebar khi focus đang ở trong sidebar
-    if (key === "Escape") {
-      const sidebar = document.querySelector(SELECTORS.sidebar);
-      if (!sidebar) return;
-      const isCollapsed = document.documentElement.classList.contains(CLASSES.collapsed);
-      if (sidebar.contains(document.activeElement) && !isCollapsed) {
-        event.preventDefault();
-        applySidebarState(true, { remember: true });
-        announce(SR_TEXT.collapsed);
-      }
-      return;
-    }
-
-    // Enter / Space trên label-as-button (drawer, search, nested section)
-    if (key === "Enter" || key === " ") {
-      if (target.tagName !== "LABEL") return;
-      const isFakeButton =
-        target.matches(SELECTORS.drawerLabel) ||
-        target.matches(SELECTORS.searchLabel) ||
-        target.matches(SELECTORS.nestedLabelAny);
-      if (isFakeButton) {
-        event.preventDefault();
-        target.click();
-      }
-    }
-  };
-
-  // ─── lifecycle ──────────────────────────────────────────────────────────
-  const isMounted = () =>
-    document.documentElement.dataset.navCollapseMounted === "true";
-
-  const mount = () => {
-    if (isMounted()) return;
-    const sidebar = document.querySelector(SELECTORS.sidebar);
-    const toggle  = document.querySelector(SELECTORS.toggle);
-
-    if (!sidebar || !toggle || sidebar.hidden) {
-      if (toggle) toggle.hidden = true;
-      return;
-    }
-
-    document.documentElement.dataset.navCollapseMounted = "true";
-    if (!sidebar.id) sidebar.id = "primary-navigation";
-    if (toggle) toggle.setAttribute("aria-controls", sidebar.id);
-    toggle.hidden = false;
-
-    document.addEventListener("click",   onClick,   true);
-    document.addEventListener("keydown", onKeydown, true);
-
-    const pref = readUserPref();
-    const collapsed = pref === null
-      ? document.documentElement.classList.contains(CLASSES.collapsed)
-      : pref;
-
-    applySidebarState(collapsed, { remember: false });
-    applySectionAria();
-    expandActiveSection();
-    applySectionAria(); // chạy lại vì expandActiveSection vừa đổi checked
-  };
-
-  const unmount = () => {
-    if (!isMounted()) return;
-    document.removeEventListener("click",   onClick,   true);
-    document.removeEventListener("keydown", onKeydown, true);
-    delete document.documentElement.dataset.navCollapseMounted;
-  };
-
-  // ─── boot ───────────────────────────────────────────────────────────────
-  if (window.document$) {
-    window.document$.subscribe(() => { unmount(); mount(); });
-  } else if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mount);
-  } else {
-    mount();
   }
+
+  function writeSidebarPreference(collapsed) {
+    try {
+      window.localStorage.setItem(SIDEBAR_STORAGE_KEY, String(collapsed));
+    } catch (_) {}
+  }
+
+  function setSidebarCollapsed(collapsed, remember) {
+    document.documentElement.classList.toggle("sidebar-nav-collapsed", collapsed);
+
+    var button = document.querySelector("[data-sidebar-toggle]");
+    if (button) {
+      var label = collapsed ? "Hiện thanh bên" : "Ẩn thanh bên";
+      button.setAttribute("aria-expanded", String(!collapsed));
+      button.setAttribute("aria-label", label);
+      button.setAttribute("title", label);
+    }
+
+    if (remember) writeSidebarPreference(collapsed);
+  }
+
+  function initSidebarToggle() {
+    var button = document.querySelector("[data-sidebar-toggle]");
+    var sidebar = document.querySelector(".md-sidebar--primary");
+    if (!button || !sidebar || sidebar.hidden) {
+      if (button) button.hidden = true;
+      return;
+    }
+
+    sidebar.id = "primary-navigation";
+    button.hidden = false;
+
+    var preference = readSidebarPreference();
+    var collapsed = preference === null
+      ? document.documentElement.classList.contains("sidebar-nav-collapsed")
+      : preference;
+    setSidebarCollapsed(collapsed, false);
+
+    if (button.getAttribute("data-sidebar-toggle-bound") !== "true") {
+      button.setAttribute("data-sidebar-toggle-bound", "true");
+      button.addEventListener("click", function () {
+        var next = !document.documentElement.classList.contains("sidebar-nav-collapsed");
+        setSidebarCollapsed(next, true);
+      });
+    }
+  }
+
+  function init() {
+    ensureStyle();
+    applyDefaultState();
+    initSidebarToggle();
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+  if (window.document$) window.document$.subscribe(init);
 })();
