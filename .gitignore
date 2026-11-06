@@ -32,3 +32,4 @@ desktop.ini
 .env.*
 !.env.example
 encryptcontent.cache
+.aider*

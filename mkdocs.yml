@@ -3,7 +3,7 @@ site_description: Personal Technical Knowledge Base & System Architecture Notes
 site_url: https://voquyen0502.github.io/knowledge-base/
 # repo_url: https://github.com/voquyen0502/knowledge-base
 # repo_name: knowledge-base
-edit_uri: edit/main/docs/
+# edit_uri: edit/main/docs/
 
 theme:
   name: material
@@ -54,8 +54,7 @@ theme:
 
 plugins:
   - search
-  - tags:
-      tags_file: tags.md
+  - tags
   - git-revision-date-localized:
       enable_creation_date: true
       enable_git_follow: false

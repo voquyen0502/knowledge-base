@@ -34,14 +34,48 @@
   --md-primary-bg-color:          var(--astro-bg);
   --md-primary-fg-color:          var(--astro-ink);
   --md-accent-fg-color:           var(--astro-interactive);
+
+  /* ── Design tokens bổ sung (Phase 1) ─────────────────────────────── */
+  /* Font aliases (chuẩn bị migrate khỏi --astro-sans/serif/mono ở Phase 2) */
+  --font-sans:  var(--astro-sans);
+  --font-serif: var(--astro-serif);
+  --font-mono:  var(--astro-mono);
+
+  /* Spacing — base 4px */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+
+  /* Radius */
+  --radius-sm:   3px;
+  --radius-md:   4px;
+  --radius-pill: 20px;
+
+  /* Stacking */
+  --z-skip:   100;
+  --z-drawer: 50;
+  --z-toast:  200;
+
+  /* Motion */
+  --motion-fast: 0.15s ease;
+  --motion-base: 0.2s ease;
+
+  /* Layout */
+  --layout-breakpoint-wide:    76.25em;
+  --layout-content-max:        44rem;
+  --layout-sidebar-primary:    13.5rem;
+  --layout-sidebar-secondary:  13rem;
 }
 
 /* ── 2. Dark Mode Tokens (Chuẩn data-theme='dark' của Astro) ─────────────── */
 [data-md-color-scheme="slate"] {
-  --astro-bg:          #18191c;   /* Nền than chì sâu */
+  --astro-bg:          #242424;   /* Nền than chì sâu */
   --astro-surface:     #222429;   /* Nền card / quote tối */
-  --astro-ink:         #eeeef0;   /* Chữ trắng ngà mềm */
-  --astro-muted:       #aaadb6;   /* Chữ phụ xám bạc */
+  --astro-ink:         #ffffffde;   /* Chữ trắng ngà mềm */
+  --astro-muted:       #ebebeb99;   /* Chữ phụ xám bạc */
   --astro-line:        #383b43;   /* Viền xám tối */
   --astro-accent:      #aac7ff;   /* Accent xanh băng */
   --astro-accent-ink:  #243d66;
@@ -52,6 +86,51 @@
   --md-default-fg-color:          var(--astro-ink);
   --md-default-fg-color--soft:     var(--astro-muted);
   --md-default-fg-color--light:    var(--astro-muted);
+}
+
+/* ── 2.5. Utilities: Accessibility ───────────────────────────────────────── */
+/* Ẩn khỏi mắt thường nhưng giữ trong cây trợ năng */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Skip-to-content: ẩn ngoài viewport, hiện khi nhận focus bàn phím */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.skip-link:focus {
+  position: fixed;
+  top: var(--space-4);
+  left: var(--space-4);
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  z-index: var(--z-skip);
+  padding: var(--space-2) var(--space-4);
+  background: var(--astro-surface);
+  color: var(--astro-ink);
+  border: 2px solid var(--astro-interactive);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 /* ── 3. Reset Toàn trang & Triệt tiêu bóng ───────────────────────────────── */
@@ -97,6 +176,12 @@ body {
   font-family: var(--astro-sans) !important;
   font-weight: 750 !important;
   font-size: 0.95rem !important;
+}
+
+.md-header__topic {
+  font: inherit;
+  margin: 0;
+  letter-spacing: normal;
 }
 
 /* Ẩn triệt để phần bọc nút GitHub nếu chưa kịp xóa trong mkdocs.yml */
@@ -284,6 +369,9 @@ html.is-unlocked .md-sidebar--primary .md-nav__link [class*="encrypt"] {
 /* ── 7. Sidebar Phải (TOC - "TRONG CHƯƠNG NÀY") ─────────────────────────── */
 /* ── Sidebar Phải (TOC): Thu gọn chiều rộng & Font-size ─────────────────── */
 @media screen and (min-width: 76.25em) {
+  .md-nav--primary .md-nav__title {
+        background: transparent;
+    }
   .md-sidebar--secondary {
     width: 13.5rem !important;        /* Giảm từ 14rem xuống 11.5rem (~184px) */
     padding-right: 0.4rem;

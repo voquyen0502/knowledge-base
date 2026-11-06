@@ -1,4 +1,4 @@
-# CHƯƠNG MỘT **The Mom Test** 
+# CHƯƠNG MỘT: **The Mom Test** 
 
 Người ta thường bảo bạn đừng bao giờ hỏi mẹ xem ý tưởng kinh doanh của mình có hay ho không. Về lý thuyết thì đúng, nhưng nhận định đó chưa đi trúng vào bản chất. Bạn không nên hỏi *bất kỳ ai* xem ý tưởng kinh doanh của mình có hay không. Ít nhất là không dùng đúng những từ ngữ đó. Mẹ bạn sẽ là người nói dối bạn nhiều nhất (đơn giản vì bà yêu bạn), nhưng bản thân đó đã là một câu hỏi tồi—một câu hỏi mở đường cho tất cả mọi người nói dối bạn, dù ít hay nhiều. 
 
