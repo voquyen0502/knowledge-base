@@ -383,7 +383,7 @@ body {
   line-height: 1.4;
   padding: 5px 8px;
   border-radius: var(--radius-md);
-  transition: all var(--motion-fast);
+  transition: background-color var(--motion-fast), color var(--motion-fast);
 }
 .md-sidebar--primary .md-nav__link:hover {
   color: var(--astro-ink);
@@ -392,9 +392,11 @@ body {
 
 .md-sidebar--primary a.md-nav__link--active {
   color: var(--astro-ink);
-  background-color: var(--astro-surface);
+  background-color: rgba(74, 103, 65, 0.14);
+  background-color: color-mix(in srgb, var(--astro-interactive) 14%, transparent);
   font-weight: 700;
-  border-left: 2px solid var(--astro-interactive);
+  border-left: none;
+  box-shadow: inset 3px 0 0 var(--astro-interactive);
   padding-left: 8px;
   margin-left: 0;
 }
@@ -941,9 +943,11 @@ html,
 @media screen and (max-width: 76.1875em) {
   .md-nav--primary .md-nav__item--active > .md-nav__link {
     color: var(--astro-ink);
-    background-color: var(--astro-surface);
+    background-color: rgba(74, 103, 65, 0.14);
+    background-color: color-mix(in srgb, var(--astro-interactive) 14%, transparent);
     font-weight: 650;
-    padding-left: 20px;
+    box-shadow: inset 3px 0 0 var(--astro-interactive);
+    padding-left: var(--space-4);
   }
 }
 
@@ -965,8 +969,23 @@ html,
 @media screen and (max-width: 76.1875em) {
   .md-sidebar--primary .md-nav__item--nested .md-nav__title {
     background-color: var(--astro-bg);
-    color: var(--astro-ink);
+    color: var(--astro-muted);
     box-shadow: none;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+  /* Mũi tên ← giữ touch target ≥ 44px khi bấm back */
+  .md-sidebar--primary .md-nav__item--nested .md-nav__title .md-nav__icon {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -987,5 +1006,57 @@ html,
   .md-sidebar--primary .md-nav__link {
     padding-left: var(--space-4);
     padding-right: var(--space-4);
+  }
+}
+
+/* ── 15. Mobile drawer: width, overlay, hierarchy, indentation ──────────── */
+/* Bổ sung cho section 6/13/14 — chỉ áp trong breakpoint Material mobile để
+   không đụng layout desktop (≥ 76.25em). */
+@media screen and (max-width: 76.1875em) {
+  /* A1: drawer quá hẹp (12.1rem ≈ 54vw) làm tiêu đề sách wrap 3–4 dòng */
+  .md-sidebar--primary,
+  .md-nav--primary {
+    width: 82vw;
+    max-width: 340px;
+  }
+
+  /* A2: overlay có blur — Material chỉ đổi opacity nên nền sau phẳng lì */
+  .md-overlay {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  /* B1: bỏ "lưới" đường kẻ ngang cứng giữa mọi item */
+  .md-nav--primary .md-nav__item {
+    border-top: none;
+  }
+  .md-nav--primary .md-nav__item:last-child {
+    border-bottom: none;
+  }
+
+  /* B3: cấp 1 (tên sách / mục) nặng hơn cấp 2 để có phân cấp thị giác.
+     Loại trừ link đang active để không đè font-weight của Fix 1. */
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__container > .md-nav__link:not(.md-nav__link--active),
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__container > label.md-nav__link,
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link:not(.md-nav__link--active) {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--astro-ink);
+  }
+
+  /* B2: cấp 2 — thụt lề + trunk dọc, hạ tông chữ để lùi về sau */
+  .md-sidebar--primary .md-nav__list .md-nav__list .md-nav__link {
+    padding-left: calc(var(--space-4) + 0.5rem);
+    border-left: 1.5px solid var(--astro-line);
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--astro-muted);
+  }
+
+  /* B2: cấp 3 — thụt sâu hơn, không thêm trunk thứ hai */
+  .md-sidebar--primary .md-nav__list .md-nav__list .md-nav__list .md-nav__link {
+    padding-left: calc(var(--space-4) + 1rem);
+    border-left: none;
+    font-size: 0.78rem;
   }
 }

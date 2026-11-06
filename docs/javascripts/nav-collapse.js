@@ -17,6 +17,7 @@
     activeLink:   ".md-nav__link--active",
     drawerLabel:  'label[for="__drawer"]',
     searchLabel:  'label[for="__search"]',
+    drawerBackLabel: '.md-nav--primary .md-nav__item--nested .md-nav__title[for="__drawer"]',
   };
 
   const SR_TEXT = {
@@ -77,6 +78,12 @@
       if (!label.hasAttribute("role")) label.setAttribute("role", "button");
       if (!label.hasAttribute("tabindex")) label.setAttribute("tabindex", "0");
     });
+    // D3: back-button drill-down là <label for="__drawer"> — mặc định không
+    // nhận Tab, phải nâng thành role=button + tabindex=0 thủ công.
+    sidebar.querySelectorAll(SELECTORS.drawerBackLabel).forEach((label) => {
+      if (!label.hasAttribute("role")) label.setAttribute("role", "button");
+      if (!label.hasAttribute("tabindex")) label.setAttribute("tabindex", "0");
+    });
   };
 
   // Chỉ mở section chứa link active — không auto-open section đầu (Nielsen #3).
@@ -119,8 +126,19 @@
   const onKeydown = (event) => {
     const { key, target } = event;
 
-    // Escape: đóng sidebar khi focus đang ở trong sidebar
+    // Escape: mobile đóng drawer, desktop thu gọn sidebar
     if (key === "Escape") {
+      if (window.matchMedia("(max-width: 76.1875em)").matches) {
+        const drawer = document.getElementById("__drawer");
+        if (drawer && drawer.checked) {
+          event.preventDefault();
+          drawer.checked = false;
+          // E2: drawer bị display:none → focus rơi về <body>, trả về hamburger
+          document.querySelector(SELECTORS.drawerLabel)?.focus();
+          announce(SR_TEXT.collapsed);
+        }
+        return;
+      }
       const sidebar = document.querySelector(SELECTORS.sidebar);
       if (!sidebar) return;
       const isCollapsed = document.documentElement.classList.contains(CLASSES.collapsed);
@@ -132,18 +150,29 @@
       return;
     }
 
-    // Enter / Space trên label-as-button (drawer, search, nested section)
+    // Enter / Space trên label-as-button (drawer, search, nested section, back)
     if (key === "Enter" || key === " ") {
       if (target.tagName !== "LABEL") return;
       const isFakeButton =
         target.matches(SELECTORS.drawerLabel) ||
         target.matches(SELECTORS.searchLabel) ||
-        target.matches(SELECTORS.nestedLabelAny);
+        target.matches(SELECTORS.nestedLabelAny) ||
+        target.matches(SELECTORS.drawerBackLabel);
       if (isFakeButton) {
         event.preventDefault();
         target.click();
       }
     }
+  };
+
+  // E2: drawer đóng bằng click overlay / label → trả focus về hamburger,
+  // nhưng chỉ khi focus đang thực sự nằm trong sidebar (tránh cướp focus
+  // khi drawer tự đóng lúc điều hướng SPA).
+  const onChange = (event) => {
+    if (event.target.id !== "__drawer" || event.target.checked) return;
+    const sidebar = document.querySelector(SELECTORS.sidebar);
+    if (!sidebar || !sidebar.contains(document.activeElement)) return;
+    document.querySelector(SELECTORS.drawerLabel)?.focus();
   };
 
   // ─── lifecycle ──────────────────────────────────────────────────────────
@@ -167,6 +196,7 @@
 
     document.addEventListener("click",   onClick,   true);
     document.addEventListener("keydown", onKeydown, true);
+    document.addEventListener("change",  onChange,  true);
 
     const pref = readUserPref();
     const collapsed = pref === null
@@ -183,6 +213,7 @@
     if (!isMounted()) return;
     document.removeEventListener("click",   onClick,   true);
     document.removeEventListener("keydown", onKeydown, true);
+    document.removeEventListener("change",  onChange,  true);
     delete document.documentElement.dataset.navCollapseMounted;
   };
 
