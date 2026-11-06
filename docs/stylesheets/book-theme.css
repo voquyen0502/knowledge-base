@@ -107,7 +107,7 @@ body {
 /* ── 1. Nút Light/Dark: Tăng khoảng cách với ô tìm kiếm ─────────────────── */
 .md-header__option {
   margin-left: auto !important;
-  margin-right: 28px !important;    /* Tăng khoảng cách lên 28px (rộng và thoáng hơn) */
+  margin-right: auto !important;    /* Tăng khoảng cách lên 28px (rộng và thoáng hơn) */
   display: flex;
   align-items: center;
 }

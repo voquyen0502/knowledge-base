@@ -48,12 +48,12 @@ theme:
     - content.tooltips
     - content.tabs.link
     # Tìm kiếm
-    - search.suggest
-    - search.highlight
-    - search.share
+    # - search.suggest
+    # - search.highlight
+    # - search.share
 
 plugins:
-  - search
+  # - search
   - tags
   - git-revision-date-localized:
       enable_creation_date: true
