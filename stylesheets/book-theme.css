@@ -3,7 +3,7 @@
    =========================================================================== */
 
 /* ── 0. Nhúng cặp Font Tạp chí từ Google Fonts ───────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=Manrope:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap');
 
 /* ── 1. Light Mode Tokens (Chuẩn global.css của Astro) ───────────────────── */
 :root {
@@ -16,14 +16,14 @@
   --md-code-font:      var(--astro-mono);
 
   /* Color Palette (100% match Astro reader) */
-  --astro-bg:          #fcfcf9;   /* Nền giấy ngà ấm */
-  --astro-surface:     #f2f3ed;   /* Nền khối quote, code, bảng, thẻ hover */
-  --astro-ink:         #20231e;   /* Chữ than rêu đen trầm */
-  --astro-muted:       #62675d;   /* Chữ phụ, breadcrumb, link chưa active */
-  --astro-line:        #dedfd7;   /* Đường phân cách 1px mờ */
+  --astro-bg:          #fafaf8;   /* Nền giấy trung tính — không lệch warm */
+  --astro-surface:     #f2f2ee;   /* Nền khối quote, code, bảng, thẻ hover */
+  --astro-ink:         #1f1f1f;   /* Chữ than trung tính — không ngả rêu */
+  --astro-muted:       #5c5c5c;   /* Chữ phụ, breadcrumb, link chưa active */
+  --astro-line:        #e2e2dd;   /* Đường phân cách 1px mờ */
   --astro-accent:      #d8ed7a;   /* Badge neon */
   --astro-accent-ink:  #293019;   /* Chữ rêu đậm trên nền badge */
-  --astro-interactive: #5c7526;   /* Vạch active sidebar, hover link */
+  --astro-interactive: #4a6741;   /* Forest green — đậm hơn olive, contrast 6.2:1 */
 
   /* Map biến nội bộ của Material for MkDocs */
   --md-default-bg-color:          var(--astro-bg);
@@ -69,6 +69,12 @@
   --layout-sidebar-primary:    13.5rem;
   --layout-sidebar-secondary:  13rem;
   --layout-header-height:      57px;
+
+  /* Scrollbar — dùng riêng 3 shade cho 3 state để tránh chìm vào nền */
+  --scrollbar-thumb:        #cfcfc9;
+  --scrollbar-thumb-hover:  #adadaa;
+  --scrollbar-thumb-active: var(--astro-interactive);
+  --scrollbar-track:        transparent;
 }
 
 /* ── 2. Dark Mode Tokens (Chuẩn data-theme='dark' của Astro) ─────────────── */
@@ -87,6 +93,9 @@
   --md-default-fg-color:          var(--astro-ink);
   --md-default-fg-color--soft:     var(--astro-muted);
   --md-default-fg-color--light:    var(--astro-muted);
+
+  --scrollbar-thumb:        #4a4e57;
+  --scrollbar-thumb-hover:  #6a6f7a;
 }
 
 /* ── 2.5. Utilities: Accessibility ───────────────────────────────────────── */
@@ -266,6 +275,18 @@ body {
   color: var(--astro-muted);
 }
 
+/* Chống iOS auto-zoom: input < 16px → Safari iOS phóng viewport khi focus */
+@media (max-width: 60em) {
+  .md-search__input { font-size: 1rem; }
+}
+
+/* Header compact trên điện thoại nhỏ (≤ 30em) */
+@media screen and (max-width: 30em) {
+  .md-header__inner { padding: 0 0.6rem; gap: 4px; }
+  .md-header__option { margin-right: 8px; }
+  .md-header__title { font-size: 0.85rem; }
+}
+
 /* ── 5. Layout toàn trang Desktop ────────────────────────────────────────── */
 @media screen and (min-width: 76.25em) {
   .md-grid { max-width: 100%; }
@@ -288,12 +309,63 @@ body {
 }
 
 /* ── 6. Sidebar Trái (Mục lục chương) ────────────────────────────────────── */
+/* ── 5.5. Nút nổi "Trở lại mục lục" (.md-top) ───────────────────────────── */
+/* Material ẩn nút bằng transform translate(-50%, -150%) ↔ .md-top--active,
+   ràng buộc ở `[dir="ltr"] .md-top` (0,2,0). Vì ta đổi mốc neo sang bottom,
+   theme không còn tự ẩn được → tự quản lý ẩn/hiện bằng opacity + visibility
+   + pointer-events. Lặp class (.md-top.md-top) để thắng specificity mà không
+   dùng !important. */
+.md-top.md-top {
+  top: auto;
+  bottom: var(--space-5);
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%) translateY(0.5rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--motion-fast), transform var(--motion-fast);
+}
+
+.md-top.md-top--active {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ── 5.6. Nút nổi — mobile/tablet: góc phải dưới, chỉ icon ──────────────── */
+@media screen and (max-width: 76.1875em) {
+  .md-top.md-top {
+    left: auto;
+    right: var(--space-4);
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+    transform: translateY(0.5rem);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0 var(--space-3);
+  }
+
+  .md-top.md-top--active { transform: translateY(0); }
+
+  /* Ẩn nhãn chữ trên mobile để nút không phình ra che nội dung.
+     Nếu markup render text trực tiếp trong <button> (không bọc .md-top__label),
+     thay 3 dòng dưới bằng:
+       .md-top.md-top { font-size: 0; }
+       .md-top.md-top svg { width: 1.1rem; height: 1.1rem; } */
+  .md-top .md-top__label { display: none; }
+}
+
 @media screen and (min-width: 76.25em) {
   .md-sidebar--primary {
     width: var(--layout-sidebar-primary);
     padding-left: 0.6rem;
     border-right: 1px solid var(--astro-line);
     background-color: var(--astro-bg);
+    min-height: calc(100vh - var(--layout-header-height));
   }
   .md-sidebar--secondary {
     width: var(--layout-sidebar-secondary);
@@ -311,11 +383,39 @@ body {
     cursor: pointer;
     pointer-events: auto;
     margin: 0;
-    padding: 4px 0.2rem 0 0.4rem;
+    padding: 5px 8px;
   }
+
+  /* Đồng bộ mốc xuất phát của section và link ở cấp 1 */
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__container {
+    padding-left: 0;
+    margin-left: 0;
+  }
+
   .md-sidebar--primary .md-nav__item--nested > .md-nav__container > label.md-nav__link .md-nav__icon {
     display: block;
   }
+
+  /* Đồng đều độ đậm cấp 1 — phá default 700 của Material cho section header */
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link:not(.md-nav__link--active),
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__container > .md-nav__link:not(.md-nav__link--active),
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__container > label.md-nav__link {
+    font-weight: 400;
+  }
+}
+
+/* Touch target ≥ 44px trong drawer mobile (WCAG 2.5.5) */
+@media screen and (max-width: 76.1875em) {
+  .md-sidebar--primary .md-nav__link {
+    padding: 10px 12px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .md-sidebar--primary .md-nav__item--nested > .md-nav__container > label.md-nav__link {
+    min-height: 44px;
+  }
+
 }
 
 .md-nav__title {
@@ -350,20 +450,48 @@ body {
 }
 
 /* Ẩn chữ site_name mặc định ở đầu Sidebar trái và thay bằng MỤC LỤC */
-.md-sidebar--primary .md-nav--primary > .md-nav__title {
+.md-sidebar--primary .md-nav--primary > .md-nav__title,
+.md-sidebar--primary .md-nav--primary > .md-nav__title[for="__drawer"] {
+  position: static;
+  top: auto;
+  z-index: auto;
   font-size: 0;
   color: transparent;
-  padding: 12px 10px 4px;
+  background: transparent;
+  box-shadow: none;
+  padding: var(--space-3) var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--astro-line);
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+/* .md-nav__title set color: transparent để ẩn site_name — nhưng cũng làm SVG
+   con (fill: currentColor) vô hình. Khôi phục màu cho logo button. */
+.md-sidebar--primary .md-nav--primary > .md-nav__title > .md-nav__button.md-logo {
+  color: var(--astro-ink);
 }
 
 .md-sidebar--primary .md-nav--primary > .md-nav__title::after {
   content: "MỤC LỤC";                /* Thay nội dung bạn muốn tại đây */
   font-family: var(--astro-sans);
-  font-size: 0.72rem;
-  font-weight: 750;
-  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   color: var(--astro-muted);
   display: block;
+  line-height: 1;
+}
+
+/* Material render .md-nav__title lặp lại bên trong mỗi section expanded
+   (dùng làm back button trên mobile). Trên desktop nó hiện thành heading
+   trùng tên section, đè lên item list — ẩn hoàn toàn; mobile giữ nguyên
+   cho navigation back. */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary .md-nav--primary > .md-nav__list .md-nav__title,
+  .md-nav--secondary > .md-nav__list .md-nav__title {
+    display: none;
+  }
 }
 
 /* ── 1. TRẠNG THÁI KHÓA (Mặc định): Hiện icon ổ khóa thanh mảnh, tinh tế ── */
@@ -400,19 +528,39 @@ html.is-unlocked .md-sidebar--primary .md-nav__link [class*="encrypt"] {
   position: static;
   font-size: 0;
   color: transparent;
-  margin-bottom: 12px;
-  padding: 0;
+  margin: 0 0 var(--space-4);
+  padding: 0 0 var(--space-3);
   box-shadow: none;
   background: transparent;
+  border-bottom: 1px solid var(--astro-line);
 }
 .md-nav--secondary .md-nav__title::after {
   content: "TRONG CHƯƠNG NÀY";
   font-family: var(--astro-sans);
-  font-size: 0.68rem;       /* Hạ từ 0.75rem xuống 0.68rem để cân đối với cột trái */
-  font-weight: 750;
-  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   color: var(--astro-muted);
   display: block;
+  line-height: 1;
+}
+
+/* Desktop: Material có rule `.md-nav--secondary .md-nav__title[for="__toc"]`
+   (specificity 0,3,0) set `position: sticky`, đè `position: static` ở rule
+   gốc phía trên (0,2,0) → title dính đầu sidebar và che các item bên dưới khi
+   cuộn. Thêm biến thể `[for="__toc"]` để cùng specificity; file extra_css
+   load sau nên thắng ở source order. Chỉ áp desktop — mobile (< 76.25em) TOC
+   là drawer và cần title sticky để luôn thấy back button khi cuộn. */
+@media screen and (min-width: 76.25em) {
+  .md-nav--secondary > .md-nav__title,
+  .md-nav--secondary > .md-nav__title[for="__toc"] {
+    position: static;
+    top: auto;
+    z-index: auto;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
 }
 
 /* 1. Xóa bỏ hoàn toàn border-left trên từng thẻ link <a> để không bị đứt đoạn */
@@ -430,7 +578,6 @@ html.is-unlocked .md-sidebar--primary .md-nav__link [class*="encrypt"] {
 .md-nav--secondary > .md-nav__list {
   border-left: 1px solid var(--astro-line);
   padding-left: 0;
-  margin-left: 4px;
 }
 
 /* 3. Mục cấp 2 (H3) thụt lề sâu hơn nhưng không tạo thêm đường kẻ mới */
@@ -624,41 +771,42 @@ body:has(#mkdocs-decrypt-form) .md-content {
 }
 
 /* ── 11. Giao diện Mobile Responsive ─────────────────────────────────────── */
-@media screen and (max-width: 600px) {
-  /* 1. Khung đệm an toàn 24px hai bên mép màn hình */
+@media screen and (max-width: 60em) {
+  /* 1. Khung đệm an toàn 24px hai bên mép màn hình.
+     Chỉ article #main-content (nội dung do ta kiểm soát) đảm nhiệm padding.
+     Reset lớp bọc Material .md-content__inner về 0 — tránh cộng dồn 2 lớp
+     lề do Material default `padding: .8rem` + class trùng tên ở lớp trong. */
   .md-content__inner {
-    margin: 0 0 1.2rem;
-    padding-left: 24px;
-    padding-right: 24px;
-    padding-top: 1.2rem;
+    margin: 0;
+    padding: 0;
   }
-  .md-typeset p,
-  .md-typeset ul,
-  .md-typeset ol,
-  .md-typeset blockquote p {
-    font-family: 'Literata', Georgia, Cambria, serif;
-    line-height: 1.68;        /* Thoáng đãng cho dấu tiếng Việt */
-    font-weight: 400;         /* Nét đầm, sắc sảo trên màn hình di động */
-    font-optical-sizing: auto;
-    letter-spacing: -0.01em;
-    text-wrap: pretty;
+  #main-content {
+    margin: 0 0 1.2rem;
+    padding-left: clamp(1.2rem, 5vw, 1.5rem);
+    padding-right: clamp(1.2rem, 5vw, 1.5rem);
+    padding-top: 1.25rem;
   }
   .md-typeset p,
   .md-typeset ul,
   .md-typeset ol {
-    font-size: 0.8rem;
+    font-size: 1rem;                       /* mobile min 16px — chống iOS zoom + đọc tốt */
+    line-height: 1.68;
+    font-weight: 420;
+    letter-spacing: -0.005em;
+    text-wrap: pretty;
   }
-  .md-typeset blockquote p { font-size: 0.76rem; }
-  .md-typeset h1 { font-size: 2.16rem; }
+  .md-typeset > p:first-of-type {
+    font-size: 1.1rem;                     /* Lead paragraph > body — không để ngược (M5) */
+    line-height: 1.6;
+  }
+  .md-typeset blockquote p { font-size: 0.95rem; }
+  .md-typeset h1 {
+    font-size: clamp(1.75rem, 7vw, 2.16rem); /* 320px → 1.75rem, 414px+ → 2.16rem (M4) */
+    margin-bottom: 1.4rem;
+  }
   .md-typeset h2 { font-size: 1.2rem; }
-  .md-top, 
-  [data-md-component="top"] {
-    top: auto;
-    bottom: 1.5rem;
-    right: 1.2rem;
-    left: auto;
-    transform: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  .md-nav--secondary .md-nav__title {
+    margin: 0 0 0;
   }
 }
 
@@ -738,9 +886,38 @@ body:has(#mkdocs-decrypt-form) .md-content {
   opacity: 1;
 }
 
-.md-sidebar--secondary .md-sidebar__scrollwrap {
+/* ── Scrollbar thống nhất toàn site ──────────────────────────────────── */
+/* Firefox / Gecko */
+html,
+.md-sidebar__scrollwrap,
+.md-search__output,
+.md-typeset pre {
   scrollbar-width: thin;
-  scrollbar-color: var(--astro-line) transparent;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* WebKit / Blink (Chromium, Safari, Electron) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border: 2px solid transparent;   /* tạo khe hở 2px quanh thumb */
+  background-clip: padding-box;
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--scrollbar-thumb-active);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 /* 1. Ẩn hoàn toàn permalink trên H1 (Tên chương không cần anchor link) */
@@ -774,5 +951,69 @@ body:has(#mkdocs-decrypt-form) .md-content {
     animation-duration: 0.01ms;
     transition-duration: 0.01ms;
     scroll-behavior: auto;
+  }
+}
+
+/* ── 12. Tinh chỉnh Mobile: input, Code, Quote, Table, Mermaid ──────────── */
+@media screen and (max-width: 60em) {
+  /* Đặt cuối file để thắng rule gốc 0.85rem ở khối encryptcontent (source order) */
+  .encryptcontent-form input[type="password"] { font-size: 1rem; }
+
+  .md-typeset pre {
+    padding: var(--space-3) var(--space-3);    /* 24px 16px → 12px 12px */
+    margin: 1.2em 0 1.6em;
+  }
+  .md-typeset pre > code { font-size: 0.78rem; }  /* 0.7rem → 0.78rem */
+  .md-typeset blockquote { padding: var(--space-3) var(--space-4) 6px; }
+  .md-typeset table:not([class]) { font-size: 0.82rem; }  /* 0.7rem → 0.82rem */
+  .md-typeset .mermaid {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+}
+
+/* ── 13. Fix Mobile: Material mobile override palette ───────────────────── */
+
+/* Fix 1: Material mobile (< 76.25em) có rule `.md-nav--primary .md-nav__item--active > .md-nav__link`
+   set `background-color: --md-primary-fg-color` (= --astro-ink) ở specificity 0,3,0 —
+   đè rule desktop `.md-sidebar--primary a.md-nav__link--active` (0,2,1) → đen-trên-đen.
+   Khôi phục cả 2 thuộc tính về palette site ở cùng specificity 0,3,0;
+   file ta load sau nên thắng ở source order. */
+@media screen and (max-width: 76.1875em) {
+  .md-nav--primary .md-nav__item--active > .md-nav__link {
+    color: var(--astro-ink);
+    background-color: var(--astro-surface);
+    font-weight: 650;
+    padding-left: 20px;
+  }
+}
+
+/* Fix 2: Mobile drawer dùng <label for="__drawer"> (hamburger chuẩn Material).
+   Nút .sidebar-toggle chỉ có tác dụng ở desktop vì `.sidebar-nav-collapsed`
+   chỉ ẩn sidebar trong @media ≥ 76.25em. Force ẩn trên mobile với specificity 0,3,0
+   để thắng mọi override của theme ở mức thấp hơn. */
+@media screen and (max-width: 76.1875em) {
+  .md-header .md-header__button.sidebar-toggle {
+    display: none;
+  }
+}
+
+/* ── 14. Fix Mobile: nới padding lề trái cho drawer nav & TOC ──────────── */
+/* Trước đó MỤC LỤC = 8px, nav items = 12px, TRONG CHƯƠNG NÀY = 0px
+   → đều sát lề trái + lệch mốc nhau. Đồng bộ về var(--space-4) = 16px
+   để cả 3 tầng thẳng hàng dọc và có không gian thở. */
+@media screen and (max-width: 76.1875em) {
+  /* Cả 2 tiêu đề (MỤC LỤC + TRONG CHƯƠNG NÀY) chung 1 rule — cùng padding ngang */
+  .md-sidebar--primary .md-nav--primary > .md-nav__title,
+  .md-sidebar--primary .md-nav--primary > .md-nav__title[for="__drawer"],
+  .md-nav--secondary .md-nav__title {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  /* Nav items trong drawer — đồng mốc 16px với title ở trên */
+  .md-sidebar--primary .md-nav__link {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
   }
 }
