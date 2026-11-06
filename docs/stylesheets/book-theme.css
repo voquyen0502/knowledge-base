@@ -717,8 +717,15 @@ body:has(#mkdocs-decrypt-form) .md-content {
 
 /* ── 11. Giao diện Mobile Responsive ─────────────────────────────────────── */
 @media screen and (max-width: 60em) {
-  /* 1. Khung đệm an toàn 24px hai bên mép màn hình */
+  /* 1. Khung đệm an toàn 24px hai bên mép màn hình.
+     Chỉ article #main-content (nội dung do ta kiểm soát) đảm nhiệm padding.
+     Reset lớp bọc Material .md-content__inner về 0 — tránh cộng dồn 2 lớp
+     lề do Material default `padding: .8rem` + class trùng tên ở lớp trong. */
   .md-content__inner {
+    margin: 0;
+    padding: 0;
+  }
+  #main-content {
     margin: 0 0 1.2rem;
     padding-left: clamp(1rem, 5vw, 1.5rem);
     padding-right: clamp(1rem, 5vw, 1.5rem);
