@@ -275,15 +275,20 @@ body {
   color: var(--astro-muted);
 }
 
-/* Chống iOS auto-zoom: input < 16px → Safari iOS phóng viewport khi focus */
-@media (max-width: 60em) {
+/* M6: Chống iOS auto-zoom: input < 16px → Safari iOS phóng viewport khi focus.
+   Mở rộng breakpoint 60em → 76.1875em để phủ iPad portrait/landscape. */
+@media screen and (max-width: 76.1875em) {
   .md-search__input { font-size: 1rem; }
+}
+
+/* M8: thu hẹp khoảng cách palette ↔ search trên tablet/mobile */
+@media screen and (max-width: 76.1875em) {
+  .md-header__option { margin-right: var(--space-2); }
 }
 
 /* Header compact trên điện thoại nhỏ (≤ 30em) */
 @media screen and (max-width: 30em) {
   .md-header__inner { padding: 0 0.6rem; gap: 4px; }
-  .md-header__option { margin-right: 8px; }
   .md-header__title { font-size: 0.85rem; }
 }
 
@@ -316,6 +321,10 @@ body {
     border-right: 1px solid var(--astro-line);
     background-color: var(--astro-bg);
     min-height: calc(100vh - var(--layout-header-height));
+  }
+  /* M9: padding nav link khai báo trong media query — không phụ thuộc source order */
+  .md-sidebar--primary .md-nav__link {
+    padding: var(--space-1) var(--space-2);
   }
   .md-sidebar--secondary {
     width: var(--layout-sidebar-secondary);
@@ -357,7 +366,7 @@ body {
 /* Touch target ≥ 44px trong drawer mobile (WCAG 2.5.5) */
 @media screen and (max-width: 76.1875em) {
   .md-sidebar--primary .md-nav__link {
-    padding: 10px 12px;
+    padding: var(--space-2) var(--space-4);
     min-height: 44px;
     display: flex;
     align-items: center;
@@ -381,7 +390,6 @@ body {
   font-family: var(--astro-sans);
   font-size: 0.75rem;
   line-height: 1.4;
-  padding: 5px 8px;
   border-radius: var(--radius-md);
   transition: all var(--motion-fast);
 }
@@ -422,6 +430,10 @@ body {
   color: var(--astro-ink);
 }
 
+/* TODO(M12): pseudo ::after không đảm bảo accessible name trong mọi SR.
+   Chuẩn WCAG yêu cầu override overrides/partials/nav.html để chèn
+   <span class="sr-only">Mục lục</span> bên trong .md-nav__title — ngoài
+   phạm vi sửa hiện tại, tạm chấp nhận visual-only. */
 .md-sidebar--primary .md-nav--primary > .md-nav__title::after {
   content: "MỤC LỤC";                /* Thay nội dung bạn muốn tại đây */
   font-family: var(--astro-sans);
@@ -724,12 +736,7 @@ body:has(#mkdocs-decrypt-form) .md-content {
 @media screen and (max-width: 60em) {
   /* 1. Khung đệm an toàn 24px hai bên mép màn hình.
      Chỉ article #main-content (nội dung do ta kiểm soát) đảm nhiệm padding.
-     Reset lớp bọc Material .md-content__inner về 0 — tránh cộng dồn 2 lớp
-     lề do Material default `padding: .8rem` + class trùng tên ở lớp trong. */
-  .md-content__inner {
-    margin: 0;
-    padding: 0;
-  }
+     Không còn .md-content__inner — wrapper đã đổi thành #main-content. */
   #main-content {
     margin: 0 0 1.2rem;
     padding-left: clamp(1.2rem, 5vw, 1.5rem);
@@ -758,8 +765,8 @@ body:has(#mkdocs-decrypt-form) .md-content {
   .md-top, 
   [data-md-component="top"] {
     top: auto;
-    bottom: 1.5rem;
-    right: 1.2rem;
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    right:  calc(1.2rem + env(safe-area-inset-right, 0px));
     left: auto;
     transform: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -955,6 +962,11 @@ html,
   .md-header .md-header__button.sidebar-toggle {
     display: none;
   }
+  /* M5: palette toggle đạt touch target ≥ 44px trên mobile/tablet (WCAG 2.5.5) */
+  .md-header__option .md-header__button:not([hidden]) {
+    width: 44px;
+    height: 44px;
+  }
 }
 
 /* ── 14. Fix Mobile: nới padding lề trái cho drawer nav & TOC ──────────── */
@@ -974,5 +986,17 @@ html,
   .md-sidebar--primary .md-nav__link {
     padding-left: var(--space-4);
     padding-right: var(--space-4);
+  }
+}
+
+/* ── 15. Touch target TOC drawer mobile (WCAG 2.5.5) ──────────────────── */
+/* M4: TOC link trong drawer mobile cần ≥ 44px và font ≥ 0.85rem để dễ tap. */
+@media screen and (max-width: 76.1875em) {
+  .md-nav--secondary .md-nav__link {
+    padding: var(--space-2) var(--space-4);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
   }
 }
