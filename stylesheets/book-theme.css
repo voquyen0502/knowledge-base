@@ -23,7 +23,7 @@
   --astro-line:        #dedfd7;   /* Đường phân cách 1px mờ */
   --astro-accent:      #d8ed7a;   /* Badge neon */
   --astro-accent-ink:  #293019;   /* Chữ rêu đậm trên nền badge */
-  --astro-interactive: #8ba43a;   /* Vạch active sidebar, hover link */
+  --astro-interactive: #5c7526;   /* Vạch active sidebar, hover link */
 
   /* Map biến nội bộ của Material for MkDocs */
   --md-default-bg-color:          var(--astro-bg);
@@ -34,14 +34,49 @@
   --md-primary-bg-color:          var(--astro-bg);
   --md-primary-fg-color:          var(--astro-ink);
   --md-accent-fg-color:           var(--astro-interactive);
+
+  /* ── Design tokens bổ sung (Phase 1) ─────────────────────────────── */
+  /* Font aliases (chuẩn bị migrate khỏi --astro-sans/serif/mono ở Phase 2) */
+  --font-sans:  var(--astro-sans);
+  --font-serif: var(--astro-serif);
+  --font-mono:  var(--astro-mono);
+
+  /* Spacing — base 4px */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+
+  /* Radius */
+  --radius-sm:   3px;
+  --radius-md:   4px;
+  --radius-pill: 20px;
+
+  /* Stacking */
+  --z-skip:   100;
+  --z-drawer: 50;
+  --z-toast:  200;
+
+  /* Motion */
+  --motion-fast: 0.15s ease;
+  --motion-base: 0.2s ease;
+
+  /* Layout */
+  --layout-breakpoint-wide:    76.25em;
+  --layout-content-max:        44rem;
+  --layout-sidebar-primary:    13.5rem;
+  --layout-sidebar-secondary:  13rem;
+  --layout-header-height:      57px;
 }
 
 /* ── 2. Dark Mode Tokens (Chuẩn data-theme='dark' của Astro) ─────────────── */
 [data-md-color-scheme="slate"] {
-  --astro-bg:          #18191c;   /* Nền than chì sâu */
+  --astro-bg:          #242424;   /* Nền than chì sâu */
   --astro-surface:     #222429;   /* Nền card / quote tối */
-  --astro-ink:         #eeeef0;   /* Chữ trắng ngà mềm */
-  --astro-muted:       #aaadb6;   /* Chữ phụ xám bạc */
+  --astro-ink:         #ffffffde;   /* Chữ trắng ngà mềm */
+  --astro-muted:       #b8b8b8;   /* Chữ phụ xám bạc */
   --astro-line:        #383b43;   /* Viền xám tối */
   --astro-accent:      #aac7ff;   /* Accent xanh băng */
   --astro-accent-ink:  #243d66;
@@ -54,10 +89,62 @@
   --md-default-fg-color--light:    var(--astro-muted);
 }
 
+/* ── 2.5. Utilities: Accessibility ───────────────────────────────────────── */
+/* Ẩn khỏi mắt thường nhưng giữ trong cây trợ năng */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Skip-to-content: ẩn ngoài viewport, hiện khi nhận focus bàn phím */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.skip-link:focus-visible {
+  position: fixed;
+  top: var(--space-4);
+  left: var(--space-4);
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  z-index: var(--z-skip);
+  padding: var(--space-2) var(--space-4);
+  background: var(--astro-surface);
+  color: var(--astro-ink);
+  border: 2px solid var(--astro-interactive);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--astro-interactive);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
 /* ── 3. Reset Toàn trang & Triệt tiêu bóng ───────────────────────────────── */
 body {
-  background-color: var(--astro-bg) !important;
-  color: var(--astro-ink) !important;
+  background-color: var(--astro-bg);
+  color: var(--astro-ink);
   font-family: var(--astro-sans);
 }
 
@@ -70,108 +157,113 @@ body {
 .md-typeset details,
 .md-typeset pre,
 .md-typeset table:not([class]) {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* ── 4. Tinh chỉnh Header phẳng & Tách khoảng cách các nút ───────────────── */
 .md-header {
-  background-color: var(--astro-bg) !important;
-  border-bottom: 1px solid var(--astro-line) !important;
-  color: var(--astro-ink) !important;
-  height: 57px;
-  box-shadow: none !important;
+  background-color: var(--astro-bg);
+  border-bottom: 1px solid var(--astro-line);
+  color: var(--astro-ink);
+  height: var(--layout-header-height);
+  box-shadow: none;
 }
 
 .md-header__inner {
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 1.2rem !important;
+  padding: 0 1.2rem;
   gap: 8px; /* Giữ khoảng cách đều giữa các nút */
 }
 
 /* Tiêu đề trang đẩy toàn bộ công cụ sang mép phải */
 .md-header__title {
   flex: 1 1 auto;
-  color: var(--astro-ink) !important;
-  font-family: var(--astro-sans) !important;
-  font-weight: 750 !important;
-  font-size: 0.95rem !important;
+  color: var(--astro-ink);
+  font-family: var(--astro-sans);
+  font-weight: 750;
+  font-size: 0.95rem;
+}
+
+.md-header__topic {
+  font: inherit;
+  margin: 0;
+  letter-spacing: normal;
 }
 
 /* Ẩn triệt để phần bọc nút GitHub nếu chưa kịp xóa trong mkdocs.yml */
 .md-header__source {
-  display: none !important;
+  display: none;
 }
 
 /* ── 1. Nút Light/Dark: Tăng khoảng cách với ô tìm kiếm ─────────────────── */
 .md-header__option {
-  margin-left: auto !important;
-  margin-right: 28px !important;    /* Tăng khoảng cách lên 28px (rộng và thoáng hơn) */
+  margin-left: auto;
+  margin-right: 28px;    /* Tăng khoảng cách lên 28px (rộng và thoáng hơn) */
   display: flex;
   align-items: center;
 }
 
 .md-header__option .md-header__button:not([hidden]) {
-  color: var(--astro-ink) !important;
+  color: var(--astro-ink);
   width: 36px;
   height: 36px;
-  display: inline-flex !important;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: background-color var(--motion-fast), color var(--motion-fast);
 }
 
 .md-header__option .md-header__button:not([hidden]):hover {
-  background-color: var(--astro-surface) !important;
-  color: var(--astro-interactive) !important;
+  background-color: var(--astro-surface);
+  color: var(--astro-interactive);
 }
 
 /* ── 2. Ô tìm kiếm: Đồng bộ 1 màu nền duy nhất, xóa hình chữ nhật xám ──── */
 .md-search {
-  max-width: 210px !important;
-  margin: 0 !important;
+  max-width: 210px;
+  margin: 0;
 }
 
 .md-search__inner {
-  background: transparent !important;
+  background: transparent;
 }
 
 /* Gán nền bo cong cho cả form cha và triệt tiêu nền xám lệch màu */
 .md-search__form {
-  background-color: var(--astro-surface) !important; /* Dùng đúng màu surface đồng nhất */
-  border-radius: 20px !important;
-  box-shadow: none !important;
+  background-color: var(--astro-surface); /* Dùng đúng màu surface đồng nhất */
+  border-radius: var(--radius-pill);
+  box-shadow: none;
   overflow: hidden;                                  /* Cắt gọn các góc thừa */
   border: 1px solid transparent;
-  transition: border-color 0.15s ease;
+  transition: border-color var(--motion-fast);
 }
 
 .md-search__form:focus-within {
-  border-color: var(--astro-interactive) !important; /* Viền sáng khi bấm vào tìm kiếm */
+  border-color: var(--astro-interactive); /* Viền sáng khi bấm vào tìm kiếm */
 }
 
 /* Input trong suốt kế thừa màu của form cha, hết bị 2 lớp màu đè nhau */
 .md-search__input {
-  background-color: transparent !important;
-  color: var(--astro-ink) !important;
-  border-radius: 20px !important;
-  height: 34px !important;
-  font-size: 0.78rem !important;
-  font-family: var(--astro-sans) !important;
-  padding-left: 38px !important;
-  border: none !important;
-  outline: none !important;
+  background-color: transparent;
+  color: var(--astro-ink);
+  border-radius: var(--radius-pill);
+  height: 34px;
+  font-size: 0.78rem;
+  font-family: var(--astro-sans);
+  padding-left: 38px;
+  border: none;
 }
 
 .md-search__input::placeholder {
-  color: var(--astro-muted) !important;
+  color: var(--astro-muted);
 }
 
 .md-search__icon {
-  color: var(--astro-muted) !important;
+  color: var(--astro-muted);
 }
 
 /* ── 5. Layout toàn trang Desktop ────────────────────────────────────────── */
@@ -181,23 +273,16 @@ body {
   /* Căn giữa nội dung bài viết trong không gian màn hình */
   .md-content { 
     max-width: 44rem; 
-    margin-left: auto !important; 
-    margin-right: auto !important; /* Bỏ margin-right: 0 cũ */
-  }
-
-  /* Đẩy mục lục dính sát mép phải màn hình */
-  .md-sidebar--secondary { 
-    width: 13rem !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important; /* Sát mép phải, chừa 1rem tránh dính sát viền màn hình */
-    padding-right: 0.5rem;
+    margin-left: auto; 
+    margin-right: auto; /* Bỏ margin-right: 0 cũ */
   }
 }
 
-.sidebar-toggle:not([hidden]) { display: none; }
+.sidebar-toggle { display: none; }
+
 @media screen and (min-width: 76.25em) {
   .sidebar-toggle:not([hidden]) { display: inline-flex; }
-  .sidebar-toggle svg { transition: transform 0.15s ease; }
+  .sidebar-toggle svg { transition: transform var(--motion-fast); }
   .sidebar-nav-collapsed .sidebar-toggle svg { transform: scaleX(-1); }
   .sidebar-nav-collapsed .md-sidebar--primary { display: none; }
 }
@@ -205,70 +290,91 @@ body {
 /* ── 6. Sidebar Trái (Mục lục chương) ────────────────────────────────────── */
 @media screen and (min-width: 76.25em) {
   .md-sidebar--primary {
-    width: 13.5rem !important;
+    width: var(--layout-sidebar-primary);
     padding-left: 0.6rem;
     border-right: 1px solid var(--astro-line);
     background-color: var(--astro-bg);
   }
+  .md-sidebar--secondary {
+    width: var(--layout-sidebar-secondary);
+    margin-left: 0;
+    margin-right: 0;
+    padding-right: 0.5rem;
+  }
+
+  .md-sidebar--primary .md-nav__item--nested > .md-toggle:not(:checked) ~ .md-nav {
+    display: none;
+  }
+  .md-sidebar--primary .md-nav__item--nested > .md-nav__container > label.md-nav__link {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: auto;
+    margin: 0;
+    padding: 4px 0.2rem 0 0.4rem;
+  }
+  .md-sidebar--primary .md-nav__item--nested > .md-nav__container > label.md-nav__link .md-nav__icon {
+    display: block;
+  }
 }
 
 .md-nav__title {
-  color: var(--astro-muted) !important;
-  font-family: var(--astro-sans) !important;
-  font-size: 0.72rem !important;
-  font-weight: 750 !important;
-  letter-spacing: 0.14em !important;
+  color: var(--astro-muted);
+  font-family: var(--astro-sans);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
 }
 
 .md-sidebar--primary .md-nav__link {
-  color: var(--astro-muted) !important;
-  font-family: var(--astro-sans) !important;
-  font-size: 0.75rem !important;
-  line-height: 1.4 !important;
-  padding: 5px 8px !important;
-  border-radius: 4px;
-  transition: all 0.15s ease;
+  color: var(--astro-muted);
+  font-family: var(--astro-sans);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  padding: 5px 8px;
+  border-radius: var(--radius-md);
+  transition: all var(--motion-fast);
 }
 .md-sidebar--primary .md-nav__link:hover {
-  color: var(--astro-ink) !important;
-  background-color: var(--astro-surface) !important;
+  color: var(--astro-ink);
+  background-color: var(--astro-surface);
 }
 
 .md-sidebar--primary a.md-nav__link--active {
-  color: var(--astro-ink) !important;
-  background-color: var(--astro-surface) !important;
-  font-weight: 700 !important;
-  border-left: 2px solid var(--astro-interactive) !important;
-  padding-left: 8px !important;
-  margin-left: 0 !important;
+  color: var(--astro-ink);
+  background-color: var(--astro-surface);
+  font-weight: 700;
+  border-left: 2px solid var(--astro-interactive);
+  padding-left: 8px;
+  margin-left: 0;
 }
 
 /* Ẩn chữ site_name mặc định ở đầu Sidebar trái và thay bằng MỤC LỤC */
 .md-sidebar--primary .md-nav--primary > .md-nav__title {
-  font-size: 0 !important;
-  color: transparent !important;
-  padding: 12px 10px 4px !important;
+  font-size: 0;
+  color: transparent;
+  padding: 12px 10px 4px;
 }
 
 .md-sidebar--primary .md-nav--primary > .md-nav__title::after {
   content: "MỤC LỤC";                /* Thay nội dung bạn muốn tại đây */
   font-family: var(--astro-sans);
-  font-size: 0.72rem !important;
-  font-weight: 750 !important;
-  letter-spacing: 0.14em !important;
-  color: var(--astro-muted) !important;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  color: var(--astro-muted);
   display: block;
 }
 
 /* ── 1. TRẠNG THÁI KHÓA (Mặc định): Hiện icon ổ khóa thanh mảnh, tinh tế ── */
 .md-sidebar--primary .md-nav__link svg:not(.md-nav__icon *) {
-  display: inline-block !important;
+  display: inline-block;
   opacity: 0.45;                             /* Để mờ 45% cho đỡ nặng mắt */
   width: 14px;
   height: 14px;
   margin-left: auto;                         /* Đẩy icon về sát mép phải dòng */
   vertical-align: middle;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity var(--motion-base), transform var(--motion-base);
 }
 
 .md-sidebar--primary .md-nav__link:hover svg:not(.md-nav__icon *) {
@@ -278,69 +384,66 @@ body {
 /* ── 2. TRẠNG THÁI MỞ KHÓA (.is-unlocked): Ẩn hoàn toàn icon ổ khóa ────── */
 html.is-unlocked .md-sidebar--primary .md-nav__link svg:not(.md-nav__icon *),
 html.is-unlocked .md-sidebar--primary .md-nav__link [class*="encrypt"] {
-  display: none !important;
+  display: none;
 }
 
 /* ── 7. Sidebar Phải (TOC - "TRONG CHƯƠNG NÀY") ─────────────────────────── */
 /* ── Sidebar Phải (TOC): Thu gọn chiều rộng & Font-size ─────────────────── */
 @media screen and (min-width: 76.25em) {
-  .md-sidebar--secondary {
-    width: 13.5rem !important;        /* Giảm từ 14rem xuống 11.5rem (~184px) */
-    padding-right: 0.4rem;
-  }
+  .md-nav--primary .md-nav__title {
+        background: transparent;
+    }
 }
 
 /* Tiêu đề "TRONG CHƯƠNG NÀY" */
 .md-nav--secondary .md-nav__title {
-  position: static !important;
-  font-size: 0 !important;
-  color: transparent !important;
-  margin-bottom: 12px !important;
-  padding: 0 !important;
+  position: static;
+  font-size: 0;
+  color: transparent;
+  margin-bottom: 12px;
+  padding: 0;
   box-shadow: none;
   background: transparent;
 }
 .md-nav--secondary .md-nav__title::after {
   content: "TRONG CHƯƠNG NÀY";
   font-family: var(--astro-sans);
-  font-size: 0.68rem !important;       /* Hạ từ 0.75rem xuống 0.68rem để cân đối với cột trái */
-  font-weight: 750 !important;
-  letter-spacing: 0.12em !important;
-  color: var(--astro-muted) !important;
+  font-size: 0.68rem;       /* Hạ từ 0.75rem xuống 0.68rem để cân đối với cột trái */
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  color: var(--astro-muted);
   display: block;
 }
 
 /* 1. Xóa bỏ hoàn toàn border-left trên từng thẻ link <a> để không bị đứt đoạn */
 .md-nav--secondary .md-nav__link {
-  border-left: none !important;
-  font-family: var(--astro-sans) !important;
-  font-size: 0.65rem !important;
-  line-height: 1.4 !important;
-  color: var(--astro-muted) !important;
-  padding: 4px 0 4px 14px !important; /* Khoảng cách chữ so với đường ray */
+  border-left: none;
+  font-family: var(--astro-sans);
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: var(--astro-muted);
+  padding: 4px 0 4px 14px; /* Khoảng cách chữ so với đường ray */
   transition: all 0.12s;
 }
 
 /* 2. Tạo MỘT đường ray duy nhất xuyên suốt danh sách */
 .md-nav--secondary > .md-nav__list {
-  border-left: 1px solid var(--astro-line) !important;
-  padding-left: 0 !important;
-  margin-left: 4px !important;
+  border-left: 1px solid var(--astro-line);
+  padding-left: 0;
+  margin-left: 4px;
 }
 
 /* 3. Mục cấp 2 (H3) thụt lề sâu hơn nhưng không tạo thêm đường kẻ mới */
 .md-nav--secondary .md-nav__list .md-nav__list {
-  border-left: none !important;
-  padding-left: 12px !important; /* Thụt lề cấp con */
+  border-left: none;
+  padding-left: 12px; /* Thụt lề cấp con */
 }
 
 /* 4. Mục đang đọc (Active): Vạch xanh đè chuẩn xác lên đường ray */
 .md-nav--secondary .md-nav__link--active {
-  color: var(--astro-ink) !important;
-  border-left: 2px solid var(--astro-interactive) !important;
-  font-weight: 650 !important;
-  margin-left: -1px !important;
-  padding-left: 13px !important;
+  color: var(--astro-ink);
+  font-weight: 650;
+  box-shadow: inset 2px 0 0 var(--astro-interactive);
 }
 
 /* ── Ẩn toàn bộ Mục lục bên phải (Desktop & Mobile) khi chưa mở khóa ────── */
@@ -348,19 +451,19 @@ html.is-unlocked .md-sidebar--primary .md-nav__link [class*="encrypt"] {
 /* 1. Kỹ thuật CSS :has() — Ẩn tức thì 0ms, không chờ JavaScript chạy */
 body:has(#mkdocs-decrypt-form) .md-sidebar--secondary,
 html.is-locked .md-sidebar--secondary {
-  display: none !important;
+  display: none;
 }
 
 /* 2. Ẩn nút icon TOC trên thanh Header của màn hình điện thoại/tablet */
 body:has(#mkdocs-decrypt-form) .md-header__button[for="__toc"],
 html.is-locked .md-header__button[for="__toc"] {
-  display: none !important;
+  display: none;
 }
 
 /* 3. Tối ưu vùng đọc: Khi sidebar phải ẩn, khung bài viết tự động căn giữa */
 body:has(#mkdocs-decrypt-form) .md-content {
-  margin-left: auto !important;
-  margin-right: auto !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ── 8. Typography Nội dung Đọc (Editorial Prose) ────────────────────────── */
@@ -374,148 +477,150 @@ body:has(#mkdocs-decrypt-form) .md-content {
 
 /* Toàn bộ văn bản đoạn văn dùng Newsreader Serif */
 .md-typeset p {
-  font-family: var(--astro-serif) !important;
-  font-size: 0.85rem !important;
-  line-height: 1.72 !important;            /* Nâng nhẹ từ 1.68 lên 1.72 để các dấu kép tiếng Việt có trần thoáng */
+  font-family: var(--astro-serif);
+  font-size: 0.85rem;
+  line-height: 1.72;            /* Nâng nhẹ từ 1.68 lên 1.72 để các dấu kép tiếng Việt có trần thoáng */
+
   
   /* ── KÍCH HOẠT QUANG HỌC & ĐỘ ĐẬM MÀN HÌNH ── */
-  font-weight: 450 !important;             /* Thay vì 400, mức 450 giúp chữ nét căng trên mọi loại màn hình */
+  font-weight: 450;             /* Thay vì 400, mức 450 giúp chữ nét căng trên mọi loại màn hình */
   font-optical-sizing: auto;               /* Buộc trình duyệt điều chỉnh hình thái serif theo cỡ 17px */
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Bật căn chỉnh khoảng cách chữ tự nhiên */
+
   
   color: var(--astro-ink);
-  margin-bottom: 1.4em !important;
+  margin-bottom: 1.4em;
 }
 
 .md-typeset > p:first-of-type {
-  font-size: 0.96rem !important;
-  line-height: 1.65 !important;
+  font-size: 0.96rem;
+  line-height: 1.65;
 }
 
 .md-typeset ul,
 .md-typeset ol {
-  font-family: var(--astro-serif) !important;
-  font-size: 0.85rem !important;
-  line-height: 1.68 !important;
+  font-family: var(--astro-serif);
+  font-size: 0.85rem;
+  line-height: 1.68;
 }
-.md-typeset li::marker { color: var(--astro-interactive) !important; }
+.md-typeset li::marker { color: var(--astro-interactive); }
 
 /* Tiêu đề Headings dùng Manrope Sans */
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
 .md-typeset h4 {
-  font-family: var(--astro-sans) !important;
-  color: var(--astro-ink) !important;
-  letter-spacing: -0.04em !important;
+  font-family: var(--astro-sans);
+  color: var(--astro-ink);
+  letter-spacing: -0.04em;
 }
 
 .md-typeset h1 {
-  font-size: 2.2rem !important;
-  font-weight: 650 !important;
-  line-height: 1.25 !important;
-  letter-spacing: -0.045em !important;
-  margin-top: 0 !important;
-  margin-bottom: 2rem !important;
-  border: none !important;
+  font-size: 2.2rem;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.045em;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  border: none;
 }
 
 .md-typeset h2 {
-  font-size: 1.4rem !important;
-  font-weight: 650 !important;
-  line-height: 1.35 !important;
-  letter-spacing: -0.035em !important;
-  margin: 2.6em 0 1em !important;
-  padding-top: 25px !important;
-  border-top: 1px solid var(--astro-line) !important;
-  border-bottom: none !important;
+  font-size: 1.4rem;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: -0.035em;
+  margin: 2.6em 0 1em;
+  padding-top: 25px;
+  border-top: 1px solid var(--astro-line);
+  border-bottom: none;
 }
 
 .md-typeset h3 {
-  font-size: 1rem !important;
-  font-weight: 650 !important;
-  margin: 2.2em 0 0.9em !important;
+  font-size: 1rem;
+  font-weight: 650;
+  margin: 2.2em 0 0.9em;
 }
 
 /* ── 9. Ghi chú, Code & Bảng ─────────────────────────────────────────────── */
 .md-typeset blockquote {
-  background: var(--astro-surface) !important;
-  border-left: 2px solid var(--astro-interactive) !important;
-  border-radius: 0 4px 4px 0 !important;
-  margin: 2em 0 !important;
-  padding: 20px 24px 6px !important;
+  background: var(--astro-surface);
+  border-left: 2px solid var(--astro-interactive);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: var(--space-6) 0;
+  padding: var(--space-5) var(--space-4) 6px;
 }
 .md-typeset blockquote p {
-  font-family: var(--astro-serif) !important;
-  font-size: 0.81rem !important;
-  line-height: 1.65 !important;
+  font-family: var(--astro-serif);
+  font-size: 0.81rem;
+  line-height: 1.65;
 }
 .md-typeset blockquote strong {
-  font-family: var(--astro-sans) !important;
-  font-size: 0.85em !important;
+  font-family: var(--astro-sans);
+  font-size: 0.85em;
 }
 
 .md-typeset code {
-  font-family: var(--astro-mono) !important;
-  background-color: var(--astro-surface) !important;
-  color: var(--astro-ink) !important;
-  padding: 0.14em 0.35em !important;
-  border-radius: 3px !important;
-  font-size: 0.78em !important;
+  font-family: var(--astro-mono);
+  background-color: var(--astro-surface);
+  color: var(--astro-ink);
+  padding: 0.14em 0.35em;
+  border-radius: var(--radius-sm);
+  font-size: 0.78em;
 }
 
 .md-typeset pre {
-  background: var(--astro-surface) !important;
-  border: 1px solid var(--astro-line) !important;
-  border-radius: 4px !important;
-  padding: 22px 24px !important;
-  margin: 1.5em 0 2em !important;
+  background: var(--astro-surface);
+  border: 1px solid var(--astro-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-4);
+  margin: 1.5em 0 2em;
 }
 .md-typeset pre > code {
-  background: transparent !important;
-  font-size: 0.7rem !important;
-  line-height: 1.7 !important;
+  background: transparent;
+  font-size: 0.7rem;
+  line-height: 1.7;
 }
 
 .md-typeset table:not([class]) {
-  border: 1px solid var(--astro-line) !important;
-  border-radius: 4px !important;
-  font-family: var(--astro-sans) !important;
-  font-size: 0.7rem !important;
-  background: var(--astro-bg) !important;
-  margin: 2em 0 !important;
+  border: 1px solid var(--astro-line);
+  border-radius: var(--radius-md);
+  font-family: var(--astro-sans);
+  font-size: 0.7rem;
+  background: var(--astro-bg);
+  margin: var(--space-6) 0;
 }
 .md-typeset table:not([class]) th {
-  background: var(--astro-surface) !important;
-  color: var(--astro-ink) !important;
-  font-weight: 650 !important;
-  border-bottom: 1px solid var(--astro-line) !important;
-  padding: 12px 14px !important;
+  background: var(--astro-surface);
+  color: var(--astro-ink);
+  font-weight: 650;
+  border-bottom: 1px solid var(--astro-line);
+  padding: 12px 14px;
 }
 .md-typeset table:not([class]) td {
-  border-top: 1px solid var(--astro-line) !important;
-  padding: 12px 14px !important;
+  border-top: 1px solid var(--astro-line);
+  padding: 12px 14px;
 }
 
 /* Links */
 .md-typeset a {
-  color: inherit !important;
-  text-decoration: underline !important;
-  text-decoration-color: var(--astro-interactive) !important;
-  text-decoration-thickness: 1px !important;
-  text-underline-offset: 3px !important;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--astro-interactive);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
-.md-typeset a:hover { color: var(--astro-interactive) !important; }
+.md-typeset a:hover { color: var(--astro-interactive); }
 
 /* ── 10. Badge Neon Chủ đề (Đồng bộ .chapter-badge của Astro) ────────────── */
 .book-chapter-tag .badge-num {
-  background-color: var(--astro-accent) !important;
-  color: var(--astro-accent-ink) !important;
-  font-family: var(--astro-sans) !important;
-  font-weight: 700 !important;
-  font-size: 0.72rem !important;
-  padding: 2px 7px !important;
-  border-radius: 3px !important;
+  background-color: var(--astro-accent);
+  color: var(--astro-accent-ink);
+  font-family: var(--astro-sans);
+  font-weight: 700;
+  font-size: 0.72rem;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
 }
 
 /* ── 11. Giao diện Mobile Responsive ─────────────────────────────────────── */
@@ -523,17 +628,17 @@ body:has(#mkdocs-decrypt-form) .md-content {
   /* 1. Khung đệm an toàn 24px hai bên mép màn hình */
   .md-content__inner {
     margin: 0 0 1.2rem;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
-    padding-top: 1.2rem !important;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 1.2rem;
   }
   .md-typeset p,
   .md-typeset ul,
   .md-typeset ol,
   .md-typeset blockquote p {
-    font-family: 'Literata', Georgia, Cambria, serif !important;
-    line-height: 1.68 !important;        /* Thoáng đãng cho dấu tiếng Việt */
-    font-weight: 400 !important;         /* Nét đầm, sắc sảo trên màn hình di động */
+    font-family: 'Literata', Georgia, Cambria, serif;
+    line-height: 1.68;        /* Thoáng đãng cho dấu tiếng Việt */
+    font-weight: 400;         /* Nét đầm, sắc sảo trên màn hình di động */
     font-optical-sizing: auto;
     letter-spacing: -0.01em;
     text-wrap: pretty;
@@ -541,19 +646,19 @@ body:has(#mkdocs-decrypt-form) .md-content {
   .md-typeset p,
   .md-typeset ul,
   .md-typeset ol {
-    font-size: 0.8rem !important;
+    font-size: 0.8rem;
   }
-  .md-typeset blockquote p { font-size: 0.76rem !important; }
-  .md-typeset h1 { font-size: 2.16rem !important; }
-  .md-typeset h2 { font-size: 1.2rem !important; }
+  .md-typeset blockquote p { font-size: 0.76rem; }
+  .md-typeset h1 { font-size: 2.16rem; }
+  .md-typeset h2 { font-size: 1.2rem; }
   .md-top, 
   [data-md-component="top"] {
-    top: auto !important;
-    bottom: 1.5rem !important;
-    right: 1.2rem !important;
-    left: auto !important;
-    transform: none !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    top: auto;
+    bottom: 1.5rem;
+    right: 1.2rem;
+    left: auto;
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 }
 
@@ -561,29 +666,29 @@ body:has(#mkdocs-decrypt-form) .md-content {
 .encryptcontent-container {
   max-width: 420px;
   margin: 4rem auto;
-  padding: 32px 28px;
-  background-color: var(--astro-surface) !important;
-  border: 1px solid var(--astro-line) !important;
+  padding: var(--space-6) var(--space-5);
+  background-color: var(--astro-surface);
+  border: 1px solid var(--astro-line);
   border-radius: 6px;
   text-align: center;
 }
 
 .encryptcontent-container h2 {
-  font-family: var(--astro-sans) !important;
-  font-size: 1.35rem !important;
-  font-weight: 750 !important;
-  letter-spacing: -0.03em !important;
-  color: var(--astro-ink) !important;
-  margin-top: 0 !important;
-  border: none !important;
-  padding: 0 !important;
+  font-family: var(--astro-sans);
+  font-size: 1.35rem;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  color: var(--astro-ink);
+  margin-top: 0;
+  border: none;
+  padding: 0;
 }
 
 .encryptcontent-container p {
-  font-family: var(--astro-serif) !important;
-  font-size: 0.95rem !important;
-  color: var(--astro-muted) !important;
-  margin-bottom: 20px !important;
+  font-family: var(--astro-serif);
+  font-size: 0.95rem;
+  color: var(--astro-muted);
+  margin-bottom: 20px;
 }
 
 .encryptcontent-form input[type="password"] {
@@ -594,11 +699,11 @@ body:has(#mkdocs-decrypt-form) .md-content {
   font-size: 0.85rem;
   background-color: var(--astro-bg);
   border: 1px solid var(--astro-line);
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   color: var(--astro-ink);
   outline: none;
   margin-bottom: 14px;
-  transition: border-color 0.15s ease;
+  transition: border-color var(--motion-fast);
 }
 
 .encryptcontent-form input[type="password"]:focus {
@@ -614,9 +719,9 @@ body:has(#mkdocs-decrypt-form) .md-content {
   font-size: 0.85rem;
   font-weight: 700;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color var(--motion-fast);
 }
 
 .encryptcontent-form button[type="submit"]:hover {
@@ -625,7 +730,12 @@ body:has(#mkdocs-decrypt-form) .md-content {
 }
 
 .md-content__button {
-  display: none !important;
+  opacity: 0.55;
+  transition: opacity var(--motion-fast);
+}
+.md-content__button:hover,
+.md-content__button:focus-visible {
+  opacity: 1;
 }
 
 .md-sidebar--secondary .md-sidebar__scrollwrap {
@@ -635,17 +745,17 @@ body:has(#mkdocs-decrypt-form) .md-content {
 
 /* 1. Ẩn hoàn toàn permalink trên H1 (Tên chương không cần anchor link) */
 .md-typeset h1 .headerlink {
-  display: none !important;
+  display: none;
 }
 
 .md-typeset :is(h2, h3, h4) .headerlink {
   opacity: 0;
   margin-left: 0.4em;
-  font-family: var(--astro-sans) !important;
+  font-family: var(--astro-sans);
   font-weight: 500;
-  color: var(--astro-muted) !important;
-  text-decoration: none !important;
-  transition: opacity 0.15s ease, color 0.15s ease;
+  color: var(--astro-muted);
+  text-decoration: none;
+  transition: opacity var(--motion-fast), color var(--motion-fast);
 }
 
 /* Khi rê chuột vào vùng tiêu đề -> Hiện dấu # mờ */
@@ -656,5 +766,13 @@ body:has(#mkdocs-decrypt-form) .md-content {
 /* Khi rê chuột trực tiếp vào dấu # -> Sáng rõ theo màu nhấn */
 .md-typeset :is(h2, h3, h4) .headerlink:hover {
   opacity: 1;
-  color: var(--astro-interactive) !important;
+  color: var(--astro-interactive);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
+  }
 }

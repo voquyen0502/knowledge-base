@@ -71,7 +71,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="#5c7526">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -95,16 +95,22 @@
   
 
 <header class="md-header md-header--shadow" data-md-component="header">
+  <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
   <nav class="md-header__inner md-grid" aria-label="Đầu trang">
-    <a href="../../.." title="Engineering Wiki" class="md-header__button md-logo" aria-label="Engineering Wiki" data-md-component="logo">
+    <a href="/" title="Engineering Wiki" class="md-header__button md-logo" aria-label="Engineering Wiki" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 1-5 5v11l5-4.5zm2 4v13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6c-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1M10 18.41C8.75 18.09 7.5 18 6.5 18c-1.06 0-2.32.19-3.5.5V7.13c.91-.4 2.14-.63 3.5-.63s2.59.23 3.5.63z"/></svg>
 
     </a>
-    <label class="md-header__button md-icon" for="__drawer">
+    <label class="md-header__button md-icon" for="__drawer"
+           role="button" tabindex="0"
+           aria-controls="__drawer"
+           aria-label="Mở menu điều hướng">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+      <span class="md-header__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+      </span>
     </label>
 
     
@@ -112,11 +118,12 @@
             class="md-header__button md-icon sidebar-toggle"
             data-sidebar-toggle
             aria-controls="primary-navigation"
-            aria-expanded="true"
             aria-label="Ẩn thanh bên"
             title="Ẩn thanh bên"
             hidden>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 15.61 19.59 17l-5.01-5 5.01-5L21 8.39 17.44 12zM3 6h13v2H3zm0 7v-2h10v2zm0 5v-2h13v2z"/></svg>
+      <span class="md-header__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 15.61 19.59 17l-5.01-5 5.01-5L21 8.39 17.44 12zM3 6h13v2H3zm0 7v-2h10v2zm0 5v-2h13v2z"/></svg>
+      </span>
     </button>
 
     <div class="md-header__title" data-md-component="header-title">
@@ -126,13 +133,13 @@
             Engineering Wiki
           </span>
         </div>
-        <div class="md-header__topic" data-md-component="header-topic">
+        <h1 class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
               Summary
             
           </span>
-        </div>
+        </h1>
       </div>
     </div>
 
@@ -144,7 +151,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Chuyển sang Dark Mode"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="#5c7526"  aria-label="Chuyển sang Dark Mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Chuyển sang Dark Mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
@@ -154,7 +161,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="slate" data-md-color-accent="indigo"  aria-label="Chuyển sang Light Mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="slate" data-md-color-accent="#5c7526"  aria-label="Chuyển sang Light Mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Chuyển sang Light Mode" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
@@ -169,9 +176,14 @@
     
       
       
-        <label class="md-header__button md-icon" for="__search">
+        <label class="md-header__button md-icon" for="__search"
+               role="button" tabindex="0"
+               aria-controls="__search"
+               aria-label="Tìm kiếm">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          <span class="md-header__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </span>
         </label>
         <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -217,6 +229,8 @@
 
     
     
+
+    <span id="sidebar-state-announcer" class="sr-only" role="status" aria-live="polite"></span>
   </nav>
 </header>
     
@@ -241,7 +255,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Thanh điều hướng" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Engineering Wiki" class="md-nav__button md-logo" aria-label="Engineering Wiki" data-md-component="logo">
+    <a href="/" title="Engineering Wiki" class="md-nav__button md-logo" aria-label="Engineering Wiki" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 1-5 5v11l5-4.5zm2 4v13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6c-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1M10 18.41C8.75 18.09 7.5 18 6.5 18c-1.06 0-2.32.19-3.5.5V7.13c.91-.4 2.14-.63 3.5-.63s2.59.23 3.5.63z"/></svg>
@@ -2117,7 +2131,7 @@
   <span class="md-ellipsis">
     
   
-    CHƯƠNG MỘT The Mom Test
+    CHƯƠNG MỘT: The Mom Test
   
 
     
@@ -2541,25 +2555,10 @@
                 
                   
 
-
-  
-    <a href="edit/main/docs/books/a-philosophy-of-software-design/summary.md" title="Chỉnh sửa" class="md-content__button md-icon" rel="edit">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
-    </a>
-  
+<article id="main-content" tabindex="-1" class="md-content__inner md-typeset">
   
     
-      
-    
-    <a href="raw/main/docs/books/a-philosophy-of-software-design/summary.md" title="Xem mã nguồn của trang" class="md-content__button md-icon">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
-    </a>
-  
-
-
-<div id="mkdocs-encrypted-content" style="display:none">azLg7Rk37D9aLIgsBEDuAQ==;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</div>
+      <div id="mkdocs-encrypted-content" style="display:none">nvwMSR3vYq2dz93RoUrklQ==;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</div>
 <div id="mkdocs-decrypted-content" style="display:none">
     <form id="mkdocs-decrypt-form" class="md-content__inner md-typeset">
         <h1>Kho tri thức này được bảo vệ. Vui lòng nhập mật khẩu để mở khóa.</h1>
@@ -2574,7 +2573,7 @@
 var encryptcontent_id = "encryptcontent_1";
 var encryptcontent_path = "knowledge-base/books/a-philosophy-of-software-design/summary/";
 var decryption_failure_message = "Invalid password.";
-var encryptcontent_keystore = ["eb8W5TqRClAdxw0R7wbxqw==;SzcZaR70FhJd73qSYYM9pHcqvuI4HJAmzbrY2b8BzrQERuqKAcCqxHEOFGxTlsWSB+DMVik1ksNr4pXzZNo3Iihb8zab7bar3tA8R5ALNSMfn3/UliAKoqalC4xklUGs;DPSI+6h1mZWm36dvec8sNA=="];
+var encryptcontent_keystore = ["zPuhls6UphQs7CGFoLJS9Q==;IScqZpIZml4RaDKNbEwImG4STaL7qeYnJw1LciQP4ttbQasDXjifquJeaJy29AvgB+LJktADPtKCm82+RYfiVbqzUlgWxzDhXBBD+Q13Ovaa5gmOsf09hV/be4niQmsn;8d96h6JQdYbxfQNusO5lFQ=="];
 var encryptcontent_obfuscate = 0;
 
 const encryptcontent_event = new Event("encryptcontent_event");
@@ -2587,50 +2586,9 @@ if (!window.hasOwnProperty("init_decryptor")) {
     init_decryptor();
 }
 </script>
-
-
-
-
-
-
-
-  
     
   
-  
-    
-  
-
-
-  <aside class="md-source-file">
-    
-      
-  <span class="md-source-file__fact">
-    <span class="md-icon" title="Cập nhật lần cuối">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
-    </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="5 tháng 11, 2026 20:28:14 UTC">5 tháng 11, 2026</span>
-  </span>
-
-    
-    
-      
-  <span class="md-source-file__fact">
-    <span class="md-icon" title="Tạo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
-    </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="5 tháng 11, 2026 20:28:14 UTC">5 tháng 11, 2026</span>
-  </span>
-
-    
-    
-    
-  </aside>
-
-
-
-
-
+</article>
                 
               </article>
             </div>
