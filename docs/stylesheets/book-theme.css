@@ -296,7 +296,7 @@ body {
     background-color: var(--astro-bg);
   }
   .md-sidebar--secondary {
-    width: var(--layout-sidebar-primary);
+    width: var(--layout-sidebar-secondary);
     margin-left: 0;
     margin-right: 0;
     padding-right: 0.5rem;

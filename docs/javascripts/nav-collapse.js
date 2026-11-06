@@ -162,6 +162,7 @@
 
     document.documentElement.dataset.navCollapseMounted = "true";
     if (!sidebar.id) sidebar.id = "primary-navigation";
+    if (toggle) toggle.setAttribute("aria-controls", sidebar.id);
     toggle.hidden = false;
 
     document.addEventListener("click",   onClick,   true);
