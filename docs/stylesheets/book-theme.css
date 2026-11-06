@@ -365,6 +365,7 @@ body {
   .md-sidebar--primary .md-nav__item--nested > .md-nav__container > label.md-nav__link {
     min-height: 44px;
   }
+
 }
 
 .md-nav__title {
@@ -409,7 +410,6 @@ body {
   background: transparent;
   box-shadow: none;
   padding: var(--space-3) var(--space-2) var(--space-3);
-  margin-bottom: var(--space-2);
   border-bottom: 1px solid var(--astro-line);
   height: auto;
   min-height: 0;
@@ -528,7 +528,6 @@ html.is-unlocked .md-sidebar--primary .md-nav__link [class*="encrypt"] {
 .md-nav--secondary > .md-nav__list {
   border-left: 1px solid var(--astro-line);
   padding-left: 0;
-  margin-left: 4px;
 }
 
 /* 3. Mục cấp 2 (H3) thụt lề sâu hơn nhưng không tạo thêm đường kẻ mới */
@@ -765,6 +764,9 @@ body:has(#mkdocs-decrypt-form) .md-content {
     transform: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
+  .md-nav--secondary .md-nav__title {
+    margin: 0 0 0;
+  }
 }
 
 /* ── Giao diện Khung giải mã mật khẩu (encryptcontent) ─────────────────── */
@@ -941,6 +943,7 @@ html,
     color: var(--astro-ink);
     background-color: var(--astro-surface);
     font-weight: 650;
+    padding-left: 20px;
   }
 }
 
