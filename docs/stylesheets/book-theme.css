@@ -416,6 +416,12 @@ body {
   overflow: visible;
 }
 
+/* .md-nav__title set color: transparent để ẩn site_name — nhưng cũng làm SVG
+   con (fill: currentColor) vô hình. Khôi phục màu cho logo button. */
+.md-sidebar--primary .md-nav--primary > .md-nav__title > .md-nav__button.md-logo {
+  color: var(--astro-ink);
+}
+
 .md-sidebar--primary .md-nav--primary > .md-nav__title::after {
   content: "MỤC LỤC";                /* Thay nội dung bạn muốn tại đây */
   font-family: var(--astro-sans);
