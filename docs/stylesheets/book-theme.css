@@ -309,6 +309,56 @@ body {
 }
 
 /* ── 6. Sidebar Trái (Mục lục chương) ────────────────────────────────────── */
+/* ── 5.5. Nút nổi "Trở lại mục lục" (.md-top) ───────────────────────────── */
+/* Material ẩn nút bằng transform translate(-50%, -150%) ↔ .md-top--active,
+   ràng buộc ở `[dir="ltr"] .md-top` (0,2,0). Vì ta đổi mốc neo sang bottom,
+   theme không còn tự ẩn được → tự quản lý ẩn/hiện bằng opacity + visibility
+   + pointer-events. Lặp class (.md-top.md-top) để thắng specificity mà không
+   dùng !important. */
+.md-top.md-top {
+  top: auto;
+  bottom: var(--space-5);
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%) translateY(0.5rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--motion-fast), transform var(--motion-fast);
+}
+
+.md-top.md-top--active {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ── 5.6. Nút nổi — mobile/tablet: góc phải dưới, chỉ icon ──────────────── */
+@media screen and (max-width: 76.1875em) {
+  .md-top.md-top {
+    left: auto;
+    right: var(--space-4);
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+    transform: translateY(0.5rem);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0 var(--space-3);
+  }
+
+  .md-top.md-top--active { transform: translateY(0); }
+
+  /* Ẩn nhãn chữ trên mobile để nút không phình ra che nội dung.
+     Nếu markup render text trực tiếp trong <button> (không bọc .md-top__label),
+     thay 3 dòng dưới bằng:
+       .md-top.md-top { font-size: 0; }
+       .md-top.md-top svg { width: 1.1rem; height: 1.1rem; } */
+  .md-top .md-top__label { display: none; }
+}
+
 @media screen and (min-width: 76.25em) {
   .md-sidebar--primary {
     width: var(--layout-sidebar-primary);
@@ -755,15 +805,6 @@ body:has(#mkdocs-decrypt-form) .md-content {
     margin-bottom: 1.4rem;
   }
   .md-typeset h2 { font-size: 1.2rem; }
-  .md-top, 
-  [data-md-component="top"] {
-    top: auto;
-    bottom: 1.5rem;
-    right: 1.2rem;
-    left: auto;
-    transform: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
   .md-nav--secondary .md-nav__title {
     margin: 0 0 0;
   }
